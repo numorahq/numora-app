@@ -1331,7 +1331,7 @@
 
 
 
-                    <!-- SERVICE PRICE -->
+                    <!-- WHATSAPP -->
 
                     <div class="pricing-card">
 
@@ -1340,19 +1340,19 @@
                             <div>
 
                                 <div class="pricing-title">
-                                    Numora Service Pricing
+                                    WhatsApp Verification
                                 </div>
 
                                 <div class="pricing-description">
-                                    Control the price customers
-                                    pay for Numora services.
+                                    Price for WhatsApp verification
+                                    service.
                                 </div>
 
                             </div>
 
                             <button
                                 class="edit-button"
-                                onclick="editPricing('service')"
+                                onclick="editPricing('whatsapp')"
                             >
                                 Edit
                             </button>
@@ -1361,7 +1361,86 @@
 
 
                         <div
-                            id="servicePrice"
+                            id="whatsappPrice"
+                            class="pricing-value"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- SMS -->
+
+                    <div class="pricing-card">
+
+                        <div class="pricing-header">
+
+                            <div>
+
+                                <div class="pricing-title">
+                                    SMS Only
+                                </div>
+
+                                <div class="pricing-description">
+                                    Price for SMS-only number rental.
+                                </div>
+
+                            </div>
+
+                            <button
+                                class="edit-button"
+                                onclick="editPricing('sms')"
+                            >
+                                Edit
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="smsPrice"
+                            class="pricing-value"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- WHATSAPP + SMS -->
+
+                    <div class="pricing-card">
+
+                        <div class="pricing-header">
+
+                            <div>
+
+                                <div class="pricing-title">
+                                    WhatsApp + SMS
+                                </div>
+
+                                <div class="pricing-description">
+                                    Price for WhatsApp verification
+                                    and SMS rental.
+                                </div>
+
+                            </div>
+
+                            <button
+                                class="edit-button"
+                                onclick="editPricing('whatsappSms')"
+                            >
+                                Edit
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="whatsappSmsPrice"
                             class="pricing-value"
                         >
                             —
@@ -1749,15 +1828,43 @@
 
 
             if (
-                typeof data.servicePrice ===
+                typeof data.whatsappPrice ===
                 "number"
             ) {
 
                 document.getElementById(
-                    "servicePrice"
+                    "whatsappPrice"
                 ).textContent =
                     formatCurrency(
-                        data.servicePrice
+                        data.whatsappPrice
+                    );
+            }
+
+
+            if (
+                typeof data.smsPrice ===
+                "number"
+            ) {
+
+                document.getElementById(
+                    "smsPrice"
+                ).textContent =
+                    formatCurrency(
+                        data.smsPrice
+                    );
+            }
+
+
+            if (
+                typeof data.whatsappSmsPrice ===
+                "number"
+            ) {
+
+                document.getElementById(
+                    "whatsappSmsPrice"
+                ).textContent =
+                    formatCurrency(
+                        data.whatsappSmsPrice
                     );
             }
 
@@ -2110,17 +2217,49 @@
             }
 
 
-            if (type === "service") {
+            if (type === "whatsapp") {
 
                 title.textContent =
-                    "Edit Service Pricing";
+                    "Edit WhatsApp Verification Price";
 
                 description.textContent =
-                    "Set the amount customers pay for Numora services.";
+                    "Set the amount customers pay for WhatsApp verification.";
 
                 input.value =
                     getNumericPrice(
-                        "servicePrice"
+                        "whatsappPrice"
+                    );
+
+            }
+
+
+            if (type === "sms") {
+
+                title.textContent =
+                    "Edit SMS Only Price";
+
+                description.textContent =
+                    "Set the amount customers pay for SMS-only rental.";
+
+                input.value =
+                    getNumericPrice(
+                        "smsPrice"
+                    );
+
+            }
+
+
+            if (type === "whatsappSms") {
+
+                title.textContent =
+                    "Edit WhatsApp + SMS Price";
+
+                description.textContent =
+                    "Set the amount customers pay for WhatsApp verification and SMS rental.";
+
+                input.value =
+                    getNumericPrice(
+                        "whatsappSmsPrice"
                     );
 
             }
@@ -2235,10 +2374,30 @@
 
                 if (
                     editingPricingType ===
-                    "service"
+                    "whatsapp"
                 ) {
 
-                    updateData.servicePrice =
+                    updateData.whatsappPrice =
+                        numericValue;
+                }
+
+
+                if (
+                    editingPricingType ===
+                    "sms"
+                ) {
+
+                    updateData.smsPrice =
+                        numericValue;
+                }
+
+
+                if (
+                    editingPricingType ===
+                    "whatsappSms"
+                ) {
+
+                    updateData.whatsappSmsPrice =
                         numericValue;
                 }
 
@@ -2268,11 +2427,39 @@
 
                 if (
                     editingPricingType ===
-                    "service"
+                    "whatsapp"
                 ) {
 
                     document.getElementById(
-                        "servicePrice"
+                        "whatsappPrice"
+                    ).textContent =
+                        formatCurrency(
+                            numericValue
+                        );
+                }
+
+
+                if (
+                    editingPricingType ===
+                    "sms"
+                ) {
+
+                    document.getElementById(
+                        "smsPrice"
+                    ).textContent =
+                        formatCurrency(
+                            numericValue
+                        );
+                }
+
+
+                if (
+                    editingPricingType ===
+                    "whatsappSms"
+                ) {
+
+                    document.getElementById(
+                        "whatsappSmsPrice"
                     ).textContent =
                         formatCurrency(
                             numericValue
