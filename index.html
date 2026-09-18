@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -48,6 +49,7 @@
         input {
             font-family: inherit;
         }
+
 
         /* =========================================
            LOGIN
@@ -510,7 +512,7 @@
 
 
         /* =========================================
-           PRICING CARDS
+           COMPACT PRICING
         ========================================= */
 
         .section-title {
@@ -527,7 +529,7 @@
             grid-template-columns:
                 repeat(2, minmax(0, 1fr));
 
-            gap: 16px;
+            gap: 14px;
         }
 
         .pricing-card {
@@ -535,17 +537,23 @@
 
             border: 1px solid var(--border);
 
-            border-radius: 18px;
+            border-radius: 17px;
 
-            padding: 20px;
-        }
+            padding: 17px 18px;
 
-        .pricing-header {
+            min-height: 100px;
+
             display: flex;
+
+            align-items: center;
 
             justify-content: space-between;
 
             gap: 15px;
+        }
+
+        .pricing-info {
+            min-width: 0;
         }
 
         .pricing-title {
@@ -561,44 +569,40 @@
 
             font-size: 12px;
 
-            line-height: 1.5;
+            line-height: 1.45;
         }
 
         .edit-button {
+            flex-shrink: 0;
+
             border: 0;
 
             background: var(--blue-light);
 
             color: var(--blue);
 
-            padding: 8px 12px;
+            padding: 9px 14px;
 
-            border-radius: 9px;
+            border-radius: 10px;
 
             font-size: 12px;
 
             font-weight: 600;
 
             cursor: pointer;
+        }
 
-            height: fit-content;
+        .edit-button:hover {
+            background: #e4edff;
         }
 
         .edit-button:active {
             transform: scale(.97);
         }
 
-        .pricing-value {
-            margin-top: 18px;
-
-            font-size: 23px;
-
-            font-weight: 700;
-        }
-
 
         /* =========================================
-           PRICING MODAL
+           MODAL
         ========================================= */
 
         .pricing-modal {
@@ -628,7 +632,12 @@
 
         .pricing-modal-card {
             width: 100%;
-            max-width: 390px;
+
+            max-width: 430px;
+
+            max-height: calc(100vh - 40px);
+
+            overflow-y: auto;
 
             background: white;
 
@@ -676,6 +685,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+
+            flex-shrink: 0;
         }
 
         .modal-top {
@@ -707,6 +718,103 @@
             line-height: 1.5;
         }
 
+
+        /* =========================================
+           MODAL PLAN ROWS
+        ========================================= */
+
+        .plan-list {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+        .plan-row {
+            padding: 14px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            background: #fafbfc;
+        }
+
+        .plan-row-top {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            margin-bottom: 10px;
+        }
+
+        .plan-name {
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+        .plan-ncoins {
+            font-size: 12px;
+
+            color: var(--blue);
+
+            font-weight: 600;
+        }
+
+        .plan-input-label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 11px;
+
+            color: var(--muted);
+
+            font-weight: 600;
+        }
+
+
+        /* =========================================
+           SERVICE ROWS
+        ========================================= */
+
+        .service-list {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+        .service-row {
+            padding: 14px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            background: #fafbfc;
+        }
+
+        .service-name {
+            margin-bottom: 9px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================
+           INPUTS
+        ========================================= */
+
         .modal-label {
             display: block;
 
@@ -726,7 +834,7 @@
 
             border: 1px solid #dfe4ec;
 
-            border-radius: 13px;
+            border-radius: 12px;
 
             overflow: hidden;
 
@@ -741,9 +849,9 @@
         }
 
         .currency-symbol {
-            padding-left: 14px;
+            padding-left: 13px;
 
-            font-size: 15px;
+            font-size: 14px;
 
             font-weight: 600;
 
@@ -757,9 +865,9 @@
 
             outline: 0;
 
-            padding: 13px 14px;
+            padding: 12px 13px;
 
-            font-size: 16px;
+            font-size: 15px;
 
             font-weight: 600;
 
@@ -767,6 +875,11 @@
 
             background: transparent;
         }
+
+
+        /* =========================================
+           MODAL ACTIONS
+        ========================================= */
 
         .modal-actions {
             display: grid;
@@ -808,12 +921,43 @@
 
         .modal-save:disabled {
             opacity: .6;
+
             cursor: not-allowed;
         }
 
         .modal-save:active,
         .modal-cancel:active {
             transform: scale(.98);
+        }
+
+        .modal-message {
+            display: none;
+
+            margin-top: 12px;
+
+            padding: 10px 12px;
+
+            border-radius: 10px;
+
+            font-size: 12px;
+
+            text-align: center;
+        }
+
+        .modal-message.show {
+            display: block;
+        }
+
+        .modal-message.error {
+            background: #fff1f2;
+
+            color: #be123c;
+        }
+
+        .modal-message.success {
+            background: #ecfdf5;
+
+            color: #047857;
         }
 
 
@@ -974,9 +1118,15 @@
                 border-radius: 21px;
             }
 
+            .plan-row,
+            .service-row {
+                padding: 12px;
+            }
+
         }
 
     </style>
+
 </head>
 
 
@@ -1295,156 +1445,51 @@
 
                     <div class="pricing-card">
 
-                        <div class="pricing-header">
+                        <div class="pricing-info">
 
-                            <div>
-
-                                <div class="pricing-title">
-                                    Numora NCoins Pricing
-                                </div>
-
-                                <div class="pricing-description">
-                                    Control how much customers
-                                    pay for NCoins.
-                                </div>
-
+                            <div class="pricing-title">
+                                NCoins Plans
                             </div>
 
-                            <button
-                                class="edit-button"
-                                onclick="editPricing('ncoins')"
-                            >
-                                Edit
-                            </button>
+                            <div class="pricing-description">
+                                Manage customer NCoins deposit plans.
+                            </div>
 
                         </div>
 
-
-                        <div
-                            id="ncoinsPrice"
-                            class="pricing-value"
+                        <button
+                            class="edit-button"
+                            onclick="openNCoinsModal()"
                         >
-                            —
-                        </div>
+                            Edit
+                        </button>
 
                     </div>
 
 
 
-                    <!-- WHATSAPP -->
+                    <!-- SERVICES -->
 
                     <div class="pricing-card">
 
-                        <div class="pricing-header">
+                        <div class="pricing-info">
 
-                            <div>
-
-                                <div class="pricing-title">
-                                    WhatsApp Verification
-                                </div>
-
-                                <div class="pricing-description">
-                                    Price for WhatsApp verification
-                                    service.
-                                </div>
-
+                            <div class="pricing-title">
+                                Service Prices
                             </div>
 
-                            <button
-                                class="edit-button"
-                                onclick="editPricing('whatsapp')"
-                            >
-                                Edit
-                            </button>
-
-                        </div>
-
-
-                        <div
-                            id="whatsappPrice"
-                            class="pricing-value"
-                        >
-                            —
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- SMS -->
-
-                    <div class="pricing-card">
-
-                        <div class="pricing-header">
-
-                            <div>
-
-                                <div class="pricing-title">
-                                    SMS Only
-                                </div>
-
-                                <div class="pricing-description">
-                                    Price for SMS-only number rental.
-                                </div>
-
+                            <div class="pricing-description">
+                                Manage WhatsApp and SMS service prices.
                             </div>
 
-                            <button
-                                class="edit-button"
-                                onclick="editPricing('sms')"
-                            >
-                                Edit
-                            </button>
-
                         </div>
 
-
-                        <div
-                            id="smsPrice"
-                            class="pricing-value"
+                        <button
+                            class="edit-button"
+                            onclick="openServiceModal()"
                         >
-                            —
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- WHATSAPP + SMS -->
-
-                    <div class="pricing-card">
-
-                        <div class="pricing-header">
-
-                            <div>
-
-                                <div class="pricing-title">
-                                    WhatsApp + SMS
-                                </div>
-
-                                <div class="pricing-description">
-                                    Price for WhatsApp verification
-                                    and SMS rental.
-                                </div>
-
-                            </div>
-
-                            <button
-                                class="edit-button"
-                                onclick="editPricing('whatsappSms')"
-                            >
-                                Edit
-                            </button>
-
-                        </div>
-
-
-                        <div
-                            id="whatsappSmsPrice"
-                            class="pricing-value"
-                        >
-                            —
-                        </div>
+                            Edit
+                        </button>
 
                     </div>
 
@@ -1515,11 +1560,11 @@
 
 
 <!-- =====================================================
-     PRICING EDIT MODAL
+     NCOINS PLANS MODAL
 ====================================================== -->
 
 <div
-    id="pricingModal"
+    id="ncoinsModal"
     class="pricing-modal"
 >
 
@@ -1532,18 +1577,12 @@
 
             <div>
 
-                <div
-                    id="modalTitle"
-                    class="modal-title"
-                >
-                    Edit Pricing
+                <div class="modal-title">
+                    NCoins Plans
                 </div>
 
-                <div
-                    id="modalDescription"
-                    class="modal-description"
-                >
-                    Update the price below.
+                <div class="modal-description">
+                    Change what customers pay for each NCoins plan.
                 </div>
 
             </div>
@@ -1552,7 +1591,7 @@
             <button
                 class="modal-close"
                 type="button"
-                onclick="closePricingModal()"
+                onclick="closeNCoinsModal()"
             >
                 ×
             </button>
@@ -1560,30 +1599,186 @@
         </div>
 
 
-        <label
-            class="modal-label"
-            for="modalPriceInput"
-        >
-            Price
-        </label>
+        <div class="plan-list">
 
 
-        <div class="modal-input-wrapper">
+            <!-- PLAN 1 -->
 
-            <span class="currency-symbol">
-                ₦
-            </span>
+            <div class="plan-row">
 
-            <input
-                id="modalPriceInput"
-                class="modal-input"
-                type="number"
-                min="0"
-                step="1"
-                placeholder="Enter price"
-            >
+                <div class="plan-row-top">
+
+                    <div class="plan-name">
+                        Plan 1
+                    </div>
+
+                    <div class="plan-ncoins">
+                        2,000 NCoins
+                    </div>
+
+                </div>
+
+
+                <label class="plan-input-label">
+                    Customer Price
+                </label>
+
+
+                <div class="modal-input-wrapper">
+
+                    <span class="currency-symbol">
+                        ₦
+                    </span>
+
+                    <input
+                        id="plan2000Price"
+                        class="modal-input"
+                        type="number"
+                        min="0"
+                        step="1"
+                        placeholder="2000"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PLAN 2 -->
+
+            <div class="plan-row">
+
+                <div class="plan-row-top">
+
+                    <div class="plan-name">
+                        Plan 2
+                    </div>
+
+                    <div class="plan-ncoins">
+                        5,000 NCoins
+                    </div>
+
+                </div>
+
+
+                <label class="plan-input-label">
+                    Customer Price
+                </label>
+
+
+                <div class="modal-input-wrapper">
+
+                    <span class="currency-symbol">
+                        ₦
+                    </span>
+
+                    <input
+                        id="plan5000Price"
+                        class="modal-input"
+                        type="number"
+                        min="0"
+                        step="1"
+                        placeholder="5000"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PLAN 3 -->
+
+            <div class="plan-row">
+
+                <div class="plan-row-top">
+
+                    <div class="plan-name">
+                        Plan 3
+                    </div>
+
+                    <div class="plan-ncoins">
+                        10,000 NCoins
+                    </div>
+
+                </div>
+
+
+                <label class="plan-input-label">
+                    Customer Price
+                </label>
+
+
+                <div class="modal-input-wrapper">
+
+                    <span class="currency-symbol">
+                        ₦
+                    </span>
+
+                    <input
+                        id="plan10000Price"
+                        class="modal-input"
+                        type="number"
+                        min="0"
+                        step="1"
+                        placeholder="10000"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PLAN 4 -->
+
+            <div class="plan-row">
+
+                <div class="plan-row-top">
+
+                    <div class="plan-name">
+                        Plan 4
+                    </div>
+
+                    <div class="plan-ncoins">
+                        20,000 NCoins
+                    </div>
+
+                </div>
+
+
+                <label class="plan-input-label">
+                    Customer Price
+                </label>
+
+
+                <div class="modal-input-wrapper">
+
+                    <span class="currency-symbol">
+                        ₦
+                    </span>
+
+                    <input
+                        id="plan20000Price"
+                        class="modal-input"
+                        type="number"
+                        min="0"
+                        step="1"
+                        placeholder="20000"
+                    >
+
+                </div>
+
+            </div>
 
         </div>
+
+
+        <div
+            id="ncoinsModalMessage"
+            class="modal-message"
+        ></div>
 
 
         <div class="modal-actions">
@@ -1591,17 +1786,185 @@
             <button
                 class="modal-button modal-cancel"
                 type="button"
-                onclick="closePricingModal()"
+                onclick="closeNCoinsModal()"
             >
                 Cancel
             </button>
 
 
             <button
-                id="modalSaveButton"
+                id="ncoinsSaveButton"
                 class="modal-button modal-save"
                 type="button"
-                onclick="saveModalPricing()"
+                onclick="saveNCoinsPlans()"
+            >
+                Save Changes
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     SERVICE PRICES MODAL
+====================================================== -->
+
+<div
+    id="serviceModal"
+    class="pricing-modal"
+>
+
+    <div
+        class="pricing-modal-card"
+        onclick="event.stopPropagation()"
+    >
+
+        <div class="modal-top">
+
+            <div>
+
+                <div class="modal-title">
+                    Service Prices
+                </div>
+
+                <div class="modal-description">
+                    Change the current customer price for each service.
+                </div>
+
+            </div>
+
+
+            <button
+                class="modal-close"
+                type="button"
+                onclick="closeServiceModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="service-list">
+
+
+            <!-- WHATSAPP -->
+
+            <div class="service-row">
+
+                <div class="service-name">
+                    WhatsApp Verification
+                </div>
+
+
+                <div class="modal-input-wrapper">
+
+                    <span class="currency-symbol">
+                        ₦
+                    </span>
+
+                    <input
+                        id="serviceWhatsappPrice"
+                        class="modal-input"
+                        type="number"
+                        min="0"
+                        step="1"
+                        placeholder="3000"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SMS -->
+
+            <div class="service-row">
+
+                <div class="service-name">
+                    SMS Only
+                </div>
+
+
+                <div class="modal-input-wrapper">
+
+                    <span class="currency-symbol">
+                        ₦
+                    </span>
+
+                    <input
+                        id="serviceSmsPrice"
+                        class="modal-input"
+                        type="number"
+                        min="0"
+                        step="1"
+                        placeholder="5000"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- WHATSAPP + SMS -->
+
+            <div class="service-row">
+
+                <div class="service-name">
+                    WhatsApp + SMS
+                </div>
+
+
+                <div class="modal-input-wrapper">
+
+                    <span class="currency-symbol">
+                        ₦
+                    </span>
+
+                    <input
+                        id="serviceWhatsappSmsPrice"
+                        class="modal-input"
+                        type="number"
+                        min="0"
+                        step="1"
+                        placeholder="6000"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="serviceModalMessage"
+            class="modal-message"
+        ></div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="modal-button modal-cancel"
+                type="button"
+                onclick="closeServiceModal()"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                id="serviceSaveButton"
+                class="modal-button modal-save"
+                type="button"
+                onclick="saveServicePrices()"
             >
                 Save Changes
             </button>
@@ -1643,6 +2006,7 @@
         doc,
         getDoc,
         setDoc,
+        collection,
         serverTimestamp
     }
     from
@@ -1683,13 +2047,18 @@
     ========================================= */
 
     const app =
-        initializeApp(firebaseConfig);
+        initializeApp(
+            firebaseConfig
+        );
+
 
     const auth =
         getAuth(app);
 
+
     const db =
         getFirestore(app);
+
 
     const provider =
         new GoogleAuthProvider();
@@ -1708,20 +2077,24 @@
             "loginScreen"
         );
 
+
     const adminApp =
         document.getElementById(
             "adminApp"
         );
+
 
     const loginButton =
         document.getElementById(
             "googleLoginButton"
         );
 
+
     const buttonText =
         document.getElementById(
             "googleButtonText"
         );
+
 
     const status =
         document.getElementById(
@@ -1738,6 +2111,13 @@
             db,
             "adminConfig",
             "pricing"
+        );
+
+
+    const ncoinPlansCollection =
+        collection(
+            db,
+            "ncoinPlans"
         );
 
 
@@ -1778,7 +2158,9 @@
 
 
         const adminSnapshot =
-            await getDoc(adminRef);
+            await getDoc(
+                adminRef
+            );
 
 
         return adminSnapshot.exists();
@@ -1786,7 +2168,7 @@
 
 
     /* =========================================
-       LOAD PRICING
+       LOAD SERVICE PRICING
     ========================================= */
 
     async function loadPricing() {
@@ -1813,66 +2195,151 @@
                 snapshot.data();
 
 
-            if (
-                typeof data.ncoinsPrice ===
-                "number"
-            ) {
-
-                document.getElementById(
-                    "ncoinsPrice"
-                ).textContent =
-                    formatCurrency(
-                        data.ncoinsPrice
-                    );
-            }
+            const whatsappPrice =
+                typeof data.whatsappPrice === "number"
+                    ? data.whatsappPrice
+                    : 3000;
 
 
-            if (
-                typeof data.whatsappPrice ===
-                "number"
-            ) {
-
-                document.getElementById(
-                    "whatsappPrice"
-                ).textContent =
-                    formatCurrency(
-                        data.whatsappPrice
-                    );
-            }
+            const smsPrice =
+                typeof data.smsPrice === "number"
+                    ? data.smsPrice
+                    : 5000;
 
 
-            if (
-                typeof data.smsPrice ===
-                "number"
-            ) {
-
-                document.getElementById(
-                    "smsPrice"
-                ).textContent =
-                    formatCurrency(
-                        data.smsPrice
-                    );
-            }
+            const whatsappSmsPrice =
+                typeof data.whatsappSmsPrice === "number"
+                    ? data.whatsappSmsPrice
+                    : 6000;
 
 
-            if (
-                typeof data.whatsappSmsPrice ===
-                "number"
-            ) {
+            document.getElementById(
+                "serviceWhatsappPrice"
+            ).value =
+                whatsappPrice;
 
-                document.getElementById(
-                    "whatsappSmsPrice"
-                ).textContent =
-                    formatCurrency(
-                        data.whatsappSmsPrice
-                    );
-            }
+
+            document.getElementById(
+                "serviceSmsPrice"
+            ).value =
+                smsPrice;
+
+
+            document.getElementById(
+                "serviceWhatsappSmsPrice"
+            ).value =
+                whatsappSmsPrice;
 
 
         } catch (error) {
 
             console.error(
                 "Unable to load pricing:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* =========================================
+       LOAD NCOINS PLANS
+    ========================================= */
+
+    async function loadNCoinsPlans() {
+
+        const planIds = [
+            "plan_2000",
+            "plan_5000",
+            "plan_10000",
+            "plan_20000"
+        ];
+
+
+        const defaults = {
+            plan_2000: 2000,
+            plan_5000: 5000,
+            plan_10000: 10000,
+            plan_20000: 20000
+        };
+
+
+        const inputMap = {
+            plan_2000:
+                "plan2000Price",
+
+            plan_5000:
+                "plan5000Price",
+
+            plan_10000:
+                "plan10000Price",
+
+            plan_20000:
+                "plan20000Price"
+        };
+
+
+        try {
+
+            for (
+                const planId of planIds
+            ) {
+
+                const planRef =
+                    doc(
+                        ncoinPlansCollection,
+                        planId
+                    );
+
+
+                const snapshot =
+                    await getDoc(
+                        planRef
+                    );
+
+
+                const input =
+                    document.getElementById(
+                        inputMap[planId]
+                    );
+
+
+                if (
+                    snapshot.exists()
+                ) {
+
+                    const data =
+                        snapshot.data();
+
+
+                    if (
+                        typeof data.price ===
+                        "number"
+                    ) {
+
+                        input.value =
+                            data.price;
+
+                    } else {
+
+                        input.value =
+                            defaults[planId];
+                    }
+
+                } else {
+
+                    input.value =
+                        defaults[planId];
+                }
+
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                "Unable to load NCoins plans:",
                 error
             );
 
@@ -1890,12 +2357,14 @@
         loginScreen.style.display =
             "none";
 
+
         adminApp.style.display =
             "block";
 
 
         const email =
-            user.email || ADMIN_EMAIL;
+            user.email ||
+            ADMIN_EMAIL;
 
 
         document.getElementById(
@@ -1917,6 +2386,8 @@
 
 
         await loadPricing();
+
+        await loadNCoinsPlans();
     }
 
 
@@ -1930,6 +2401,7 @@
 
             loginButton.disabled =
                 true;
+
 
             buttonText.textContent =
                 "Signing in...";
@@ -1959,7 +2431,10 @@
                     ADMIN_EMAIL.toLowerCase()
                 ) {
 
-                    await signOut(auth);
+                    await signOut(
+                        auth
+                    );
+
 
                     throw new Error(
                         "unauthorized"
@@ -1975,7 +2450,10 @@
 
                 if (!isAdmin) {
 
-                    await signOut(auth);
+                    await signOut(
+                        auth
+                    );
+
 
                     throw new Error(
                         "admin-document-missing"
@@ -1992,7 +2470,9 @@
                 setTimeout(
                     () => {
 
-                        showAdmin(user);
+                        showAdmin(
+                            user
+                        );
 
                     },
                     500
@@ -2060,6 +2540,7 @@
                         "Unable to sign in. Please try again.",
                         "error"
                     );
+
                 }
 
 
@@ -2068,8 +2549,10 @@
                 loginButton.disabled =
                     false;
 
+
                 buttonText.textContent =
                     "Continue with Google";
+
             }
 
         }
@@ -2100,7 +2583,9 @@
                 ADMIN_EMAIL.toLowerCase()
             ) {
 
-                await signOut(auth);
+                await signOut(
+                    auth
+                );
 
                 return;
             }
@@ -2116,18 +2601,24 @@
 
                 if (!isAdmin) {
 
-                    await signOut(auth);
+                    await signOut(
+                        auth
+                    );
+
 
                     showStatus(
                         "Admin authorization was not found for this account.",
                         "error"
                     );
 
+
                     return;
                 }
 
 
-                showAdmin(user);
+                showAdmin(
+                    user
+                );
 
 
             } catch (error) {
@@ -2137,12 +2628,17 @@
                     error
                 );
 
-                await signOut(auth);
+
+                await signOut(
+                    auth
+                );
+
 
                 showStatus(
                     "Unable to verify administrator access.",
                     "error"
                 );
+
             }
 
         }
@@ -2156,331 +2652,275 @@
     window.adminLogout =
         async function() {
 
-            await signOut(auth);
+            await signOut(
+                auth
+            );
+
 
             adminApp.style.display =
                 "none";
 
+
             loginScreen.style.display =
                 "flex";
+
         };
 
 
     /* =========================================
-       PRICING MODAL
+       OPEN NCOINS MODAL
     ========================================= */
 
-    let editingPricingType = null;
+    window.openNCoinsModal =
+        async function() {
 
-
-    window.editPricing =
-        function(type) {
-
-            editingPricingType =
-                type;
+            await loadNCoinsPlans();
 
 
             const modal =
                 document.getElementById(
-                    "pricingModal"
+                    "ncoinsModal"
                 );
 
-            const title =
+
+            const message =
                 document.getElementById(
-                    "modalTitle"
-                );
-
-            const description =
-                document.getElementById(
-                    "modalDescription"
-                );
-
-            const input =
-                document.getElementById(
-                    "modalPriceInput"
+                    "ncoinsModalMessage"
                 );
 
 
-            if (type === "ncoins") {
-
-                title.textContent =
-                    "Edit NCoins Pricing";
-
-                description.textContent =
-                    "Set the amount customers pay for NCoins.";
-
-                input.value =
-                    getNumericPrice(
-                        "ncoinsPrice"
-                    );
-
-            }
+            message.className =
+                "modal-message";
 
 
-            if (type === "whatsapp") {
-
-                title.textContent =
-                    "Edit WhatsApp Verification Price";
-
-                description.textContent =
-                    "Set the amount customers pay for WhatsApp verification.";
-
-                input.value =
-                    getNumericPrice(
-                        "whatsappPrice"
-                    );
-
-            }
-
-
-            if (type === "sms") {
-
-                title.textContent =
-                    "Edit SMS Only Price";
-
-                description.textContent =
-                    "Set the amount customers pay for SMS-only rental.";
-
-                input.value =
-                    getNumericPrice(
-                        "smsPrice"
-                    );
-
-            }
-
-
-            if (type === "whatsappSms") {
-
-                title.textContent =
-                    "Edit WhatsApp + SMS Price";
-
-                description.textContent =
-                    "Set the amount customers pay for WhatsApp verification and SMS rental.";
-
-                input.value =
-                    getNumericPrice(
-                        "whatsappSmsPrice"
-                    );
-
-            }
+            message.textContent =
+                "";
 
 
             modal.classList.add(
                 "show"
             );
 
-
-            setTimeout(
-                () => {
-
-                    input.focus();
-
-                    input.select();
-
-                },
-                50
-            );
         };
 
 
-    function getNumericPrice(id) {
+    /* =========================================
+       CLOSE NCOINS MODAL
+    ========================================= */
 
-        const text =
+    window.closeNCoinsModal =
+        function() {
+
             document.getElementById(
-                id
-            ).textContent;
-
-
-        const number =
-            text.replace(
-                /[^0-9.]/g,
-                ""
+                "ncoinsModal"
+            ).classList.remove(
+                "show"
             );
 
-
-        return number;
-    }
+        };
 
 
     /* =========================================
-       SAVE MODAL PRICING
+       SAVE NCOINS PLANS
     ========================================= */
 
-    window.saveModalPricing =
+    window.saveNCoinsPlans =
         async function() {
-
-            const input =
-                document.getElementById(
-                    "modalPriceInput"
-                );
 
             const saveButton =
                 document.getElementById(
-                    "modalSaveButton"
+                    "ncoinsSaveButton"
                 );
 
 
-            const value =
-                input.value.trim();
+            const message =
+                document.getElementById(
+                    "ncoinsModalMessage"
+                );
 
 
-            if (
-                !value ||
-                Number(value) < 0 ||
-                !Number.isFinite(
-                    Number(value)
-                )
+            const plans = [
+
+                {
+                    id: "plan_2000",
+                    ncoins: 2000,
+                    input:
+                        "plan2000Price"
+                },
+
+                {
+                    id: "plan_5000",
+                    ncoins: 5000,
+                    input:
+                        "plan5000Price"
+                },
+
+                {
+                    id: "plan_10000",
+                    ncoins: 10000,
+                    input:
+                        "plan10000Price"
+                },
+
+                {
+                    id: "plan_20000",
+                    ncoins: 20000,
+                    input:
+                        "plan20000Price"
+                }
+
+            ];
+
+
+            const values = [];
+
+
+            for (
+                const plan of plans
             ) {
 
-                input.focus();
+                const input =
+                    document.getElementById(
+                        plan.input
+                    );
 
-                return;
-            }
+
+                const value =
+                    Number(
+                        input.value
+                    );
 
 
-            if (!editingPricingType) {
-                return;
+                if (
+                    !input.value.trim() ||
+                    !Number.isFinite(value) ||
+                    value < 0
+                ) {
+
+                    input.focus();
+
+                    message.textContent =
+                        "Please enter a valid price for every NCoins plan.";
+
+                    message.className =
+                        "modal-message show error";
+
+                    return;
+                }
+
+
+                values.push({
+                    ...plan,
+                    price: value
+                });
+
             }
 
 
             saveButton.disabled =
                 true;
 
+
             saveButton.textContent =
                 "Saving...";
 
 
+            message.className =
+                "modal-message";
+
+
             try {
 
-                const numericValue =
-                    Number(value);
-
-
-                const updateData = {
-                    updatedAt:
-                        serverTimestamp()
-                };
-
-
-                if (
-                    editingPricingType ===
-                    "ncoins"
+                for (
+                    const plan of values
                 ) {
 
-                    updateData.ncoinsPrice =
-                        numericValue;
+                    const planRef =
+                        doc(
+                            ncoinPlansCollection,
+                            plan.id
+                        );
+
+
+                    /*
+                     * Internal value is always
+                     * 50% of customer payment.
+                     */
+
+                    const internalValue =
+                        plan.price * 0.5;
+
+
+                    await setDoc(
+                        planRef,
+                        {
+
+                            planId:
+                                plan.id,
+
+                            ncoins:
+                                plan.ncoins,
+
+                            price:
+                                plan.price,
+
+                            currency:
+                                "NGN",
+
+                            internalValue:
+                                internalValue,
+
+                            margin:
+                                plan.price -
+                                internalValue,
+
+                            active:
+                                true,
+
+                            updatedAt:
+                                serverTimestamp()
+
+                        },
+                        {
+                            merge: true
+                        }
+                    );
+
                 }
 
 
-                if (
-                    editingPricingType ===
-                    "whatsapp"
-                ) {
-
-                    updateData.whatsappPrice =
-                        numericValue;
-                }
+                message.textContent =
+                    "NCoins plans saved successfully.";
 
 
-                if (
-                    editingPricingType ===
-                    "sms"
-                ) {
-
-                    updateData.smsPrice =
-                        numericValue;
-                }
+                message.className =
+                    "modal-message show success";
 
 
-                if (
-                    editingPricingType ===
-                    "whatsappSms"
-                ) {
+                setTimeout(
+                    () => {
 
-                    updateData.whatsappSmsPrice =
-                        numericValue;
-                }
+                        closeNCoinsModal();
 
-
-                await setDoc(
-                    pricingRef,
-                    updateData,
-                    {
-                        merge: true
-                    }
+                    },
+                    700
                 );
-
-
-                if (
-                    editingPricingType ===
-                    "ncoins"
-                ) {
-
-                    document.getElementById(
-                        "ncoinsPrice"
-                    ).textContent =
-                        formatCurrency(
-                            numericValue
-                        );
-                }
-
-
-                if (
-                    editingPricingType ===
-                    "whatsapp"
-                ) {
-
-                    document.getElementById(
-                        "whatsappPrice"
-                    ).textContent =
-                        formatCurrency(
-                            numericValue
-                        );
-                }
-
-
-                if (
-                    editingPricingType ===
-                    "sms"
-                ) {
-
-                    document.getElementById(
-                        "smsPrice"
-                    ).textContent =
-                        formatCurrency(
-                            numericValue
-                        );
-                }
-
-
-                if (
-                    editingPricingType ===
-                    "whatsappSms"
-                ) {
-
-                    document.getElementById(
-                        "whatsappSmsPrice"
-                    ).textContent =
-                        formatCurrency(
-                            numericValue
-                        );
-                }
-
-
-                closePricingModal();
 
 
             } catch (error) {
 
                 console.error(
-                    "Unable to save pricing:",
+                    "Unable to save NCoins plans:",
                     error
                 );
 
 
-                alert(
-                    "Unable to save the price. Please try again."
-                );
+                message.textContent =
+                    "Unable to save the NCoins plans. Please try again.";
+
+
+                message.className =
+                    "modal-message show error";
 
 
             } finally {
@@ -2488,52 +2928,269 @@
                 saveButton.disabled =
                     false;
 
+
                 saveButton.textContent =
                     "Save Changes";
+
             }
 
         };
 
 
     /* =========================================
-       CLOSE MODAL
+       OPEN SERVICE MODAL
     ========================================= */
 
-    window.closePricingModal =
-        function() {
+    window.openServiceModal =
+        async function() {
 
-            document.getElementById(
-                "pricingModal"
-            ).classList.remove(
+            await loadPricing();
+
+
+            const modal =
+                document.getElementById(
+                    "serviceModal"
+                );
+
+
+            const message =
+                document.getElementById(
+                    "serviceModalMessage"
+                );
+
+
+            message.className =
+                "modal-message";
+
+
+            message.textContent =
+                "";
+
+
+            modal.classList.add(
                 "show"
             );
 
-
-            editingPricingType =
-                null;
         };
 
 
     /* =========================================
-       FORMAT CURRENCY
+       CLOSE SERVICE MODAL
     ========================================= */
 
-    function formatCurrency(value) {
+    window.closeServiceModal =
+        function() {
 
-        return "₦" +
-            Number(value).toLocaleString(
-                "en-NG"
+            document.getElementById(
+                "serviceModal"
+            ).classList.remove(
+                "show"
             );
-    }
+
+        };
 
 
     /* =========================================
-       CLOSE WHEN CLICKING OUTSIDE
+       SAVE SERVICE PRICES
+    ========================================= */
+
+    window.saveServicePrices =
+        async function() {
+
+            const whatsappInput =
+                document.getElementById(
+                    "serviceWhatsappPrice"
+                );
+
+
+            const smsInput =
+                document.getElementById(
+                    "serviceSmsPrice"
+                );
+
+
+            const whatsappSmsInput =
+                document.getElementById(
+                    "serviceWhatsappSmsPrice"
+                );
+
+
+            const saveButton =
+                document.getElementById(
+                    "serviceSaveButton"
+                );
+
+
+            const message =
+                document.getElementById(
+                    "serviceModalMessage"
+                );
+
+
+            const whatsappPrice =
+                Number(
+                    whatsappInput.value
+                );
+
+
+            const smsPrice =
+                Number(
+                    smsInput.value
+                );
+
+
+            const whatsappSmsPrice =
+                Number(
+                    whatsappSmsInput.value
+                );
+
+
+            if (
+                !whatsappInput.value.trim() ||
+                !Number.isFinite(whatsappPrice) ||
+                whatsappPrice < 0
+            ) {
+
+                whatsappInput.focus();
+
+                message.textContent =
+                    "Please enter a valid WhatsApp Verification price.";
+
+                message.className =
+                    "modal-message show error";
+
+                return;
+            }
+
+
+            if (
+                !smsInput.value.trim() ||
+                !Number.isFinite(smsPrice) ||
+                smsPrice < 0
+            ) {
+
+                smsInput.focus();
+
+                message.textContent =
+                    "Please enter a valid SMS Only price.";
+
+                message.className =
+                    "modal-message show error";
+
+                return;
+            }
+
+
+            if (
+                !whatsappSmsInput.value.trim() ||
+                !Number.isFinite(whatsappSmsPrice) ||
+                whatsappSmsPrice < 0
+            ) {
+
+                whatsappSmsInput.focus();
+
+                message.textContent =
+                    "Please enter a valid WhatsApp + SMS price.";
+
+                message.className =
+                    "modal-message show error";
+
+                return;
+            }
+
+
+            saveButton.disabled =
+                true;
+
+
+            saveButton.textContent =
+                "Saving...";
+
+
+            message.className =
+                "modal-message";
+
+
+            try {
+
+                await setDoc(
+                    pricingRef,
+                    {
+
+                        whatsappPrice:
+                            whatsappPrice,
+
+                        smsPrice:
+                            smsPrice,
+
+                        whatsappSmsPrice:
+                            whatsappSmsPrice,
+
+                        updatedAt:
+                            serverTimestamp()
+
+                    },
+                    {
+                        merge: true
+                    }
+                );
+
+
+                message.textContent =
+                    "Service prices saved successfully.";
+
+
+                message.className =
+                    "modal-message show success";
+
+
+                setTimeout(
+                    () => {
+
+                        closeServiceModal();
+
+                    },
+                    700
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Unable to save service prices:",
+                    error
+                );
+
+
+                message.textContent =
+                    "Unable to save the service prices. Please try again.";
+
+
+                message.className =
+                    "modal-message show error";
+
+
+            } finally {
+
+                saveButton.disabled =
+                    false;
+
+
+                saveButton.textContent =
+                    "Save Changes";
+
+            }
+
+        };
+
+
+    /* =========================================
+       CLOSE MODALS WHEN CLICKING OUTSIDE
     ========================================= */
 
     document
         .getElementById(
-            "pricingModal"
+            "ncoinsModal"
         )
         .addEventListener(
             "click",
@@ -2544,7 +3201,28 @@
                     this
                 ) {
 
-                    closePricingModal();
+                    closeNCoinsModal();
+
+                }
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "serviceModal"
+        )
+        .addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target ===
+                    this
+                ) {
+
+                    closeServiceModal();
 
                 }
 
@@ -2553,38 +3231,26 @@
 
 
     /* =========================================
-       ENTER KEY TO SAVE
+       ESCAPE KEY
     ========================================= */
 
-    document
-        .getElementById(
-            "modalPriceInput"
-        )
-        .addEventListener(
-            "keydown",
-            function(event) {
+    document.addEventListener(
+        "keydown",
+        function(event) {
 
-                if (
-                    event.key ===
-                    "Enter"
-                ) {
+            if (
+                event.key ===
+                "Escape"
+            ) {
 
-                    saveModalPricing();
+                closeNCoinsModal();
 
-                }
-
-
-                if (
-                    event.key ===
-                    "Escape"
-                ) {
-
-                    closePricingModal();
-
-                }
+                closeServiceModal();
 
             }
-        );
+
+        }
+    );
 
 </script>
 
@@ -2598,7 +3264,10 @@
 
     function openPage(page) {
 
-        if (page === "dashboard") {
+        if (
+            page ===
+            "dashboard"
+        ) {
 
             window.location.href =
                 "index.html";
@@ -2607,7 +3276,10 @@
         }
 
 
-        if (page === "numbers") {
+        if (
+            page ===
+            "numbers"
+        ) {
 
             window.location.href =
                 "numbers.html";
@@ -2616,7 +3288,10 @@
         }
 
 
-        if (page === "payments") {
+        if (
+            page ===
+            "payments"
+        ) {
 
             window.location.href =
                 "payments.html";
@@ -2625,7 +3300,10 @@
         }
 
 
-        if (page === "settings") {
+        if (
+            page ===
+            "settings"
+        ) {
 
             window.location.href =
                 "settings.html";
@@ -2636,6 +3314,7 @@
     }
 
 </script>
+
 
 </body>
 </html>
