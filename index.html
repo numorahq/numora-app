@@ -1,0 +1,2454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Numora Admin</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blue: #1769ff;
+            --blue-light: #eef4ff;
+            --text: #111827;
+            --muted: #6b7280;
+            --border: #e8ecf2;
+            --background: #f7f9fc;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "SF Pro Display",
+                "SF Pro Text",
+                Arial,
+                sans-serif;
+
+            min-height: 100vh;
+
+            background: var(--background);
+
+            color: var(--text);
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        /* =========================================
+           LOGIN
+        ========================================= */
+
+        #loginScreen {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 24px;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(23, 105, 255, 0.10),
+                    transparent 35%
+                ),
+                #f7f9fc;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .brand-logo {
+            width: 64px;
+            height: 64px;
+
+            margin: 0 auto 16px;
+
+            border-radius: 18px;
+
+            background: var(--blue);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            font-size: 30px;
+            font-weight: 700;
+
+            box-shadow:
+                0 12px 30px rgba(23, 105, 255, 0.22);
+        }
+
+        .brand-name {
+            font-size: 27px;
+            font-weight: 700;
+            letter-spacing: -0.7px;
+        }
+
+        .brand-subtitle {
+            margin-top: 7px;
+
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.94);
+
+            border: 1px solid rgba(229, 231, 235, 0.9);
+
+            border-radius: 26px;
+
+            padding: 32px 26px;
+
+            box-shadow:
+                0 20px 60px rgba(15, 23, 42, 0.08);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .card-title {
+            font-size: 23px;
+            font-weight: 700;
+
+            text-align: center;
+        }
+
+        .card-description {
+            margin-top: 9px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .google-button {
+            width: 100%;
+
+            margin-top: 28px;
+
+            min-height: 54px;
+
+            border: 1px solid #e1e5eb;
+
+            border-radius: 15px;
+
+            background: white;
+
+            color: var(--text);
+
+            font-size: 15px;
+            font-weight: 600;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 12px;
+
+            cursor: pointer;
+        }
+
+        .google-button:active {
+            transform: scale(0.98);
+        }
+
+        .google-button:disabled {
+            opacity: .6;
+        }
+
+        .google-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .status {
+            display: none;
+
+            margin-top: 18px;
+
+            padding: 12px;
+
+            border-radius: 12px;
+
+            font-size: 13px;
+
+            text-align: center;
+        }
+
+        .status.show {
+            display: block;
+        }
+
+        .status.error {
+            background: #fff1f2;
+            color: #be123c;
+        }
+
+        .status.success {
+            background: #ecfdf5;
+            color: #047857;
+        }
+
+        .security-note {
+            margin-top: 24px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #edf0f4;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            color: #8a93a3;
+        }
+
+        .footer {
+            text-align: center;
+
+            margin-top: 22px;
+
+            font-size: 12px;
+
+            color: #9ca3af;
+        }
+
+
+        /* =========================================
+           ADMIN APP
+        ========================================= */
+
+        #adminApp {
+            display: none;
+
+            min-height: 100vh;
+        }
+
+        .admin-layout {
+            min-height: 100vh;
+
+            display: flex;
+        }
+
+
+        /* =========================================
+           SIDEBAR
+        ========================================= */
+
+        .sidebar {
+            width: 245px;
+
+            position: fixed;
+
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            background: white;
+
+            border-right: 1px solid var(--border);
+
+            padding: 25px 16px;
+
+            z-index: 20;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+
+            gap: 11px;
+
+            padding: 4px 10px 30px;
+        }
+
+        .sidebar-logo {
+            width: 39px;
+            height: 39px;
+
+            border-radius: 12px;
+
+            background: var(--blue);
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .sidebar-brand-name {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .sidebar-label {
+            font-size: 11px;
+
+            color: #9ca3af;
+
+            padding: 0 12px 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .6px;
+        }
+
+        .nav {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+        }
+
+        .nav-button {
+            width: 100%;
+
+            border: 0;
+
+            background: transparent;
+
+            color: #667085;
+
+            padding: 12px;
+
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            text-align: left;
+        }
+
+        .nav-button:hover {
+            background: #f7f9fc;
+        }
+
+        .nav-button.active {
+            background: var(--blue-light);
+
+            color: var(--blue);
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+
+            font-size: 17px;
+        }
+
+
+        /* =========================================
+           MAIN
+        ========================================= */
+
+        .main {
+            margin-left: 245px;
+
+            width: calc(100% - 245px);
+
+            min-height: 100vh;
+
+            padding: 25px 30px;
+        }
+
+        .topbar {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 28px;
+        }
+
+        .page-heading h1 {
+            font-size: 27px;
+
+            letter-spacing: -.6px;
+        }
+
+        .page-heading p {
+            margin-top: 5px;
+
+            font-size: 13px;
+
+            color: var(--muted);
+        }
+
+        .admin-profile {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .admin-avatar {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            background: var(--blue-light);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: var(--blue);
+
+            font-weight: 700;
+        }
+
+        .admin-email {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .admin-role {
+            margin-top: 2px;
+
+            font-size: 11px;
+
+            color: var(--muted);
+        }
+
+
+        /* =========================================
+           DASHBOARD CARDS
+        ========================================= */
+
+        .dashboard-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 18px;
+
+            padding: 20px;
+
+            min-height: 135px;
+        }
+
+        .stat-label {
+            color: var(--muted);
+
+            font-size: 13px;
+
+            font-weight: 500;
+        }
+
+        .stat-value {
+            margin-top: 13px;
+
+            font-size: 27px;
+
+            font-weight: 700;
+
+            letter-spacing: -.5px;
+        }
+
+        .stat-note {
+            margin-top: 7px;
+
+            font-size: 12px;
+
+            color: #9ca3af;
+        }
+
+
+        /* =========================================
+           PRICING CARDS
+        ========================================= */
+
+        .section-title {
+            margin-top: 30px;
+            margin-bottom: 14px;
+
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .pricing-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 16px;
+        }
+
+        .pricing-card {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 18px;
+
+            padding: 20px;
+        }
+
+        .pricing-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .pricing-title {
+            font-size: 15px;
+
+            font-weight: 700;
+        }
+
+        .pricing-description {
+            margin-top: 5px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+        .edit-button {
+            border: 0;
+
+            background: var(--blue-light);
+
+            color: var(--blue);
+
+            padding: 8px 12px;
+
+            border-radius: 9px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            height: fit-content;
+        }
+
+        .edit-button:active {
+            transform: scale(.97);
+        }
+
+        .pricing-value {
+            margin-top: 18px;
+
+            font-size: 23px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================
+           PRICING MODAL
+        ========================================= */
+
+        .pricing-modal {
+            position: fixed;
+
+            inset: 0;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(15, 23, 42, .38);
+
+            backdrop-filter: blur(7px);
+            -webkit-backdrop-filter: blur(7px);
+
+            z-index: 100;
+        }
+
+        .pricing-modal.show {
+            display: flex;
+        }
+
+        .pricing-modal-card {
+            width: 100%;
+            max-width: 390px;
+
+            background: white;
+
+            border-radius: 23px;
+
+            padding: 24px;
+
+            box-shadow:
+                0 25px 80px rgba(15, 23, 42, .20);
+
+            animation:
+                modalIn .18s ease-out;
+        }
+
+        @keyframes modalIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+        }
+
+        .modal-close {
+            width: 34px;
+            height: 34px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            background: #f3f5f8;
+
+            color: #667085;
+
+            font-size: 20px;
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-top {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 22px;
+        }
+
+        .modal-title {
+            font-size: 19px;
+
+            font-weight: 700;
+
+            letter-spacing: -.3px;
+        }
+
+        .modal-description {
+            margin-top: 6px;
+
+            font-size: 12px;
+
+            color: var(--muted);
+
+            line-height: 1.5;
+        }
+
+        .modal-label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #4b5563;
+        }
+
+        .modal-input-wrapper {
+            display: flex;
+
+            align-items: center;
+
+            border: 1px solid #dfe4ec;
+
+            border-radius: 13px;
+
+            overflow: hidden;
+
+            background: white;
+        }
+
+        .modal-input-wrapper:focus-within {
+            border-color: var(--blue);
+
+            box-shadow:
+                0 0 0 3px rgba(23, 105, 255, .08);
+        }
+
+        .currency-symbol {
+            padding-left: 14px;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            color: #667085;
+        }
+
+        .modal-input {
+            width: 100%;
+
+            border: 0;
+
+            outline: 0;
+
+            padding: 13px 14px;
+
+            font-size: 16px;
+
+            font-weight: 600;
+
+            color: var(--text);
+
+            background: transparent;
+        }
+
+        .modal-actions {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 10px;
+
+            margin-top: 20px;
+        }
+
+        .modal-button {
+            min-height: 46px;
+
+            border-radius: 12px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .modal-cancel {
+            border: 1px solid #e1e5eb;
+
+            background: white;
+
+            color: #667085;
+        }
+
+        .modal-save {
+            border: 0;
+
+            background: var(--blue);
+
+            color: white;
+        }
+
+        .modal-save:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+        .modal-save:active,
+        .modal-cancel:active {
+            transform: scale(.98);
+        }
+
+
+        /* =========================================
+           MOBILE NAV
+        ========================================= */
+
+        .mobile-nav {
+            display: none;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            .dashboard-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 700px) {
+
+            .sidebar {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+
+                width: 100%;
+
+                padding:
+                    20px
+                    18px
+                    100px;
+            }
+
+            .topbar {
+                align-items: flex-start;
+            }
+
+            .admin-email {
+                display: none;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mobile-nav {
+                position: fixed;
+
+                display: flex;
+
+                left: 12px;
+                right: 12px;
+                bottom: 12px;
+
+                height: 67px;
+
+                background:
+                    rgba(255,255,255,.94);
+
+                border:
+                    1px solid rgba(229,231,235,.9);
+
+                border-radius: 19px;
+
+                box-shadow:
+                    0 12px 35px rgba(15,23,42,.12);
+
+                backdrop-filter: blur(20px);
+
+                z-index: 50;
+
+                justify-content: space-around;
+
+                align-items: center;
+            }
+
+            .mobile-nav button {
+                border: 0;
+
+                background: transparent;
+
+                color: #8a93a3;
+
+                font-size: 11px;
+
+                font-weight: 600;
+
+                display: flex;
+
+                flex-direction: column;
+
+                align-items: center;
+
+                gap: 5px;
+
+                cursor: pointer;
+            }
+
+            .mobile-nav button.active {
+                color: var(--blue);
+            }
+
+            .mobile-nav-icon {
+                font-size: 19px;
+            }
+        }
+
+
+        @media (max-width: 480px) {
+
+            #loginScreen {
+                padding: 18px;
+            }
+
+            .login-card {
+                padding: 28px 20px;
+
+                border-radius: 23px;
+            }
+
+            .brand-logo {
+                width: 58px;
+                height: 58px;
+            }
+
+            .brand-name {
+                font-size: 25px;
+            }
+
+            .card-title {
+                font-size: 21px;
+            }
+
+            .stat-card {
+                min-height: 120px;
+            }
+
+            .stat-value {
+                font-size: 24px;
+            }
+
+            .pricing-modal-card {
+                padding: 21px;
+
+                border-radius: 21px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOGIN SCREEN
+====================================================== -->
+
+<div id="loginScreen">
+
+    <main class="login-container">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                N
+            </div>
+
+            <div class="brand-name">
+                Numora
+            </div>
+
+            <div class="brand-subtitle">
+                Administration Console
+            </div>
+
+        </div>
+
+
+        <section class="login-card">
+
+            <h1 class="card-title">
+                Admin Sign In
+            </h1>
+
+            <p class="card-description">
+                Sign in with your authorized Google account
+                to manage Numora.
+            </p>
+
+
+            <button
+                id="googleLoginButton"
+                class="google-button"
+                type="button"
+            >
+
+                <svg
+                    class="google-icon"
+                    viewBox="0 0 24 24"
+                >
+
+                    <path
+                        fill="#4285F4"
+                        d="M21.35 12.23c0-.71-.06-1.39-.18-2.05H12v3.88h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.69 2.91-4.18 2.91-7.22z"
+                    />
+
+                    <path
+                        fill="#34A853"
+                        d="M12 21.5c2.63 0 4.84-.87 6.45-2.35l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.69-1.72-5.46-4.03H3.3v2.52A9.75 9.75 0 0 0 12 21.5z"
+                    />
+
+                    <path
+                        fill="#FBBC05"
+                        d="M6.54 13.59A5.86 5.86 0 0 1 6.23 12c0-.55.11-1.09.31-1.59V7.89H3.3A9.5 9.5 0 0 0 2.25 12c0 1.53.37 2.98 1.05 4.11l3.24-2.52z"
+                    />
+
+                    <path
+                        fill="#EA4335"
+                        d="M12 6.38c1.43 0 2.72.49 3.73 1.46l2.8-2.8C16.84 3.5 14.63 2.5 12 2.5a9.75 9.75 0 0 0-8.7 5.39l3.24 2.52C7.31 8.1 9.46 6.38 12 6.38z"
+                    />
+
+                </svg>
+
+                <span id="googleButtonText">
+                    Continue with Google
+                </span>
+
+            </button>
+
+
+            <div
+                id="status"
+                class="status"
+            ></div>
+
+
+            <div class="security-note">
+                Access is restricted to authorized
+                Numora administrators.
+            </div>
+
+        </section>
+
+
+        <div class="footer">
+            Numora © 2026
+        </div>
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     ADMIN APP
+====================================================== -->
+
+<div id="adminApp">
+
+    <div class="admin-layout">
+
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+
+                <div class="sidebar-logo">
+                    N
+                </div>
+
+                <div class="sidebar-brand-name">
+                    Numora
+                </div>
+
+            </div>
+
+
+            <div class="sidebar-label">
+                Administration
+            </div>
+
+
+            <nav class="nav">
+
+                <button
+                    class="nav-button active"
+                    onclick="openPage('dashboard')"
+                >
+                    <span class="nav-icon">⌂</span>
+                    Dashboard
+                </button>
+
+
+                <button
+                    class="nav-button"
+                    onclick="openPage('numbers')"
+                >
+                    <span class="nav-icon">▣</span>
+                    Numbers
+                </button>
+
+
+                <button
+                    class="nav-button"
+                    onclick="openPage('payments')"
+                >
+                    <span class="nav-icon">₦</span>
+                    Payments
+                </button>
+
+
+                <button
+                    class="nav-button"
+                    onclick="openPage('settings')"
+                >
+                    <span class="nav-icon">⚙</span>
+                    Settings
+                </button>
+
+            </nav>
+
+        </aside>
+
+
+
+        <!-- MAIN -->
+
+        <main class="main">
+
+
+            <!-- TOPBAR -->
+
+            <header class="topbar">
+
+                <div class="page-heading">
+
+                    <h1>
+                        Dashboard
+                    </h1>
+
+                    <p>
+                        Welcome back to Numora Admin.
+                    </p>
+
+                </div>
+
+
+                <div class="admin-profile">
+
+                    <div
+                        id="adminAvatar"
+                        class="admin-avatar"
+                    >
+                        N
+                    </div>
+
+                    <div>
+
+                        <div
+                            id="adminEmail"
+                            class="admin-email"
+                        >
+                            numora.support@gmail.com
+                        </div>
+
+                        <div class="admin-role">
+                            Administrator
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- =================================================
+                 DASHBOARD
+            ================================================== -->
+
+            <section id="dashboardPage">
+
+
+                <div class="dashboard-grid">
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-label">
+                            Total Customers
+                        </div>
+
+                        <div
+                            id="customerCount"
+                            class="stat-value"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-note">
+                            Registered Numora customers
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-label">
+                            Twilio SMS Pricing
+                        </div>
+
+                        <div
+                            id="twilioPrice"
+                            class="stat-value"
+                        >
+                            —
+                        </div>
+
+                        <div class="stat-note">
+                            Current provider cost
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-label">
+                            Monthly Revenue / Margin
+                        </div>
+
+                        <div
+                            id="monthlyRevenue"
+                            class="stat-value"
+                        >
+                            —
+                        </div>
+
+                        <div class="stat-note">
+                            Current month
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="section-title">
+                    Pricing
+                </div>
+
+
+                <div class="pricing-grid">
+
+
+                    <!-- NCOINS -->
+
+                    <div class="pricing-card">
+
+                        <div class="pricing-header">
+
+                            <div>
+
+                                <div class="pricing-title">
+                                    Numora NCoins Pricing
+                                </div>
+
+                                <div class="pricing-description">
+                                    Control how much customers
+                                    pay for NCoins.
+                                </div>
+
+                            </div>
+
+                            <button
+                                class="edit-button"
+                                onclick="editPricing('ncoins')"
+                            >
+                                Edit
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="ncoinsPrice"
+                            class="pricing-value"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- SERVICE PRICE -->
+
+                    <div class="pricing-card">
+
+                        <div class="pricing-header">
+
+                            <div>
+
+                                <div class="pricing-title">
+                                    Numora Service Pricing
+                                </div>
+
+                                <div class="pricing-description">
+                                    Control the price customers
+                                    pay for Numora services.
+                                </div>
+
+                            </div>
+
+                            <button
+                                class="edit-button"
+                                onclick="editPricing('service')"
+                            >
+                                Edit
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="servicePrice"
+                            class="pricing-value"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MOBILE NAV
+            ================================================== -->
+
+            <nav class="mobile-nav">
+
+                <button
+                    class="active"
+                    onclick="openPage('dashboard')"
+                >
+                    <span class="mobile-nav-icon">
+                        ⌂
+                    </span>
+
+                    Dashboard
+                </button>
+
+
+                <button
+                    onclick="openPage('numbers')"
+                >
+                    <span class="mobile-nav-icon">
+                        ▣
+                    </span>
+
+                    Numbers
+                </button>
+
+
+                <button
+                    onclick="openPage('payments')"
+                >
+                    <span class="mobile-nav-icon">
+                        ₦
+                    </span>
+
+                    Payments
+                </button>
+
+
+                <button
+                    onclick="openPage('settings')"
+                >
+                    <span class="mobile-nav-icon">
+                        ⚙
+                    </span>
+
+                    Settings
+                </button>
+
+            </nav>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     PRICING EDIT MODAL
+====================================================== -->
+
+<div
+    id="pricingModal"
+    class="pricing-modal"
+>
+
+    <div
+        class="pricing-modal-card"
+        onclick="event.stopPropagation()"
+    >
+
+        <div class="modal-top">
+
+            <div>
+
+                <div
+                    id="modalTitle"
+                    class="modal-title"
+                >
+                    Edit Pricing
+                </div>
+
+                <div
+                    id="modalDescription"
+                    class="modal-description"
+                >
+                    Update the price below.
+                </div>
+
+            </div>
+
+
+            <button
+                class="modal-close"
+                type="button"
+                onclick="closePricingModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <label
+            class="modal-label"
+            for="modalPriceInput"
+        >
+            Price
+        </label>
+
+
+        <div class="modal-input-wrapper">
+
+            <span class="currency-symbol">
+                ₦
+            </span>
+
+            <input
+                id="modalPriceInput"
+                class="modal-input"
+                type="number"
+                min="0"
+                step="1"
+                placeholder="Enter price"
+            >
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="modal-button modal-cancel"
+                type="button"
+                onclick="closePricingModal()"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                id="modalSaveButton"
+                class="modal-button modal-save"
+                type="button"
+                onclick="saveModalPricing()"
+            >
+                Save Changes
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     FIREBASE
+====================================================== -->
+
+<script type="module">
+
+    import {
+        initializeApp
+    }
+    from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+    import {
+        getAuth,
+        GoogleAuthProvider,
+        signInWithPopup,
+        signOut,
+        onAuthStateChanged
+    }
+    from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+    import {
+        getFirestore,
+        doc,
+        getDoc,
+        setDoc,
+        serverTimestamp
+    }
+    from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+    /* =========================================
+       FIREBASE CONFIG
+    ========================================= */
+
+    const firebaseConfig = {
+
+        apiKey:
+            "AIzaSyDZa5HcMxwYS-qVPPAyKSWwjvGdSccWrSg",
+
+        authDomain:
+            "numora-c9a3b.firebaseapp.com",
+
+        projectId:
+            "numora-c9a3b",
+
+        storageBucket:
+            "numora-c9a3b.firebasestorage.app",
+
+        messagingSenderId:
+            "778502274031",
+
+        appId:
+            "1:778502274031:web:4cf57beed3703cbe5dd41a",
+
+        measurementId:
+            "G-6ELM21FDPH"
+    };
+
+
+    /* =========================================
+       INITIALIZE
+    ========================================= */
+
+    const app =
+        initializeApp(firebaseConfig);
+
+    const auth =
+        getAuth(app);
+
+    const db =
+        getFirestore(app);
+
+    const provider =
+        new GoogleAuthProvider();
+
+
+    /* =========================================
+       ADMIN
+    ========================================= */
+
+    const ADMIN_EMAIL =
+        "numora.support@gmail.com";
+
+
+    const loginScreen =
+        document.getElementById(
+            "loginScreen"
+        );
+
+    const adminApp =
+        document.getElementById(
+            "adminApp"
+        );
+
+    const loginButton =
+        document.getElementById(
+            "googleLoginButton"
+        );
+
+    const buttonText =
+        document.getElementById(
+            "googleButtonText"
+        );
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    /* =========================================
+       FIRESTORE REFERENCES
+    ========================================= */
+
+    const pricingRef =
+        doc(
+            db,
+            "adminConfig",
+            "pricing"
+        );
+
+
+    /* =========================================
+       STATUS
+    ========================================= */
+
+    function showStatus(
+        message,
+        type
+    ) {
+
+        status.textContent =
+            message;
+
+        status.className =
+            "status show " + type;
+    }
+
+
+    /* =========================================
+       CHECK ADMIN DOCUMENT
+    ========================================= */
+
+    async function verifyAdmin(user) {
+
+        if (!user) {
+            return false;
+        }
+
+
+        const adminRef =
+            doc(
+                db,
+                "admins",
+                user.uid
+            );
+
+
+        const adminSnapshot =
+            await getDoc(adminRef);
+
+
+        return adminSnapshot.exists();
+    }
+
+
+    /* =========================================
+       LOAD PRICING
+    ========================================= */
+
+    async function loadPricing() {
+
+        try {
+
+            const snapshot =
+                await getDoc(
+                    pricingRef
+                );
+
+
+            if (!snapshot.exists()) {
+
+                console.warn(
+                    "Pricing document does not exist."
+                );
+
+                return;
+            }
+
+
+            const data =
+                snapshot.data();
+
+
+            if (
+                typeof data.ncoinsPrice ===
+                "number"
+            ) {
+
+                document.getElementById(
+                    "ncoinsPrice"
+                ).textContent =
+                    formatCurrency(
+                        data.ncoinsPrice
+                    );
+            }
+
+
+            if (
+                typeof data.servicePrice ===
+                "number"
+            ) {
+
+                document.getElementById(
+                    "servicePrice"
+                ).textContent =
+                    formatCurrency(
+                        data.servicePrice
+                    );
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                "Unable to load pricing:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* =========================================
+       SHOW DASHBOARD
+    ========================================= */
+
+    async function showAdmin(user) {
+
+        loginScreen.style.display =
+            "none";
+
+        adminApp.style.display =
+            "block";
+
+
+        const email =
+            user.email || ADMIN_EMAIL;
+
+
+        document.getElementById(
+            "adminEmail"
+        ).textContent =
+            email;
+
+
+        const initial =
+            email
+                .charAt(0)
+                .toUpperCase();
+
+
+        document.getElementById(
+            "adminAvatar"
+        ).textContent =
+            initial;
+
+
+        await loadPricing();
+    }
+
+
+    /* =========================================
+       GOOGLE LOGIN
+    ========================================= */
+
+    loginButton.addEventListener(
+        "click",
+        async () => {
+
+            loginButton.disabled =
+                true;
+
+            buttonText.textContent =
+                "Signing in...";
+
+
+            try {
+
+                const result =
+                    await signInWithPopup(
+                        auth,
+                        provider
+                    );
+
+
+                const user =
+                    result.user;
+
+
+                const email =
+                    (
+                        user.email || ""
+                    ).toLowerCase();
+
+
+                if (
+                    email !==
+                    ADMIN_EMAIL.toLowerCase()
+                ) {
+
+                    await signOut(auth);
+
+                    throw new Error(
+                        "unauthorized"
+                    );
+                }
+
+
+                const isAdmin =
+                    await verifyAdmin(
+                        user
+                    );
+
+
+                if (!isAdmin) {
+
+                    await signOut(auth);
+
+                    throw new Error(
+                        "admin-document-missing"
+                    );
+                }
+
+
+                showStatus(
+                    "Authentication successful.",
+                    "success"
+                );
+
+
+                setTimeout(
+                    () => {
+
+                        showAdmin(user);
+
+                    },
+                    500
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    error
+                );
+
+
+                if (
+                    error.message ===
+                    "unauthorized"
+                ) {
+
+                    showStatus(
+                        "This Google account is not authorized to access Numora Admin.",
+                        "error"
+                    );
+
+                }
+
+                else if (
+                    error.message ===
+                    "admin-document-missing"
+                ) {
+
+                    showStatus(
+                        "Admin authorization was not found for this account.",
+                        "error"
+                    );
+
+                }
+
+                else if (
+                    error.code ===
+                    "auth/popup-closed-by-user"
+                ) {
+
+                    showStatus(
+                        "Google sign-in was cancelled.",
+                        "error"
+                    );
+
+                }
+
+                else if (
+                    error.code ===
+                    "auth/popup-blocked"
+                ) {
+
+                    showStatus(
+                        "Google sign-in was blocked by your browser.",
+                        "error"
+                    );
+
+                }
+
+                else {
+
+                    showStatus(
+                        "Unable to sign in. Please try again.",
+                        "error"
+                    );
+                }
+
+
+            } finally {
+
+                loginButton.disabled =
+                    false;
+
+                buttonText.textContent =
+                    "Continue with Google";
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       EXISTING LOGIN
+    ========================================= */
+
+    onAuthStateChanged(
+        auth,
+        async (user) => {
+
+            if (!user) {
+                return;
+            }
+
+
+            const email =
+                (
+                    user.email || ""
+                ).toLowerCase();
+
+
+            if (
+                email !==
+                ADMIN_EMAIL.toLowerCase()
+            ) {
+
+                await signOut(auth);
+
+                return;
+            }
+
+
+            try {
+
+                const isAdmin =
+                    await verifyAdmin(
+                        user
+                    );
+
+
+                if (!isAdmin) {
+
+                    await signOut(auth);
+
+                    showStatus(
+                        "Admin authorization was not found for this account.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                showAdmin(user);
+
+
+            } catch (error) {
+
+                console.error(
+                    "Admin verification failed:",
+                    error
+                );
+
+                await signOut(auth);
+
+                showStatus(
+                    "Unable to verify administrator access.",
+                    "error"
+                );
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       LOGOUT
+    ========================================= */
+
+    window.adminLogout =
+        async function() {
+
+            await signOut(auth);
+
+            adminApp.style.display =
+                "none";
+
+            loginScreen.style.display =
+                "flex";
+        };
+
+
+    /* =========================================
+       PRICING MODAL
+    ========================================= */
+
+    let editingPricingType = null;
+
+
+    window.editPricing =
+        function(type) {
+
+            editingPricingType =
+                type;
+
+
+            const modal =
+                document.getElementById(
+                    "pricingModal"
+                );
+
+            const title =
+                document.getElementById(
+                    "modalTitle"
+                );
+
+            const description =
+                document.getElementById(
+                    "modalDescription"
+                );
+
+            const input =
+                document.getElementById(
+                    "modalPriceInput"
+                );
+
+
+            if (type === "ncoins") {
+
+                title.textContent =
+                    "Edit NCoins Pricing";
+
+                description.textContent =
+                    "Set the amount customers pay for NCoins.";
+
+                input.value =
+                    getNumericPrice(
+                        "ncoinsPrice"
+                    );
+
+            }
+
+
+            if (type === "service") {
+
+                title.textContent =
+                    "Edit Service Pricing";
+
+                description.textContent =
+                    "Set the amount customers pay for Numora services.";
+
+                input.value =
+                    getNumericPrice(
+                        "servicePrice"
+                    );
+
+            }
+
+
+            modal.classList.add(
+                "show"
+            );
+
+
+            setTimeout(
+                () => {
+
+                    input.focus();
+
+                    input.select();
+
+                },
+                50
+            );
+        };
+
+
+    function getNumericPrice(id) {
+
+        const text =
+            document.getElementById(
+                id
+            ).textContent;
+
+
+        const number =
+            text.replace(
+                /[^0-9.]/g,
+                ""
+            );
+
+
+        return number;
+    }
+
+
+    /* =========================================
+       SAVE MODAL PRICING
+    ========================================= */
+
+    window.saveModalPricing =
+        async function() {
+
+            const input =
+                document.getElementById(
+                    "modalPriceInput"
+                );
+
+            const saveButton =
+                document.getElementById(
+                    "modalSaveButton"
+                );
+
+
+            const value =
+                input.value.trim();
+
+
+            if (
+                !value ||
+                Number(value) < 0 ||
+                !Number.isFinite(
+                    Number(value)
+                )
+            ) {
+
+                input.focus();
+
+                return;
+            }
+
+
+            if (!editingPricingType) {
+                return;
+            }
+
+
+            saveButton.disabled =
+                true;
+
+            saveButton.textContent =
+                "Saving...";
+
+
+            try {
+
+                const numericValue =
+                    Number(value);
+
+
+                const updateData = {
+                    updatedAt:
+                        serverTimestamp()
+                };
+
+
+                if (
+                    editingPricingType ===
+                    "ncoins"
+                ) {
+
+                    updateData.ncoinsPrice =
+                        numericValue;
+                }
+
+
+                if (
+                    editingPricingType ===
+                    "service"
+                ) {
+
+                    updateData.servicePrice =
+                        numericValue;
+                }
+
+
+                await setDoc(
+                    pricingRef,
+                    updateData,
+                    {
+                        merge: true
+                    }
+                );
+
+
+                if (
+                    editingPricingType ===
+                    "ncoins"
+                ) {
+
+                    document.getElementById(
+                        "ncoinsPrice"
+                    ).textContent =
+                        formatCurrency(
+                            numericValue
+                        );
+                }
+
+
+                if (
+                    editingPricingType ===
+                    "service"
+                ) {
+
+                    document.getElementById(
+                        "servicePrice"
+                    ).textContent =
+                        formatCurrency(
+                            numericValue
+                        );
+                }
+
+
+                closePricingModal();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Unable to save pricing:",
+                    error
+                );
+
+
+                alert(
+                    "Unable to save the price. Please try again."
+                );
+
+
+            } finally {
+
+                saveButton.disabled =
+                    false;
+
+                saveButton.textContent =
+                    "Save Changes";
+            }
+
+        };
+
+
+    /* =========================================
+       CLOSE MODAL
+    ========================================= */
+
+    window.closePricingModal =
+        function() {
+
+            document.getElementById(
+                "pricingModal"
+            ).classList.remove(
+                "show"
+            );
+
+
+            editingPricingType =
+                null;
+        };
+
+
+    /* =========================================
+       FORMAT CURRENCY
+    ========================================= */
+
+    function formatCurrency(value) {
+
+        return "₦" +
+            Number(value).toLocaleString(
+                "en-NG"
+            );
+    }
+
+
+    /* =========================================
+       CLOSE WHEN CLICKING OUTSIDE
+    ========================================= */
+
+    document
+        .getElementById(
+            "pricingModal"
+        )
+        .addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target ===
+                    this
+                ) {
+
+                    closePricingModal();
+
+                }
+
+            }
+        );
+
+
+    /* =========================================
+       ENTER KEY TO SAVE
+    ========================================= */
+
+    document
+        .getElementById(
+            "modalPriceInput"
+        )
+        .addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key ===
+                    "Enter"
+                ) {
+
+                    saveModalPricing();
+
+                }
+
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    closePricingModal();
+
+                }
+
+            }
+        );
+
+</script>
+
+
+
+<script>
+
+    /* =========================================
+       NAVIGATION
+    ========================================= */
+
+    function openPage(page) {
+
+        if (page === "dashboard") {
+
+            window.location.href =
+                "index.html";
+
+            return;
+        }
+
+
+        if (page === "numbers") {
+
+            window.location.href =
+                "numbers.html";
+
+            return;
+        }
+
+
+        if (page === "payments") {
+
+            window.location.href =
+                "payments.html";
+
+            return;
+        }
+
+
+        if (page === "settings") {
+
+            window.location.href =
+                "settings.html";
+
+            return;
+        }
+
+    }
+
+</script>
+
+</body>
+</html>
