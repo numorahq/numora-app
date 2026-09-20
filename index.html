@@ -29,8 +29,8 @@
             --white: #ffffff;
             --green: #059669;
             --green-light: #ecfdf5;
-            --orange: #d97706;
-            --orange-light: #fff7ed;
+            --red: #dc2626;
+            --red-light: #fef2f2;
         }
 
         body {
@@ -50,14 +50,19 @@
         }
 
         button,
-        input {
+        input,
+        select {
             font-family: inherit;
         }
 
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
 
-        /* =========================================
+
+        /* =====================================================
            LOGIN
-        ========================================= */
+        ====================================================== */
 
         #loginScreen {
             min-height: 100vh;
@@ -113,6 +118,7 @@
         .brand-name {
             font-size: 27px;
             font-weight: 700;
+
             letter-spacing: -0.7px;
         }
 
@@ -120,13 +126,16 @@
             margin-top: 7px;
 
             font-size: 14px;
+
             color: var(--muted);
         }
 
         .login-card {
             background: rgba(255, 255, 255, 0.94);
 
-            border: 1px solid rgba(229, 231, 235, 0.9);
+            border:
+                1px solid
+                rgba(229, 231, 235, 0.9);
 
             border-radius: 26px;
 
@@ -141,6 +150,7 @@
 
         .card-title {
             font-size: 23px;
+
             font-weight: 700;
 
             text-align: center;
@@ -154,6 +164,7 @@
             color: var(--muted);
 
             font-size: 14px;
+
             line-height: 1.5;
         }
 
@@ -164,7 +175,9 @@
 
             min-height: 54px;
 
-            border: 1px solid #e1e5eb;
+            border:
+                1px solid
+                #e1e5eb;
 
             border-radius: 15px;
 
@@ -173,10 +186,13 @@
             color: var(--text);
 
             font-size: 15px;
+
             font-weight: 600;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             gap: 12px;
@@ -185,11 +201,13 @@
         }
 
         .google-button:active {
-            transform: scale(0.98);
+            transform: scale(.98);
         }
 
         .google-button:disabled {
             opacity: .6;
+
+            cursor: not-allowed;
         }
 
         .google-icon {
@@ -217,11 +235,13 @@
 
         .status.error {
             background: #fff1f2;
+
             color: #be123c;
         }
 
         .status.success {
             background: #ecfdf5;
+
             color: #047857;
         }
 
@@ -230,7 +250,9 @@
 
             padding-top: 20px;
 
-            border-top: 1px solid #edf0f4;
+            border-top:
+                1px solid
+                #edf0f4;
 
             text-align: center;
 
@@ -250,9 +272,9 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
            ADMIN APP
-        ========================================= */
+        ====================================================== */
 
         #adminApp {
             display: none;
@@ -267,9 +289,9 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
            SIDEBAR
-        ========================================= */
+        ====================================================== */
 
         .sidebar {
             width: 245px;
@@ -282,7 +304,9 @@
 
             background: white;
 
-            border-right: 1px solid var(--border);
+            border-right:
+                1px solid
+                var(--border);
 
             padding: 25px 16px;
 
@@ -291,11 +315,15 @@
 
         .sidebar-brand {
             display: flex;
+
             align-items: center;
 
             gap: 11px;
 
-            padding: 4px 10px 30px;
+            padding:
+                4px
+                10px
+                30px;
         }
 
         .sidebar-logo {
@@ -309,15 +337,19 @@
             color: white;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             font-weight: 700;
+
             font-size: 18px;
         }
 
         .sidebar-brand-name {
             font-size: 20px;
+
             font-weight: 700;
         }
 
@@ -326,7 +358,10 @@
 
             color: #9ca3af;
 
-            padding: 0 12px 10px;
+            padding:
+                0
+                12px
+                10px;
 
             text-transform: uppercase;
 
@@ -355,11 +390,13 @@
             border-radius: 12px;
 
             display: flex;
+
             align-items: center;
 
             gap: 12px;
 
             font-size: 14px;
+
             font-weight: 600;
 
             cursor: pointer;
@@ -379,30 +416,36 @@
 
         .nav-icon {
             width: 20px;
+
             text-align: center;
 
             font-size: 17px;
         }
 
 
-        /* =========================================
+        /* =====================================================
            MAIN
-        ========================================= */
+        ====================================================== */
 
         .main {
             margin-left: 245px;
 
-            width: calc(100% - 245px);
+            width:
+                calc(100% - 245px);
 
             min-height: 100vh;
 
-            padding: 25px 30px;
+            padding:
+                25px
+                30px
+                60px;
         }
 
         .topbar {
             display: flex;
 
             align-items: center;
+
             justify-content: space-between;
 
             gap: 20px;
@@ -441,7 +484,9 @@
             background: var(--blue-light);
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             color: var(--blue);
@@ -451,6 +496,7 @@
 
         .admin-email {
             font-size: 13px;
+
             font-weight: 600;
         }
 
@@ -463,9 +509,9 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
            DASHBOARD CARDS
-        ========================================= */
+        ====================================================== */
 
         .dashboard-grid {
             display: grid;
@@ -479,7 +525,9 @@
         .stat-card {
             background: white;
 
-            border: 1px solid var(--border);
+            border:
+                1px solid
+                var(--border);
 
             border-radius: 18px;
 
@@ -515,38 +563,15 @@
         }
 
 
-        /* =========================================
-           QUICK ACTIONS
-        ========================================= */
+        /* =====================================================
+           PRICE TABLE
+        ====================================================== */
 
-        .section-title {
-            margin-top: 30px;
-            margin-bottom: 14px;
-
-            font-size: 17px;
-            font-weight: 700;
+        .pricing-section {
+            margin-top: 32px;
         }
 
-        .quick-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, minmax(0, 1fr));
-
-            gap: 14px;
-        }
-
-        .quick-card {
-            background: white;
-
-            border: 1px solid var(--border);
-
-            border-radius: 17px;
-
-            padding: 18px;
-
-            min-height: 105px;
-
+        .section-header {
             display: flex;
 
             align-items: center;
@@ -555,72 +580,291 @@
 
             gap: 15px;
 
-            cursor: pointer;
-
-            transition:
-                transform .15s ease,
-                box-shadow .15s ease;
+            margin-bottom: 14px;
         }
 
-        .quick-card:hover {
-            box-shadow:
-                0 8px 25px rgba(15,23,42,.06);
-        }
-
-        .quick-card:active {
-            transform: scale(.985);
-        }
-
-        .quick-info {
-            min-width: 0;
-        }
-
-        .quick-title {
-            font-size: 15px;
+        .section-title {
+            font-size: 18px;
 
             font-weight: 700;
         }
 
-        .quick-description {
-            margin-top: 5px;
-
-            color: var(--muted);
+        .section-description {
+            margin-top: 4px;
 
             font-size: 12px;
 
-            line-height: 1.45;
+            color: var(--muted);
         }
 
-        .quick-arrow {
-            width: 35px;
-            height: 35px;
+        .pricing-card {
+            background: white;
 
-            flex-shrink: 0;
+            border:
+                1px solid
+                var(--border);
 
-            border-radius: 11px;
+            border-radius: 18px;
 
-            background: var(--blue-light);
+            overflow: hidden;
+        }
 
-            color: var(--blue);
+        .pricing-top {
+            padding: 18px 20px;
+
+            border-bottom:
+                1px solid
+                var(--border);
 
             display: flex;
-            align-items: center;
-            justify-content: center;
 
-            font-size: 18px;
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .pricing-note {
+            font-size: 12px;
+
+            color: var(--muted);
+        }
+
+        .table-wrap {
+            width: 100%;
+
+            overflow-x: auto;
+        }
+
+        .pricing-table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 720px;
+        }
+
+        .pricing-table th {
+            padding:
+                13px
+                18px;
+
+            background: #fafbfc;
+
+            color: #6b7280;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: .35px;
+
+            text-align: left;
+
+            border-bottom:
+                1px solid
+                var(--border);
+        }
+
+        .pricing-table td {
+            padding:
+                14px
+                18px;
+
+            border-bottom:
+                1px solid
+                #f0f2f5;
+
+            font-size: 13px;
+
+            vertical-align: middle;
+        }
+
+        .pricing-table tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .country-name {
+            font-weight: 700;
+        }
+
+        .service-name {
+            color: #4b5563;
+
+            font-weight: 600;
+        }
+
+        .provider-cost {
+            color: #4b5563;
+
+            font-weight: 600;
+        }
+
+        .provider-loading {
+            color: #9ca3af;
+        }
+
+        .price-input {
+            width: 130px;
+
+            height: 39px;
+
+            padding:
+                0
+                11px;
+
+            border:
+                1px solid
+                #dfe4ea;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            background: white;
+        }
+
+        .price-input:focus {
+            border-color: var(--blue);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(23,105,255,.08);
+        }
+
+        .price-input.changed {
+            border-color: var(--blue);
+
+            background: var(--blue-light);
+        }
+
+        .profit {
+            font-weight: 700;
+
+            color: var(--green);
+        }
+
+        .profit.negative {
+            color: var(--red);
+        }
+
+        .availability {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            padding:
+                6px
+                9px;
+
+            border-radius: 8px;
+
+            background: var(--green-light);
+
+            color: var(--green);
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+        .availability-dot {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: currentColor;
+        }
+
+        .empty-pricing {
+            padding: 35px 20px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+        .pricing-footer {
+            padding:
+                14px
+                18px;
+
+            background: #fafbfc;
+
+            border-top:
+                1px solid
+                var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .save-status {
+            font-size: 12px;
+
+            color: var(--muted);
+        }
+
+        .save-button {
+            border: 0;
+
+            border-radius: 10px;
+
+            background: var(--blue);
+
+            color: white;
+
+            padding:
+                10px
+                16px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .save-button:disabled {
+            opacity: .45;
+
+            cursor: not-allowed;
+        }
+
+        .save-button.saving {
+            opacity: .7;
         }
 
 
-        /* =========================================
-           STATUS CARD
-        ========================================= */
+        /* =====================================================
+           SYSTEM STATUS
+        ====================================================== */
 
         .system-card {
-            margin-top: 14px;
+            margin-top: 16px;
 
             background: white;
 
-            border: 1px solid var(--border);
+            border:
+                1px solid
+                var(--border);
 
             border-radius: 17px;
 
@@ -669,7 +913,9 @@
         }
 
         .system-status {
-            padding: 7px 10px;
+            padding:
+                7px
+                10px;
 
             border-radius: 9px;
 
@@ -683,29 +929,26 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
            MOBILE NAV
-        ========================================= */
+        ====================================================== */
 
         .mobile-nav {
             display: none;
         }
 
 
-        /* =========================================
+        /* =====================================================
            RESPONSIVE
-        ========================================= */
+        ====================================================== */
 
-        @media (max-width: 900px) {
+        @media (max-width: 1050px) {
 
             .dashboard-grid {
                 grid-template-columns:
                     repeat(2, minmax(0, 1fr));
             }
 
-            .quick-grid {
-                grid-template-columns: 1fr;
-            }
         }
 
 
@@ -753,12 +996,14 @@
                     rgba(255,255,255,.94);
 
                 border:
-                    1px solid rgba(229,231,235,.9);
+                    1px solid
+                    rgba(229,231,235,.9);
 
                 border-radius: 19px;
 
                 box-shadow:
-                    0 12px 35px rgba(15,23,42,.12);
+                    0 12px 35px
+                    rgba(15,23,42,.12);
 
                 backdrop-filter: blur(20px);
 
@@ -798,6 +1043,23 @@
             .mobile-nav-icon {
                 font-size: 19px;
             }
+
+            .pricing-top {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .pricing-footer {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .save-button {
+                width: 100%;
+            }
+
         }
 
 
@@ -808,7 +1070,9 @@
             }
 
             .login-card {
-                padding: 28px 20px;
+                padding:
+                    28px
+                    20px;
 
                 border-radius: 23px;
             }
@@ -833,6 +1097,7 @@
             .stat-value {
                 font-size: 24px;
             }
+
         }
 
     </style>
@@ -999,19 +1264,19 @@
 
                 <button
                     class="nav-button"
-                    onclick="openPage('pricing')"
+                    onclick="openPage('numbers')"
                 >
-                    <span class="nav-icon">₦</span>
-                    Services & Pricing
+                    <span class="nav-icon">▣</span>
+                    Numbers
                 </button>
 
 
                 <button
                     class="nav-button"
-                    onclick="openPage('transfer')"
+                    onclick="openPage('payments')"
                 >
-                    <span class="nav-icon">⇄</span>
-                    Transfer
+                    <span class="nav-icon">₦</span>
+                    Payments
                 </button>
 
 
@@ -1036,7 +1301,9 @@
         <main class="main">
 
 
-            <!-- TOPBAR -->
+            <!-- =================================================
+                 TOPBAR
+            ================================================== -->
 
             <header class="topbar">
 
@@ -1089,6 +1356,10 @@
 
             <section id="dashboardPage">
 
+
+                <!-- =================================================
+                     STATISTICS
+                ================================================== -->
 
                 <div class="dashboard-grid">
 
@@ -1163,128 +1434,124 @@
 
 
                 <!-- =================================================
-                     QUICK ACTIONS
+                     PRICE TABLE
                 ================================================== -->
 
-                <div class="section-title">
-                    Admin
-                </div>
+                <section class="pricing-section">
 
+                    <div class="section-header">
 
-                <div class="quick-grid">
+                        <div>
 
-
-                    <!-- USERS -->
-
-                    <div
-                        class="quick-card"
-                        onclick="openPage('users')"
-                    >
-
-                        <div class="quick-info">
-
-                            <div class="quick-title">
-                                Users
-                            </div>
-
-                            <div class="quick-description">
-                                View customer accounts, profile IDs
-                                and Naira balances.
-                            </div>
-
-                        </div>
-
-                        <div class="quick-arrow">
-                            →
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- PRICING -->
-
-                    <div
-                        class="quick-card"
-                        onclick="openPage('pricing')"
-                    >
-
-                        <div class="quick-info">
-
-                            <div class="quick-title">
+                            <div class="section-title">
                                 Services & Pricing
                             </div>
 
-                            <div class="quick-description">
-                                Manage countries, services and
-                                your customer selling prices.
+                            <div class="section-description">
+                                Set the price customers pay for each
+                                country and service.
                             </div>
 
-                        </div>
-
-                        <div class="quick-arrow">
-                            →
                         </div>
 
                     </div>
 
 
+                    <div class="pricing-card">
 
-                    <!-- TRANSFER -->
 
-                    <div
-                        class="quick-card"
-                        onclick="openPage('transfer')"
-                    >
+                        <div class="pricing-top">
 
-                        <div class="quick-info">
-
-                            <div class="quick-title">
-                                Transfer Naira
-                            </div>
-
-                            <div class="quick-description">
-                                Credit a customer's Naira balance
-                                using their Profile ID.
+                            <div class="pricing-note">
+                                5SIM cost is internal. Customers only
+                                see the Numora selling price.
                             </div>
 
                         </div>
 
-                        <div class="quick-arrow">
-                            →
+
+                        <div class="table-wrap">
+
+                            <table class="pricing-table">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Country
+                                        </th>
+
+                                        <th>
+                                            Service
+                                        </th>
+
+                                        <th>
+                                            5SIM Cost
+                                        </th>
+
+                                        <th>
+                                            Numora Price
+                                        </th>
+
+                                        <th>
+                                            Profit
+                                        </th>
+
+                                        <th>
+                                            Status
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody id="pricingTableBody">
+
+                                    <tr>
+
+                                        <td colspan="6">
+
+                                            <div class="empty-pricing">
+                                                Loading services...
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+
+                        <div class="pricing-footer">
+
+                            <div
+                                id="saveStatus"
+                                class="save-status"
+                            >
+                                No changes to save.
+                            </div>
+
+
+                            <button
+                                id="savePricingButton"
+                                class="save-button"
+                                type="button"
+                                disabled
+                            >
+                                Save Changes
+                            </button>
+
                         </div>
 
                     </div>
 
-
-
-                    <!-- SETTINGS -->
-
-                    <div
-                        class="quick-card"
-                        onclick="openPage('settings')"
-                    >
-
-                        <div class="quick-info">
-
-                            <div class="quick-title">
-                                Settings
-                            </div>
-
-                            <div class="quick-description">
-                                Account access and administrator
-                                controls.
-                            </div>
-
-                        </div>
-
-                        <div class="quick-arrow">
-                            →
-                        </div>
-
-                    </div>
-
-                </div>
+                </section>
 
 
 
@@ -1361,27 +1628,27 @@
 
 
                 <button
-                    onclick="openPage('pricing')"
+                    onclick="openPage('numbers')"
+                >
+
+                    <span class="mobile-nav-icon">
+                        ▣
+                    </span>
+
+                    Numbers
+
+                </button>
+
+
+                <button
+                    onclick="openPage('payments')"
                 >
 
                     <span class="mobile-nav-icon">
                         ₦
                     </span>
 
-                    Pricing
-
-                </button>
-
-
-                <button
-                    onclick="openPage('transfer')"
-                >
-
-                    <span class="mobile-nav-icon">
-                        ⇄
-                    </span>
-
-                    Transfer
+                    Payments
 
                 </button>
 
@@ -1437,15 +1704,17 @@
         doc,
         getDoc,
         collection,
-        getCountFromServer
+        getCountFromServer,
+        getDocs,
+        setDoc
     }
     from
     "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-    /* =========================================
+    /* =====================================================
        FIREBASE CONFIG
-    ========================================= */
+    ====================================================== */
 
     const firebaseConfig = {
 
@@ -1472,9 +1741,9 @@
     };
 
 
-    /* =========================================
+    /* =====================================================
        INITIALIZE
-    ========================================= */
+    ====================================================== */
 
     const app =
         initializeApp(
@@ -1494,9 +1763,9 @@
         new GoogleAuthProvider();
 
 
-    /* =========================================
+    /* =====================================================
        ADMIN
-    ========================================= */
+    ====================================================== */
 
     const ADMIN_EMAIL =
         "numora.support@gmail.com";
@@ -1532,9 +1801,19 @@
         );
 
 
-    /* =========================================
+    /* =====================================================
+       PRICING STATE
+    ====================================================== */
+
+    let pricingRows = [];
+
+    let pricingChanges = {};
+
+
+
+    /* =====================================================
        SHOW STATUS
-    ========================================= */
+    ====================================================== */
 
     function showStatus(
         message,
@@ -1545,14 +1824,17 @@
             message;
 
         status.className =
-            "status show " + type;
+            type
+                ? "status show " + type
+                : "status";
 
     }
 
 
-    /* =========================================
+
+    /* =====================================================
        VERIFY ADMIN
-    ========================================= */
+    ====================================================== */
 
     async function verifyAdmin(user) {
 
@@ -1580,20 +1862,12 @@
     }
 
 
-    /* =========================================
-       LOAD DASHBOARD COUNTS
-    ========================================= */
+
+    /* =====================================================
+       LOAD DASHBOARD STATS
+    ====================================================== */
 
     async function loadDashboardStats() {
-
-        /*
-         * These collection names are intentionally
-         * kept simple for the new V1 structure.
-         *
-         * If your actual customer/order collection
-         * names are different, we will connect those
-         * pages when we edit them.
-         */
 
         try {
 
@@ -1615,8 +1889,9 @@
             ).textContent =
                 usersSnapshot.data().count;
 
+        }
 
-        } catch (error) {
+        catch (error) {
 
             console.warn(
                 "Unable to load user count:",
@@ -1633,11 +1908,9 @@
 
 
         /*
-         * Active numbers and sales will be connected
-         * to the final order/number structure when the
-         * Numbers/Orders backend is installed.
-         *
-         * We deliberately do not invent those fields.
+         * These will be connected to the final
+         * number/order collections when those
+         * structures are installed.
          */
 
         document.getElementById(
@@ -1654,11 +1927,679 @@
     }
 
 
-    /* =========================================
-       SHOW ADMIN
-    ========================================= */
 
-    async function showAdmin(user) {
+    /* =====================================================
+       FORMAT NAIRA
+    ====================================================== */
+
+    function formatNaira(
+        amount
+    ) {
+
+        const number =
+            Number(amount);
+
+
+        if (
+            !Number.isFinite(number)
+        ) {
+
+            return "₦—";
+
+        }
+
+
+        return "₦" +
+            number.toLocaleString(
+                "en-NG"
+            );
+
+    }
+
+
+
+    /* =====================================================
+       LOAD PRICING
+    ====================================================== */
+
+    async function loadPricing() {
+
+        const body =
+            document.getElementById(
+                "pricingTableBody"
+            );
+
+
+        /*
+         * The pricing collection is intentionally
+         * kept separate from the 5SIM provider.
+         *
+         * Expected document structure:
+         *
+         * servicePricing/{id}
+         *
+         * {
+         *   country: "USA",
+         *   service: "WhatsApp",
+         *   price: 2000,
+         *   providerCost: 500,
+         *   available: true
+         * }
+         *
+         * providerCost is optional here because
+         * live 5SIM pricing should ultimately
+         * come from the backend.
+         */
+
+
+        try {
+
+            const pricingSnapshot =
+                await getDocs(
+                    collection(
+                        db,
+                        "servicePricing"
+                    )
+                );
+
+
+            pricingRows =
+                pricingSnapshot.docs.map(
+                    item => {
+
+                        const data =
+                            item.data();
+
+
+                        return {
+
+                            id:
+                                item.id,
+
+                            country:
+                                data.country ||
+                                "—",
+
+                            service:
+                                data.service ||
+                                "—",
+
+                            price:
+                                Number(
+                                    data.price || 0
+                                ),
+
+                            providerCost:
+                                Number(
+                                    data.providerCost || 0
+                                ),
+
+                            available:
+                                data.available !== false
+
+                        };
+
+                    }
+                );
+
+
+            renderPricingTable();
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Pricing collection could not be loaded:",
+                error
+            );
+
+
+            /*
+             * Do not create fake prices.
+             * The table simply tells the admin
+             * when pricing has not been configured.
+             */
+
+            body.innerHTML = `
+                <tr>
+                    <td colspan="6">
+                        <div class="empty-pricing">
+                            No service pricing has been configured yet.
+                        </div>
+                    </td>
+                </tr>
+            `;
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       RENDER PRICING TABLE
+    ====================================================== */
+
+    function renderPricingTable() {
+
+        const body =
+            document.getElementById(
+                "pricingTableBody"
+            );
+
+
+        if (
+            pricingRows.length === 0
+        ) {
+
+            body.innerHTML = `
+                <tr>
+                    <td colspan="6">
+                        <div class="empty-pricing">
+                            No service pricing has been configured yet.
+                        </div>
+                    </td>
+                </tr>
+            `;
+
+            return;
+
+        }
+
+
+        body.innerHTML =
+            pricingRows.map(
+                row => {
+
+                    const currentPrice =
+                        pricingChanges[row.id] !== undefined
+                            ? pricingChanges[row.id]
+                            : row.price;
+
+
+                    const providerCost =
+                        row.providerCost;
+
+
+                    const profit =
+                        providerCost > 0
+                            ? currentPrice - providerCost
+                            : null;
+
+
+                    const profitHTML =
+                        profit === null
+                            ? `<span class="provider-loading">—</span>`
+                            : `
+                                <span class="profit ${profit < 0 ? "negative" : ""}">
+                                    ${formatNaira(profit)}
+                                </span>
+                              `;
+
+
+                    const statusHTML =
+                        row.available
+                            ? `
+                                <span class="availability">
+                                    <span class="availability-dot"></span>
+                                    Available
+                                </span>
+                              `
+                            : `
+                                <span
+                                    class="availability"
+                                    style="
+                                        background:#fef2f2;
+                                        color:#dc2626;
+                                    "
+                                >
+                                    <span class="availability-dot"></span>
+                                    Unavailable
+                                </span>
+                              `;
+
+
+                    const changedClass =
+                        pricingChanges[row.id] !== undefined
+                            ? "changed"
+                            : "";
+
+
+                    return `
+
+                        <tr>
+
+                            <td>
+                                <div class="country-name">
+                                    ${escapeHTML(row.country)}
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="service-name">
+                                    ${escapeHTML(row.service)}
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="provider-cost">
+                                    ${
+                                        providerCost > 0
+                                            ? formatNaira(providerCost)
+                                            : `<span class="provider-loading">Live cost</span>`
+                                    }
+                                </div>
+                            </td>
+
+                            <td>
+
+                                <input
+                                    class="price-input ${changedClass}"
+                                    type="number"
+                                    min="0"
+                                    step="1"
+                                    value="${currentPrice || ""}"
+                                    data-pricing-id="${escapeHTML(row.id)}"
+                                    oninput="handlePriceChange(this)"
+                                >
+
+                            </td>
+
+                            <td>
+                                ${profitHTML}
+                            </td>
+
+                            <td>
+                                ${statusHTML}
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+            ).join("");
+
+    }
+
+
+
+    /* =====================================================
+       HANDLE PRICE CHANGE
+    ====================================================== */
+
+    window.handlePriceChange =
+        function(input) {
+
+            const id =
+                input.dataset.pricingId;
+
+
+            const value =
+                Number(
+                    input.value
+                );
+
+
+            const original =
+                pricingRows.find(
+                    row =>
+                        row.id === id
+                );
+
+
+            if (!original) {
+                return;
+            }
+
+
+            if (
+                value === original.price
+            ) {
+
+                delete pricingChanges[id];
+
+                input.classList.remove(
+                    "changed"
+                );
+
+            }
+
+            else {
+
+                pricingChanges[id] =
+                    value;
+
+                input.classList.add(
+                    "changed"
+                );
+
+            }
+
+
+            updateSaveButton();
+
+            updateProfitForInput(
+                input,
+                value,
+                original.providerCost
+            );
+
+        };
+
+
+
+    /* =====================================================
+       UPDATE PROFIT
+    ====================================================== */
+
+    function updateProfitForInput(
+        input,
+        price,
+        providerCost
+    ) {
+
+        const row =
+            input.closest("tr");
+
+
+        if (!row) {
+            return;
+        }
+
+
+        const profitCell =
+            row.children[4];
+
+
+        if (
+            !providerCost ||
+            !Number.isFinite(
+                Number(providerCost)
+            )
+        ) {
+
+            profitCell.innerHTML =
+                `<span class="provider-loading">—</span>`;
+
+            return;
+
+        }
+
+
+        const profit =
+            Number(price) -
+            Number(providerCost);
+
+
+        profitCell.innerHTML = `
+
+            <span
+                class="profit ${profit < 0 ? "negative" : ""}"
+            >
+                ${formatNaira(profit)}
+            </span>
+
+        `;
+
+    }
+
+
+
+    /* =====================================================
+       UPDATE SAVE BUTTON
+    ====================================================== */
+
+    function updateSaveButton() {
+
+        const button =
+            document.getElementById(
+                "savePricingButton"
+            );
+
+
+        const statusText =
+            document.getElementById(
+                "saveStatus"
+            );
+
+
+        const hasChanges =
+            Object.keys(
+                pricingChanges
+            ).length > 0;
+
+
+        button.disabled =
+            !hasChanges;
+
+
+        if (hasChanges) {
+
+            statusText.textContent =
+                Object.keys(
+                    pricingChanges
+                ).length +
+                " price change" +
+                (
+                    Object.keys(
+                        pricingChanges
+                    ).length === 1
+                        ? ""
+                        : "s"
+                ) +
+                " ready to save.";
+
+        }
+
+        else {
+
+            statusText.textContent =
+                "No changes to save.";
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       SAVE PRICING
+    ====================================================== */
+
+    document
+        .getElementById(
+            "savePricingButton"
+        )
+        .addEventListener(
+            "click",
+            async () => {
+
+                const button =
+                    document.getElementById(
+                        "savePricingButton"
+                    );
+
+
+                const statusText =
+                    document.getElementById(
+                        "saveStatus"
+                    );
+
+
+                const changes =
+                    Object.entries(
+                        pricingChanges
+                    );
+
+
+                if (
+                    changes.length === 0
+                ) {
+
+                    return;
+
+                }
+
+
+                button.disabled =
+                    true;
+
+                button.classList.add(
+                    "saving"
+                );
+
+                button.textContent =
+                    "Saving...";
+
+
+                try {
+
+                    for (
+                        const [
+                            id,
+                            price
+                        ]
+                        of changes
+                    ) {
+
+                        await setDoc(
+                            doc(
+                                db,
+                                "servicePricing",
+                                id
+                            ),
+                            {
+                                price:
+                                    Number(price)
+                            },
+                            {
+                                merge: true
+                            }
+                        );
+
+                    }
+
+
+                    pricingRows =
+                        pricingRows.map(
+                            row => {
+
+                                if (
+                                    pricingChanges[
+                                        row.id
+                                    ] !== undefined
+                                ) {
+
+                                    return {
+
+                                        ...row,
+
+                                        price:
+                                            pricingChanges[
+                                                row.id
+                                            ]
+
+                                    };
+
+                                }
+
+
+                                return row;
+
+                            }
+                        );
+
+
+                    pricingChanges = {};
+
+
+                    renderPricingTable();
+
+                    updateSaveButton();
+
+
+                    statusText.textContent =
+                        "Prices saved successfully.";
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "Unable to save pricing:",
+                        error
+                    );
+
+
+                    statusText.textContent =
+                        "Unable to save changes. Check your admin permissions.";
+
+                }
+
+                finally {
+
+                    button.classList.remove(
+                        "saving"
+                    );
+
+                    button.textContent =
+                        "Save Changes";
+
+
+                    updateSaveButton();
+
+                }
+
+            }
+        );
+
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ====================================================== */
+
+    function escapeHTML(
+        value
+    ) {
+
+        return String(
+            value ?? ""
+        )
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+
+    /* =====================================================
+       SHOW ADMIN
+    ====================================================== */
+
+    async function showAdmin(
+        user
+    ) {
 
         loginScreen.style.display =
             "none";
@@ -1693,12 +2634,15 @@
 
         await loadDashboardStats();
 
+        await loadPricing();
+
     }
 
 
-    /* =========================================
+
+    /* =====================================================
        GOOGLE LOGIN
-    ========================================= */
+    ====================================================== */
 
     loginButton.addEventListener(
         "click",
@@ -1731,10 +2675,6 @@
                     ).toLowerCase();
 
 
-                /*
-                 * Keep the existing email protection.
-                 */
-
                 if (
                     email !==
                     ADMIN_EMAIL.toLowerCase()
@@ -1751,11 +2691,6 @@
 
                 }
 
-
-                /*
-                 * Firebase admin document
-                 * remains the second protection.
-                 */
 
                 const isAdmin =
                     await verifyAdmin(
@@ -1795,7 +2730,9 @@
                 );
 
 
-            } catch (error) {
+            }
+
+            catch (error) {
 
                 console.error(
                     error
@@ -1859,7 +2796,9 @@
 
                 }
 
-            } finally {
+            }
+
+            finally {
 
                 loginButton.disabled =
                     false;
@@ -1874,9 +2813,10 @@
     );
 
 
-    /* =========================================
+
+    /* =====================================================
        EXISTING LOGIN
-    ========================================= */
+    ====================================================== */
 
     onAuthStateChanged(
         auth,
@@ -1937,8 +2877,9 @@
                     user
                 );
 
+            }
 
-            } catch (error) {
+            catch (error) {
 
                 console.error(
                     "Admin verification failed:",
@@ -1962,9 +2903,10 @@
     );
 
 
-    /* =========================================
+
+    /* =====================================================
        LOGOUT
-    ========================================= */
+    ====================================================== */
 
     window.adminLogout =
         async function() {
@@ -1975,7 +2917,9 @@
                     auth
                 );
 
-            } catch (error) {
+            }
+
+            catch (error) {
 
                 console.error(
                     "Logout failed:",
@@ -2000,18 +2944,19 @@
 
         };
 
-
 </script>
 
 
 
 <script>
 
-    /* =========================================
+    /* =====================================================
        NAVIGATION
-    ========================================= */
+    ====================================================== */
 
-    function openPage(page) {
+    function openPage(
+        page
+    ) {
 
         if (
             page ===
@@ -2041,11 +2986,11 @@
 
         if (
             page ===
-            "pricing"
+            "numbers"
         ) {
 
             window.location.href =
-                "pricing.html";
+                "numbers.html";
 
             return;
 
@@ -2054,11 +2999,11 @@
 
         if (
             page ===
-            "transfer"
+            "payments"
         ) {
 
             window.location.href =
-                "transfer.html";
+                "payments.html";
 
             return;
 
