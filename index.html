@@ -601,6 +601,39 @@
             color: var(--muted);
         }
 
+        .add-service-button {
+            border: 0;
+
+            background: var(--blue);
+
+            color: white;
+
+            padding:
+                10px
+                15px;
+
+            border-radius: 10px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+
+            box-shadow:
+                0 5px 14px
+                rgba(23,105,255,.16);
+        }
+
+        .add-service-button:hover {
+            opacity: .94;
+        }
+
+        .add-service-button:active {
+            transform: scale(.98);
+        }
+
         .table-wrap {
             width: 100%;
             overflow-x: auto;
@@ -611,7 +644,7 @@
 
             border-collapse: collapse;
 
-            min-width: 720px;
+            min-width: 820px;
         }
 
         .pricing-table th {
@@ -818,6 +851,249 @@
 
 
         /* =====================================================
+           MODAL
+        ====================================================== */
+
+        .modal-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(15, 23, 42, .42);
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            z-index: 100;
+
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-card {
+            width: 100%;
+
+            max-width: 460px;
+
+            background: white;
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 25px 80px
+                rgba(15,23,42,.18);
+
+            overflow: hidden;
+
+            animation:
+                modalIn .18s ease-out;
+        }
+
+        @keyframes modalIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(8px) scale(.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+        }
+
+        .modal-header {
+            padding: 22px 22px 18px;
+
+            border-bottom:
+                1px solid
+                var(--border);
+
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .modal-title {
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        .modal-description {
+            margin-top: 5px;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+            color: var(--muted);
+        }
+
+        .modal-close {
+            width: 34px;
+            height: 34px;
+
+            border: 0;
+
+            border-radius: 10px;
+
+            background: #f4f6f8;
+
+            color: #6b7280;
+
+            font-size: 19px;
+
+            cursor: pointer;
+
+            flex-shrink: 0;
+        }
+
+        .modal-body {
+            padding: 22px;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: #374151;
+        }
+
+        .form-select {
+            width: 100%;
+
+            height: 46px;
+
+            border:
+                1px solid
+                #dfe4ea;
+
+            border-radius: 11px;
+
+            background: white;
+
+            padding:
+                0
+                12px;
+
+            outline: none;
+
+            font-size: 13px;
+
+            color: var(--text);
+        }
+
+        .form-select:focus {
+            border-color: var(--blue);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(23,105,255,.08);
+        }
+
+        .form-select:disabled {
+            background: #f8fafc;
+
+            color: #9ca3af;
+
+            cursor: not-allowed;
+        }
+
+        .catalog-status {
+            padding: 11px 12px;
+
+            border-radius: 10px;
+
+            background: var(--blue-light);
+
+            color: #355aa8;
+
+            font-size: 12px;
+
+            line-height: 1.45;
+
+            margin-bottom: 17px;
+        }
+
+        .catalog-status.error {
+            background: var(--red-light);
+            color: var(--red);
+        }
+
+        .modal-footer {
+            padding: 16px 22px;
+
+            border-top:
+                1px solid
+                var(--border);
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 10px;
+        }
+
+        .secondary-button,
+        .primary-button {
+            border: 0;
+
+            border-radius: 10px;
+
+            min-height: 42px;
+
+            padding:
+                0
+                15px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .secondary-button {
+            background: #f3f4f6;
+            color: #4b5563;
+        }
+
+        .primary-button {
+            background: var(--blue);
+            color: white;
+        }
+
+        .primary-button:disabled,
+        .secondary-button:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+
+        /* =====================================================
            SYSTEM STATUS
         ====================================================== */
 
@@ -1010,12 +1286,31 @@
                 flex-direction: column;
             }
 
+            .add-service-button {
+                width: 100%;
+            }
+
             .pricing-footer {
                 align-items: flex-start;
                 flex-direction: column;
             }
 
             .save-button {
+                width: 100%;
+            }
+
+            .modal-card {
+                max-height: 90vh;
+
+                overflow-y: auto;
+            }
+
+            .modal-footer {
+                flex-direction: column;
+            }
+
+            .secondary-button,
+            .primary-button {
                 width: 100%;
             }
 
@@ -1201,8 +1496,6 @@
             </div>
 
 
-            <!-- ONLY 3 ADMIN PAGES -->
-
             <nav class="nav">
 
                 <button
@@ -1243,10 +1536,6 @@
 
         <main class="main">
 
-
-            <!-- =================================================
-                 TOPBAR
-            ================================================== -->
 
             <header class="topbar">
 
@@ -1371,7 +1660,7 @@
 
 
                 <!-- =================================================
-                     PRICE TABLE
+                     SERVICES & PRICING
                 ================================================== -->
 
                 <section class="pricing-section">
@@ -1385,8 +1674,8 @@
                             </div>
 
                             <div class="section-description">
-                                Set the price customers pay for each
-                                country and service.
+                                Add services available through 5SIM
+                                and set the price customers pay.
                             </div>
 
                         </div>
@@ -1400,9 +1689,18 @@
                         <div class="pricing-top">
 
                             <div class="pricing-note">
-                                5SIM cost is internal. Customers only
-                                see the Numora selling price.
+                                5SIM cost and availability are internal.
+                                Customers only see your Numora price.
                             </div>
+
+
+                            <button
+                                id="addServiceButton"
+                                class="add-service-button"
+                                type="button"
+                            >
+                                + Add Service
+                            </button>
 
                         </div>
 
@@ -1533,7 +1831,6 @@
 
             <!-- =================================================
                  MOBILE NAV
-                 ONLY 3 PAGES
             ================================================== -->
 
             <nav class="mobile-nav">
@@ -1582,6 +1879,133 @@
         </main>
 
     </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     ADD SERVICE MODAL
+====================================================== -->
+
+<div
+    id="addServiceModal"
+    class="modal-overlay"
+>
+
+    <section class="modal-card">
+
+        <div class="modal-header">
+
+            <div>
+
+                <div class="modal-title">
+                    Add Service
+                </div>
+
+                <div class="modal-description">
+                    Choose a service and country currently
+                    available through 5SIM.
+                </div>
+
+            </div>
+
+
+            <button
+                id="closeModalButton"
+                class="modal-close"
+                type="button"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <div
+                id="catalogStatus"
+                class="catalog-status"
+            >
+                Loading available 5SIM services...
+            </div>
+
+
+            <div class="form-group">
+
+                <label
+                    class="form-label"
+                    for="serviceSelect"
+                >
+                    Service
+                </label>
+
+                <select
+                    id="serviceSelect"
+                    class="form-select"
+                    disabled
+                >
+
+                    <option value="">
+                        Select service
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label
+                    class="form-label"
+                    for="countrySelect"
+                >
+                    Country
+                </label>
+
+                <select
+                    id="countrySelect"
+                    class="form-select"
+                    disabled
+                >
+
+                    <option value="">
+                        Select country
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                id="cancelModalButton"
+                class="secondary-button"
+                type="button"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                id="confirmAddServiceButton"
+                class="primary-button"
+                type="button"
+                disabled
+            >
+                Add Service
+            </button>
+
+        </div>
+
+    </section>
 
 </div>
 
@@ -1683,6 +2107,27 @@
         "numora.support@gmail.com";
 
 
+    /*
+     * IMPORTANT:
+     *
+     * The 5SIM API key must NEVER be placed in this file.
+     *
+     * The backend will securely communicate with 5SIM.
+     */
+
+    const BACKEND_URL =
+        "https://numora-backend-cle6.onrender.com";
+
+
+    const FIVE_SIM_CATALOG_ENDPOINT =
+        BACKEND_URL +
+        "/api/5sim/catalog";
+
+
+    /* =====================================================
+       ELEMENTS
+    ====================================================== */
+
     const loginScreen =
         document.getElementById(
             "loginScreen"
@@ -1713,6 +2158,54 @@
         );
 
 
+    const addServiceButton =
+        document.getElementById(
+            "addServiceButton"
+        );
+
+
+    const addServiceModal =
+        document.getElementById(
+            "addServiceModal"
+        );
+
+
+    const closeModalButton =
+        document.getElementById(
+            "closeModalButton"
+        );
+
+
+    const cancelModalButton =
+        document.getElementById(
+            "cancelModalButton"
+        );
+
+
+    const serviceSelect =
+        document.getElementById(
+            "serviceSelect"
+        );
+
+
+    const countrySelect =
+        document.getElementById(
+            "countrySelect"
+        );
+
+
+    const catalogStatus =
+        document.getElementById(
+            "catalogStatus"
+        );
+
+
+    const confirmAddServiceButton =
+        document.getElementById(
+            "confirmAddServiceButton"
+        );
+
+
     /* =====================================================
        PRICING STATE
     ====================================================== */
@@ -1720,6 +2213,10 @@
     let pricingRows = [];
 
     let pricingChanges = {};
+
+    let fiveSimCatalog = [];
+
+    let selectedCatalogService = null;
 
 
     /* =====================================================
@@ -1818,8 +2315,8 @@
 
         /*
          * Active numbers and sales will be connected
-         * after the final Firestore structure is
-         * created with the backend.
+         * after the final Firestore structure and
+         * backend are completed.
          */
 
         document.getElementById(
@@ -1877,27 +2374,6 @@
             );
 
 
-        /*
-         * CURRENT PLANNED COLLECTION
-         *
-         * servicePricing/{id}
-         *
-         * {
-         *   country: "USA",
-         *   service: "WhatsApp",
-         *   price: 2000,
-         *   providerCost: 500,
-         *   available: true
-         * }
-         *
-         * IMPORTANT:
-         * providerCost will eventually come from the
-         * Numora backend / 5SIM API.
-         *
-         * We do NOT invent a 5SIM price here.
-         */
-
-
         try {
 
             const pricingSnapshot =
@@ -1941,12 +2417,46 @@
                                 ),
 
                             available:
-                                data.available !== false
+                                data.available !== false,
+
+                            provider:
+                                data.provider ||
+                                "5sim"
 
                         };
 
                     }
                 );
+
+
+            /*
+             * Sort alphabetically by country,
+             * then service.
+             */
+
+            pricingRows.sort(
+                (a, b) => {
+
+                    const first =
+                        (
+                            a.country +
+                            a.service
+                        ).toLowerCase();
+
+
+                    const second =
+                        (
+                            b.country +
+                            b.service
+                        ).toLowerCase();
+
+
+                    return first.localeCompare(
+                        second
+                    );
+
+                }
+            );
 
 
             renderPricingTable();
@@ -1996,7 +2506,8 @@
                 <tr>
                     <td colspan="6">
                         <div class="empty-pricing">
-                            No service pricing has been configured yet.
+                            No services have been added yet.
+                            Use "+ Add Service" to add one from 5SIM.
                         </div>
                     </td>
                 </tr>
@@ -2022,7 +2533,8 @@
 
 
                     const profit =
-                        providerCost > 0
+                        providerCost > 0 &&
+                        currentPrice > 0
                             ? currentPrice - providerCost
                             : null;
 
@@ -2077,11 +2589,13 @@
 
                             <td>
                                 <div class="provider-cost">
+
                                     ${
                                         providerCost > 0
                                             ? formatNaira(providerCost)
                                             : `<span class="provider-loading">Live cost</span>`
                                     }
+
                                 </div>
                             </td>
 
@@ -2092,7 +2606,12 @@
                                     type="number"
                                     min="0"
                                     step="1"
-                                    value="${currentPrice || ""}"
+                                    value="${
+                                        currentPrice > 0
+                                            ? currentPrice
+                                            : ""
+                                    }"
+                                    placeholder="Enter price"
                                     data-pricing-id="${escapeHTML(row.id)}"
                                     oninput="handlePriceChange(this)"
                                 >
@@ -2209,7 +2728,8 @@
             !providerCost ||
             !Number.isFinite(
                 Number(providerCost)
-            )
+            ) ||
+            !price
         ) {
 
             profitCell.innerHTML =
@@ -2333,6 +2853,33 @@
                 }
 
 
+                /*
+                 * Do not allow invalid prices.
+                 */
+
+                for (
+                    const [
+                        id,
+                        price
+                    ]
+                    of changes
+                ) {
+
+                    if (
+                        !Number.isFinite(price) ||
+                        price < 0
+                    ) {
+
+                        statusText.textContent =
+                            "Please enter valid prices.";
+
+                        return;
+
+                    }
+
+                }
+
+
                 button.disabled =
                     true;
 
@@ -2444,6 +2991,1070 @@
 
             }
         );
+
+
+    /* =====================================================
+       OPEN ADD SERVICE MODAL
+    ====================================================== */
+
+    addServiceButton.addEventListener(
+        "click",
+        async () => {
+
+            openAddServiceModal();
+
+            await loadFiveSimCatalog();
+
+        }
+    );
+
+
+    /* =====================================================
+       OPEN MODAL
+    ====================================================== */
+
+    function openAddServiceModal() {
+
+        addServiceModal.classList.add(
+            "show"
+        );
+
+
+        serviceSelect.innerHTML = `
+            <option value="">
+                Select service
+            </option>
+        `;
+
+
+        countrySelect.innerHTML = `
+            <option value="">
+                Select country
+            </option>
+        `;
+
+
+        serviceSelect.disabled =
+            true;
+
+
+        countrySelect.disabled =
+            true;
+
+
+        confirmAddServiceButton.disabled =
+            true;
+
+
+        selectedCatalogService =
+            null;
+
+
+        catalogStatus.className =
+            "catalog-status";
+
+
+        catalogStatus.textContent =
+            "Loading available 5SIM services...";
+
+    }
+
+
+    /* =====================================================
+       CLOSE MODAL
+    ====================================================== */
+
+    function closeAddServiceModal() {
+
+        addServiceModal.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    closeModalButton.addEventListener(
+        "click",
+        closeAddServiceModal
+    );
+
+
+    cancelModalButton.addEventListener(
+        "click",
+        closeAddServiceModal
+    );
+
+
+    addServiceModal.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target ===
+                addServiceModal
+            ) {
+
+                closeAddServiceModal();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       LOAD 5SIM CATALOG
+    ====================================================== */
+
+    async function loadFiveSimCatalog() {
+
+        try {
+
+            const response =
+                await fetch(
+                    FIVE_SIM_CATALOG_ENDPOINT,
+                    {
+                        method: "GET",
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (
+                !response.ok
+            ) {
+
+                throw new Error(
+                    "Backend returned HTTP " +
+                    response.status
+                );
+
+            }
+
+
+            const result =
+                await response.json();
+
+
+            fiveSimCatalog =
+                normalizeCatalog(
+                    result
+                );
+
+
+            if (
+                fiveSimCatalog.length === 0
+            ) {
+
+                throw new Error(
+                    "No services were returned by the 5SIM backend."
+                );
+
+            }
+
+
+            populateServiceSelect();
+
+
+            catalogStatus.className =
+                "catalog-status";
+
+
+            catalogStatus.textContent =
+                fiveSimCatalog.length +
+                " 5SIM service" +
+                (
+                    fiveSimCatalog.length === 1
+                        ? ""
+                        : "s"
+                ) +
+                " available.";
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Unable to load 5SIM catalog:",
+                error
+            );
+
+
+            fiveSimCatalog = [];
+
+
+            serviceSelect.innerHTML = `
+                <option value="">
+                    Unable to load services
+                </option>
+            `;
+
+
+            countrySelect.innerHTML = `
+                <option value="">
+                    Select service first
+                </option>
+            `;
+
+
+            serviceSelect.disabled =
+                true;
+
+
+            countrySelect.disabled =
+                true;
+
+
+            confirmAddServiceButton.disabled =
+                true;
+
+
+            catalogStatus.className =
+                "catalog-status error";
+
+
+            catalogStatus.textContent =
+                "Unable to load 5SIM services. Make sure the backend catalog endpoint is connected.";
+
+        }
+
+    }
+
+
+    /* =====================================================
+       NORMALIZE 5SIM CATALOG
+    ====================================================== */
+
+    function normalizeCatalog(
+        result
+    ) {
+
+        /*
+         * Expected backend response:
+         *
+         * {
+         *   services: [
+         *     {
+         *       name: "WhatsApp",
+         *       countries: [
+         *         {
+         *           name: "USA",
+         *           code: "usa"
+         *         }
+         *       ]
+         *     }
+         *   ]
+         * }
+         *
+         * The normalizer also accepts:
+         *
+         * {
+         *   data: [...]
+         * }
+         *
+         * so the backend can be adjusted without
+         * changing this page.
+         */
+
+        let services = [];
+
+
+        if (
+            Array.isArray(
+                result
+            )
+        ) {
+
+            services =
+                result;
+
+        }
+
+        else if (
+            Array.isArray(
+                result?.services
+            )
+        ) {
+
+            services =
+                result.services;
+
+        }
+
+        else if (
+            Array.isArray(
+                result?.data
+            )
+        ) {
+
+            services =
+                result.data;
+
+        }
+
+
+        return services
+            .map(
+                service => {
+
+                    if (
+                        typeof service ===
+                        "string"
+                    ) {
+
+                        return {
+
+                            name:
+                                service,
+
+                            countries: []
+
+                        };
+
+                    }
+
+
+                    const countries =
+                        Array.isArray(
+                            service.countries
+                        )
+                            ? service.countries
+                            : [];
+
+
+                    return {
+
+                        name:
+                            service.name ||
+                            service.service ||
+                            service.title ||
+                            "",
+
+                        code:
+                            service.code ||
+                            service.key ||
+                            "",
+
+                        countries:
+                            countries
+                                .map(
+                                    country => {
+
+                                        if (
+                                            typeof country ===
+                                            "string"
+                                        ) {
+
+                                            return {
+
+                                                name:
+                                                    country,
+
+                                                code:
+                                                    country
+
+                                            };
+
+                                        }
+
+
+                                        return {
+
+                                            name:
+                                                country.name ||
+                                                country.country ||
+                                                country.title ||
+                                                "",
+
+                                            code:
+                                                country.code ||
+                                                country.key ||
+                                                country.iso ||
+                                                ""
+
+                                        };
+
+                                    }
+                                )
+                                .filter(
+                                    country =>
+                                        country.name
+                                )
+
+                    };
+
+                }
+            )
+            .filter(
+                service =>
+                    service.name
+            );
+
+    }
+
+
+    /* =====================================================
+       POPULATE SERVICE SELECT
+    ====================================================== */
+
+    function populateServiceSelect() {
+
+        serviceSelect.innerHTML = `
+            <option value="">
+                Select service
+            </option>
+        `;
+
+
+        fiveSimCatalog.forEach(
+            (
+                service,
+                index
+            ) => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    String(index);
+
+
+                option.textContent =
+                    service.name;
+
+
+                serviceSelect.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+        serviceSelect.disabled =
+            false;
+
+
+        countrySelect.innerHTML = `
+            <option value="">
+                Select service first
+            </option>
+        `;
+
+
+        countrySelect.disabled =
+            true;
+
+
+        confirmAddServiceButton.disabled =
+            true;
+
+    }
+
+
+    /* =====================================================
+       SERVICE CHANGED
+    ====================================================== */
+
+    serviceSelect.addEventListener(
+        "change",
+        () => {
+
+            const index =
+                Number(
+                    serviceSelect.value
+                );
+
+
+            if (
+                !serviceSelect.value ||
+                !fiveSimCatalog[index]
+            ) {
+
+                selectedCatalogService =
+                    null;
+
+
+                countrySelect.innerHTML = `
+                    <option value="">
+                        Select service first
+                    </option>
+                `;
+
+
+                countrySelect.disabled =
+                    true;
+
+
+                confirmAddServiceButton.disabled =
+                    true;
+
+
+                return;
+
+            }
+
+
+            selectedCatalogService =
+                fiveSimCatalog[index];
+
+
+            populateCountrySelect(
+                selectedCatalogService
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       POPULATE COUNTRY SELECT
+    ====================================================== */
+
+    function populateCountrySelect(
+        service
+    ) {
+
+        const countries =
+            service.countries || [];
+
+
+        countrySelect.innerHTML = `
+            <option value="">
+                Select country
+            </option>
+        `;
+
+
+        countries.forEach(
+            (
+                country,
+                index
+            ) => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    String(index);
+
+
+                option.textContent =
+                    country.name;
+
+
+                countrySelect.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+        countrySelect.disabled =
+            countries.length === 0;
+
+
+        if (
+            countries.length === 0
+        ) {
+
+            catalogStatus.className =
+                "catalog-status error";
+
+
+            catalogStatus.textContent =
+                "No countries are currently available for this service.";
+
+        }
+
+        else {
+
+            catalogStatus.className =
+                "catalog-status";
+
+
+            catalogStatus.textContent =
+                countries.length +
+                " countr" +
+                (
+                    countries.length === 1
+                        ? "y"
+                        : "ies"
+                ) +
+                " available for " +
+                service.name +
+                ".";
+
+        }
+
+
+        confirmAddServiceButton.disabled =
+            true;
+
+    }
+
+
+    /* =====================================================
+       COUNTRY CHANGED
+    ====================================================== */
+
+    countrySelect.addEventListener(
+        "change",
+        () => {
+
+            confirmAddServiceButton.disabled =
+                !(
+                    selectedCatalogService &&
+                    countrySelect.value !== ""
+                );
+
+        }
+    );
+
+
+    /* =====================================================
+       ADD SERVICE TO FIRESTORE
+    ====================================================== */
+
+    confirmAddServiceButton.addEventListener(
+        "click",
+        async () => {
+
+            if (
+                !selectedCatalogService ||
+                countrySelect.value === ""
+            ) {
+
+                return;
+
+            }
+
+
+            const countryIndex =
+                Number(
+                    countrySelect.value
+                );
+
+
+            const country =
+                selectedCatalogService
+                    .countries[
+                        countryIndex
+                    ];
+
+
+            if (!country) {
+                return;
+            }
+
+
+            const serviceName =
+                selectedCatalogService.name;
+
+
+            const countryName =
+                country.name;
+
+
+            /*
+             * Deterministic ID:
+             *
+             * USA + WhatsApp
+             *
+             * becomes:
+             *
+             * usa_whatsapp
+             *
+             * This prevents accidentally creating
+             * duplicate pricing rows.
+             */
+
+            const pricingId =
+                createPricingId(
+                    countryName,
+                    serviceName
+                );
+
+
+            /*
+             * Check whether it already exists.
+             */
+
+            const existingRef =
+                doc(
+                    db,
+                    "servicePricing",
+                    pricingId
+                );
+
+
+            confirmAddServiceButton.disabled =
+                true;
+
+
+            confirmAddServiceButton.textContent =
+                "Adding...";
+
+
+            try {
+
+                const existing =
+                    await getDoc(
+                        existingRef
+                    );
+
+
+                if (
+                    existing.exists()
+                ) {
+
+                    catalogStatus.className =
+                        "catalog-status error";
+
+
+                    catalogStatus.textContent =
+                        "This country and service has already been added.";
+
+
+                    return;
+
+                }
+
+
+                /*
+                 * We intentionally do not create
+                 * a fake provider cost here.
+                 *
+                 * The backend will supply the real
+                 * 5SIM provider cost.
+                 *
+                 * If the catalog endpoint supplies
+                 * a provider cost, we preserve it.
+                 */
+
+                const providerCost =
+                    extractProviderCost(
+                        selectedCatalogService,
+                        country
+                    );
+
+
+                const available =
+                    extractAvailability(
+                        selectedCatalogService,
+                        country
+                    );
+
+
+                const newPricing = {
+
+                    country:
+                        countryName,
+
+                    countryCode:
+                        country.code ||
+                        "",
+
+                    service:
+                        serviceName,
+
+                    serviceCode:
+                        selectedCatalogService.code ||
+                        "",
+
+                    provider:
+                        "5sim",
+
+                    price:
+                        0,
+
+                    providerCost:
+                        providerCost,
+
+                    available:
+                        available,
+
+                    createdAt:
+                        new Date()
+
+                };
+
+
+                await setDoc(
+                    existingRef,
+                    newPricing
+                );
+
+
+                /*
+                 * Add immediately to local table.
+                 */
+
+                pricingRows.push({
+
+                    id:
+                        pricingId,
+
+                    country:
+                        countryName,
+
+                    service:
+                        serviceName,
+
+                    price:
+                        0,
+
+                    providerCost:
+                        providerCost,
+
+                    available:
+                        available,
+
+                    provider:
+                        "5sim"
+
+                });
+
+
+                pricingRows.sort(
+                    (a, b) => {
+
+                        const first =
+                            (
+                                a.country +
+                                a.service
+                            ).toLowerCase();
+
+
+                        const second =
+                            (
+                                b.country +
+                                b.service
+                            ).toLowerCase();
+
+
+                        return first.localeCompare(
+                            second
+                        );
+
+                    }
+                );
+
+
+                renderPricingTable();
+
+
+                /*
+                 * Close modal after successful
+                 * Firestore creation.
+                 */
+
+                closeAddServiceModal();
+
+
+                /*
+                 * Tell admin that the row has been
+                 * added and needs a Numora price.
+                 */
+
+                document.getElementById(
+                    "saveStatus"
+                ).textContent =
+                    "Service added. Enter your Numora price and save.";
+
+
+                /*
+                 * Automatically focus the new
+                 * price field.
+                 */
+
+                setTimeout(
+                    () => {
+
+                        const input =
+                            document.querySelector(
+                                `[data-pricing-id="${pricingId}"]`
+                            );
+
+
+                        if (input) {
+
+                            input.focus();
+
+                        }
+
+                    },
+                    150
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Unable to add service:",
+                    error
+                );
+
+
+                catalogStatus.className =
+                    "catalog-status error";
+
+
+                catalogStatus.textContent =
+                    "Unable to add this service. Check your Firestore permissions.";
+
+            }
+
+            finally {
+
+                confirmAddServiceButton.disabled =
+                    false;
+
+                confirmAddServiceButton.textContent =
+                    "Add Service";
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       CREATE PRICING ID
+    ====================================================== */
+
+    function createPricingId(
+        country,
+        service
+    ) {
+
+        return (
+            String(country) +
+            "_" +
+            String(service)
+        )
+            .toLowerCase()
+            .trim()
+            .replace(
+                /[^a-z0-9]+/g,
+                "_"
+            )
+            .replace(
+                /^_+|_+$/g,
+                ""
+            );
+
+    }
+
+
+    /* =====================================================
+       EXTRACT PROVIDER COST
+    ====================================================== */
+
+    function extractProviderCost(
+        service,
+        country
+    ) {
+
+        const possibleValues = [
+
+            country?.providerCost,
+
+            country?.price,
+
+            service?.providerCost,
+
+            service?.price
+
+        ];
+
+
+        for (
+            const value
+            of possibleValues
+        ) {
+
+            const number =
+                Number(value);
+
+
+            if (
+                Number.isFinite(number) &&
+                number > 0
+            ) {
+
+                return number;
+
+            }
+
+        }
+
+
+        return 0;
+
+    }
+
+
+    /* =====================================================
+       EXTRACT AVAILABILITY
+    ====================================================== */
+
+    function extractAvailability(
+        service,
+        country
+    ) {
+
+        if (
+            typeof country?.available ===
+            "boolean"
+        ) {
+
+            return country.available;
+
+        }
+
+
+        if (
+            typeof country?.availability ===
+            "boolean"
+        ) {
+
+            return country.availability;
+
+        }
+
+
+        if (
+            typeof service?.available ===
+            "boolean"
+        ) {
+
+            return service.available;
+
+        }
+
+
+        /*
+         * If the catalog contains the country,
+         * we treat it as available until the
+         * live inventory endpoint gives us a
+         * more precise availability value.
+         */
+
+        return true;
+
+    }
 
 
     /* =====================================================
@@ -2828,6 +4439,7 @@
             );
 
         };
+
 
 </script>
 
