@@ -158,6 +158,27 @@ button{
     font-weight:700;
 }
 
+.icon-button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.logout-button{
+    border:1px solid #e4e7ec;
+    background:#fff;
+    color:#475467;
+    padding:10px 13px;
+    border-radius:11px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.logout-button:hover{
+    background:#fff5f4;
+    color:#b42318;
+    border-color:#f3c3bf;
+}
+
 .admin-chip{
     display:flex;
     align-items:center;
@@ -296,7 +317,7 @@ button{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:820px;
+    min-width:900px;
 }
 
 th{
@@ -326,16 +347,36 @@ tbody tr:last-child td{
     color:#101828;
 }
 
+.country-code{
+    color:#98a2b3;
+    font-size:10px;
+    margin-top:3px;
+    font-weight:600;
+}
+
 .service-cell{
     color:#475467;
+}
+
+.service-code{
+    color:#98a2b3;
+    font-size:10px;
+    margin-top:3px;
+    font-weight:600;
 }
 
 .cost{
     font-weight:700;
 }
 
+.cost-usd{
+    color:#667085;
+    font-size:10px;
+    margin-top:3px;
+}
+
 .price-input{
-    width:125px;
+    width:135px;
     border:1px solid #d9dee7;
     border-radius:9px;
     padding:9px 10px;
@@ -467,6 +508,11 @@ tbody tr:last-child td{
 
 .google-btn:hover{
     background:#f8fafc;
+}
+
+.google-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
 }
 
 /* MODAL */
@@ -733,6 +779,10 @@ tbody tr:last-child td{
     .admin-chip{
         display:none;
     }
+
+    .logout-button{
+        display:none;
+    }
 }
 
 @media(max-width:600px){
@@ -780,86 +830,175 @@ tbody tr:last-child td{
         <div class="login-logo">N</div>
         <h1>Numora Admin</h1>
         <p>Sign in with the authorized Google account to manage Numora services and pricing.</p>
-        <button id="googleLoginBtn" class="google-btn">Continue with Google</button>
+        <button id="googleLoginBtn" class="google-btn">
+            Continue with Google
+        </button>
     </div>
 </div>
 
 <div id="app" class="app hidden">
 
     <aside class="sidebar">
+
         <div class="brand">
             <div class="brand-mark">N</div>
             <div class="brand-text">Nu<span>mora</span></div>
         </div>
 
         <nav class="nav">
-            <button id="navDashboard" class="active" onclick="goTo('index.html')">Dashboard</button>
-            <button id="navPayments" onclick="goTo('payments.html')">Payments</button>
-            <button id="navSettings" onclick="goTo('settings.html')">Settings</button>
+            <button id="navDashboard" class="active" onclick="goTo('index.html')">
+                Dashboard
+            </button>
+
+            <button id="navPayments" onclick="goTo('payments.html')">
+                Payments
+            </button>
+
+            <button id="navSettings" onclick="goTo('settings.html')">
+                Settings
+            </button>
         </nav>
 
-        <div class="sidebar-footer">Admin panel</div>
+        <div class="sidebar-footer">
+            Admin panel
+        </div>
+
     </aside>
 
     <main class="main">
 
         <header class="topbar">
+
             <div>
                 <div class="page-title">Dashboard</div>
-                <div class="page-subtitle">Manage Numora services and customer pricing.</div>
+                <div class="page-subtitle">
+                    Manage Numora services and customer pricing.
+                </div>
             </div>
 
             <div class="top-actions">
-                <button id="refreshBtn" class="icon-button" title="Refresh">↻</button>
+
+                <button id="refreshBtn"
+                        class="icon-button"
+                        title="Refresh">
+                    ↻
+                </button>
+
+                <button id="logoutBtn"
+                        class="logout-button">
+                    Log Out
+                </button>
 
                 <div class="admin-chip">
-                    <div id="adminAvatar" class="admin-avatar">N</div>
-                    <span id="adminName">Admin</span>
+
+                    <div id="adminAvatar" class="admin-avatar">
+                        N
+                    </div>
+
+                    <span id="adminName">
+                        Admin
+                    </span>
+
                 </div>
+
             </div>
+
         </header>
 
+
         <section class="stats">
-            <div class="stat-card">
-                <div class="stat-label">Total Users</div>
-                <div id="totalUsers" class="stat-value">—</div>
-                <div class="stat-note">Registered customer accounts</div>
-            </div>
 
             <div class="stat-card">
-                <div class="stat-label">Active Numbers</div>
-                <div id="activeNumbers" class="stat-value">—</div>
-                <div class="stat-note">Currently active verification numbers</div>
+                <div class="stat-label">
+                    Total Users
+                </div>
+
+                <div id="totalUsers" class="stat-value">
+                    —
+                </div>
+
+                <div class="stat-note">
+                    Registered customer accounts
+                </div>
             </div>
 
+
             <div class="stat-card">
-                <div class="stat-label">Total Sales</div>
-                <div id="totalSales" class="stat-value">₦0</div>
-                <div class="stat-note">Recorded customer payments</div>
+                <div class="stat-label">
+                    Active Numbers
+                </div>
+
+                <div id="activeNumbers" class="stat-value">
+                    —
+                </div>
+
+                <div class="stat-note">
+                    Currently active verification numbers
+                </div>
             </div>
+
+
+            <div class="stat-card">
+                <div class="stat-label">
+                    Total Sales
+                </div>
+
+                <div id="totalSales" class="stat-value">
+                    ₦0
+                </div>
+
+                <div class="stat-note">
+                    Recorded customer payments
+                </div>
+            </div>
+
         </section>
+
 
         <section class="section">
 
             <div class="section-head">
+
                 <div>
-                    <div class="section-title">Service Pricing</div>
+                    <div class="section-title">
+                        Service Pricing
+                    </div>
+
                     <div class="section-description">
-                        5SIM cost and availability are live. Only the Numora customer price is editable here.
+                        5SIM provider cost is live in USD and converted to NGN.
+                        Set the actual Numora customer price here.
                     </div>
                 </div>
 
                 <div class="head-actions">
-                    <button id="addServiceBtn" class="primary">+ Add Service</button>
-                    <button id="saveAllBtn" class="primary" disabled>Save Changes</button>
+
+                    <button id="addServiceBtn"
+                            class="primary">
+                        + Add Service
+                    </button>
+
+                    <button id="saveAllBtn"
+                            class="primary"
+                            disabled>
+                        Save Changes
+                    </button>
+
                 </div>
+
             </div>
 
-            <div id="tableNotice" class="notice"></div>
+
+            <div id="tableNotice"
+                 class="notice">
+            </div>
+
 
             <div class="table-wrap">
+
                 <table>
+
                     <thead>
+
                         <tr>
                             <th>Country</th>
                             <th>Service</th>
@@ -868,95 +1007,197 @@ tbody tr:last-child td{
                             <th>Profit</th>
                             <th>Status</th>
                         </tr>
+
                     </thead>
 
                     <tbody id="pricingBody">
+
                         <tr>
+
                             <td colspan="6">
-                                <div class="loading">Loading services...</div>
+
+                                <div class="loading">
+                                    Loading services...
+                                </div>
+
                             </td>
+
                         </tr>
+
                     </tbody>
+
                 </table>
+
             </div>
 
         </section>
 
     </main>
 
+
     <div class="mobile-nav">
-        <button class="active" onclick="goTo('index.html')">Dashboard</button>
-        <button onclick="goTo('payments.html')">Payments</button>
-        <button onclick="goTo('settings.html')">Settings</button>
+
+        <button class="active"
+                onclick="goTo('index.html')">
+            Dashboard
+        </button>
+
+        <button onclick="goTo('payments.html')">
+            Payments
+        </button>
+
+        <button onclick="goTo('settings.html')">
+            Settings
+        </button>
+
     </div>
+
 </div>
 
+
 <!-- ADD SERVICE MODAL -->
-<div id="addServiceModal" class="modal-backdrop">
+
+<div id="addServiceModal"
+     class="modal-backdrop">
+
     <div class="modal">
 
         <div class="modal-head">
+
             <div>
-                <div class="modal-title">Add Service</div>
-                <div class="modal-subtitle">
-                    Choose a country, load its services from 5SIM, then select one or more services to add to the pricing table.
+
+                <div class="modal-title">
+                    Add Service
                 </div>
+
+                <div class="modal-subtitle">
+                    Choose a country from 5SIM, load its live services,
+                    then select the services you want available to Numora customers.
+                </div>
+
             </div>
-            <button id="closeModalBtn" class="close">×</button>
+
+            <button id="closeModalBtn"
+                    class="close">
+                ×
+            </button>
+
         </div>
+
 
         <div class="modal-body">
 
-            <div id="modalNotice" class="notice"></div>
-
-            <div class="form-row">
-                <div class="field">
-                    <label for="countrySelect">Country</label>
-                    <select id="countrySelect">
-                        <option value="">Loading countries...</option>
-                    </select>
-                </div>
-
-                <div class="field">
-                    <label for="serviceSearch">Search service</label>
-                    <input id="serviceSearch" type="text" placeholder="e.g. WhatsApp">
-                </div>
+            <div id="modalNotice"
+                 class="notice">
             </div>
 
-            <div id="serviceList" class="service-list">
-                <div class="service-list-head">
-                    <span>Available services</span>
-                    <span id="serviceCount">0</span>
+
+            <div class="form-row">
+
+                <div class="field">
+
+                    <label for="countrySelect">
+                        Country
+                    </label>
+
+                    <select id="countrySelect">
+
+                        <option value="">
+                            Loading countries...
+                        </option>
+
+                    </select>
+
                 </div>
 
-                <div id="serviceListBody" class="service-list-body">
-                    <div class="loading">Select a country.</div>
+
+                <div class="field">
+
+                    <label for="serviceSearch">
+                        Search service
+                    </label>
+
+                    <input id="serviceSearch"
+                           type="text"
+                           placeholder="e.g. WhatsApp">
+
                 </div>
+
+            </div>
+
+
+            <div id="serviceList"
+                 class="service-list">
+
+                <div class="service-list-head">
+
+                    <span>
+                        Available services
+                    </span>
+
+                    <span id="serviceCount">
+                        0
+                    </span>
+
+                </div>
+
+
+                <div id="serviceListBody"
+                     class="service-list-body">
+
+                    <div class="loading">
+                        Select a country.
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
 
+
         <div class="modal-foot">
-            <button id="cancelModalBtn" class="secondary">Cancel</button>
-            <button id="addSelectedBtn" class="primary" disabled>Add Selected</button>
+
+            <button id="cancelModalBtn"
+                    class="secondary">
+                Cancel
+            </button>
+
+            <button id="addSelectedBtn"
+                    class="primary"
+                    disabled>
+                Add Selected
+            </button>
+
         </div>
 
     </div>
+
 </div>
 
-<div id="toast" class="toast"></div>
+
+<div id="toast"
+     class="toast">
+</div>
+
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 
 import {
     getAuth,
     GoogleAuthProvider,
     signInWithPopup,
     onAuthStateChanged,
-    signOut
+    signOut,
+    setPersistence,
+    browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
 
 import {
     getFirestore,
@@ -965,8 +1206,6 @@ import {
     getDocs,
     getDoc,
     setDoc,
-    query,
-    where,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -976,28 +1215,66 @@ import {
 ========================================================= */
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDZa5HcMxwYS-qVPPAyKSWwjvGdSccWrSg",
-    authDomain: "numora-c9a3b.firebaseapp.com",
-    projectId: "numora-c9a3b",
-    storageBucket: "numora-c9a3b.firebasestorage.app",
-    messagingSenderId: "778502274031",
-    appId: "1:778502274031:web:4cf57beed3703cbe5dd41a",
-    measurementId: "G-6ELM21FDPH"
+
+    apiKey:
+        "AIzaSyDZa5HcMxwYS-qVPPAyKSWwjvGdSccWrSg",
+
+    authDomain:
+        "numora-c9a3b.firebaseapp.com",
+
+    projectId:
+        "numora-c9a3b",
+
+    storageBucket:
+        "numora-c9a3b.firebasestorage.app",
+
+    messagingSenderId:
+        "778502274031",
+
+    appId:
+        "1:778502274031:web:4cf57beed3703cbe5dd41a",
+
+    measurementId:
+        "G-6ELM21FDPH"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const provider = new GoogleAuthProvider();
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getFirestore(app);
+
+const provider =
+    new GoogleAuthProvider();
 
 
 /* =========================================================
    CONFIG
 ========================================================= */
 
-const BACKEND_URL = "https://numora-backend-cle6.onrender.com";
+const BACKEND_URL =
+    "https://numora-backend-cle6.onrender.com";
 
-const ADMIN_EMAIL = "numora.support@gmail.com";
+const ADMIN_EMAIL =
+    "numora.support@gmail.com";
+
+
+/*
+  Public exchange-rate endpoint.
+
+  The 5SIM provider cost is USD.
+  We convert it to NGN only for Numora's admin display/profit
+  calculation.
+
+  The customer's actual Numora price remains whatever the admin
+  explicitly enters.
+*/
+const FX_URL =
+    "https://open.er-api.com/v6/latest/USD";
 
 
 /* =========================================================
@@ -1005,41 +1282,86 @@ const ADMIN_EMAIL = "numora.support@gmail.com";
 ========================================================= */
 
 let currentUser = null;
+
 let pricingRows = [];
+
 let countries = [];
+
 let countryServices = [];
-let pendingChanges = new Map();
-let selectedServices = new Set();
+
+let pendingChanges =
+    new Map();
+
+let selectedServices =
+    new Set();
+
+let usdToNgn =
+    null;
+
+let fxUpdatedAt =
+    null;
 
 
 /* =========================================================
    DOM
 ========================================================= */
 
-const loginScreen = document.getElementById("loginScreen");
-const appEl = document.getElementById("app");
+const loginScreen =
+    document.getElementById("loginScreen");
 
-const googleLoginBtn = document.getElementById("googleLoginBtn");
+const appEl =
+    document.getElementById("app");
 
-const pricingBody = document.getElementById("pricingBody");
-const saveAllBtn = document.getElementById("saveAllBtn");
-const refreshBtn = document.getElementById("refreshBtn");
+const googleLoginBtn =
+    document.getElementById("googleLoginBtn");
 
-const addServiceModal = document.getElementById("addServiceModal");
-const addServiceBtn = document.getElementById("addServiceBtn");
-const closeModalBtn = document.getElementById("closeModalBtn");
-const cancelModalBtn = document.getElementById("cancelModalBtn");
-const addSelectedBtn = document.getElementById("addSelectedBtn");
+const logoutBtn =
+    document.getElementById("logoutBtn");
 
-const countrySelect = document.getElementById("countrySelect");
-const serviceSearch = document.getElementById("serviceSearch");
-const serviceListBody = document.getElementById("serviceListBody");
-const serviceCount = document.getElementById("serviceCount");
+const pricingBody =
+    document.getElementById("pricingBody");
 
-const tableNotice = document.getElementById("tableNotice");
-const modalNotice = document.getElementById("modalNotice");
+const saveAllBtn =
+    document.getElementById("saveAllBtn");
 
-const toast = document.getElementById("toast");
+const refreshBtn =
+    document.getElementById("refreshBtn");
+
+const addServiceModal =
+    document.getElementById("addServiceModal");
+
+const addServiceBtn =
+    document.getElementById("addServiceBtn");
+
+const closeModalBtn =
+    document.getElementById("closeModalBtn");
+
+const cancelModalBtn =
+    document.getElementById("cancelModalBtn");
+
+const addSelectedBtn =
+    document.getElementById("addSelectedBtn");
+
+const countrySelect =
+    document.getElementById("countrySelect");
+
+const serviceSearch =
+    document.getElementById("serviceSearch");
+
+const serviceListBody =
+    document.getElementById("serviceListBody");
+
+const serviceCount =
+    document.getElementById("serviceCount");
+
+const tableNotice =
+    document.getElementById("tableNotice");
+
+const modalNotice =
+    document.getElementById("modalNotice");
+
+const toast =
+    document.getElementById("toast");
 
 
 /* =========================================================
@@ -1047,7 +1369,9 @@ const toast = document.getElementById("toast");
 ========================================================= */
 
 window.goTo = function(page){
-    window.location.href = page;
+
+    window.location.href =
+        page;
 };
 
 
@@ -1056,77 +1380,203 @@ window.goTo = function(page){
 ========================================================= */
 
 function showToast(message){
-    toast.textContent = message;
+
+    toast.textContent =
+        message;
+
     toast.classList.add("show");
 
     setTimeout(() => {
+
         toast.classList.remove("show");
+
     }, 2600);
 }
 
-function showNotice(element, message, type = "error"){
-    element.textContent = message;
-    element.className = `notice show ${type}`;
+
+function showNotice(
+    element,
+    message,
+    type = "error"
+){
+
+    element.textContent =
+        message;
+
+    element.className =
+        `notice show ${type}`;
 }
+
 
 function hideNotice(element){
-    element.className = "notice";
-    element.textContent = "";
+
+    element.className =
+        "notice";
+
+    element.textContent =
+        "";
 }
+
 
 function formatNaira(value){
-    const amount = Number(value || 0);
 
-    return new Intl.NumberFormat("en-NG", {
-        style:"currency",
-        currency:"NGN",
-        maximumFractionDigits:0
-    }).format(amount);
+    const amount =
+        Number(value || 0);
+
+    return new Intl.NumberFormat(
+        "en-NG",
+        {
+            style:"currency",
+            currency:"NGN",
+            maximumFractionDigits:0
+        }
+    ).format(amount);
 }
+
+
+function formatUsd(value){
+
+    const amount =
+        Number(value || 0);
+
+    if (!Number.isFinite(amount)){
+        return "$0.00";
+    }
+
+    return new Intl.NumberFormat(
+        "en-US",
+        {
+            style:"currency",
+            currency:"USD",
+            minimumFractionDigits:2,
+            maximumFractionDigits:4
+        }
+    ).format(amount);
+}
+
 
 function formatNumber(value){
-    return new Intl.NumberFormat("en-NG").format(Number(value || 0));
+
+    return new Intl.NumberFormat(
+        "en-NG"
+    ).format(
+        Number(value || 0)
+    );
 }
 
+
 function normalizeKey(value){
+
     return String(value || "")
         .trim()
         .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "_")
-        .replace(/^_+|_+$/g, "");
+        .replace(
+            /[^a-z0-9]+/g,
+            "_"
+        )
+        .replace(
+            /^_+|_+$/g,
+            ""
+        );
 }
 
-function serviceDocId(countryCode, serviceCode){
+
+function serviceDocId(
+    countryCode,
+    serviceCode
+){
+
     return `${normalizeKey(countryCode)}_${normalizeKey(serviceCode)}`;
 }
 
+
 function getRowPrice(row){
-    if (pendingChanges.has(row.id)){
-        return Number(pendingChanges.get(row.id));
+
+    if (
+        pendingChanges.has(row.id)
+    ){
+
+        return Number(
+            pendingChanges.get(row.id)
+        );
+
     }
 
-    return Number(row.price || 0);
+    return Number(
+        row.price ?? 0
+    );
 }
+
 
 function markSaveState(){
-    saveAllBtn.disabled = pendingChanges.size === 0;
+
+    saveAllBtn.disabled =
+        pendingChanges.size === 0;
 }
+
 
 function closeModal(){
-    addServiceModal.classList.remove("show");
+
+    addServiceModal.classList.remove(
+        "show"
+    );
+
     selectedServices.clear();
-    countrySelect.value = "";
-    serviceSearch.value = "";
-    countryServices = [];
-    serviceListBody.innerHTML = `<div class="loading">Select a country.</div>`;
-    serviceCount.textContent = "0";
-    addSelectedBtn.disabled = true;
-    hideNotice(modalNotice);
+
+    countrySelect.value =
+        "";
+
+    serviceSearch.value =
+        "";
+
+    countryServices =
+        [];
+
+    serviceListBody.innerHTML =
+        `<div class="loading">Select a country.</div>`;
+
+    serviceCount.textContent =
+        "0";
+
+    addSelectedBtn.disabled =
+        true;
+
+    hideNotice(
+        modalNotice
+    );
 }
 
-function openModal(){
-    addServiceModal.classList.add("show");
-    loadCountries();
+
+async function openModal(){
+
+    addServiceModal.classList.add(
+        "show"
+    );
+
+    await loadCountries();
+}
+
+
+/* =========================================================
+   FIREBASE AUTH PERSISTENCE
+========================================================= */
+
+async function configureAuth(){
+
+    try{
+
+        await setPersistence(
+            auth,
+            browserLocalPersistence
+        );
+
+    }catch(error){
+
+        console.warn(
+            "Could not configure Firebase persistence:",
+            error
+        );
+    }
 }
 
 
@@ -1137,101 +1587,273 @@ function openModal(){
 async function verifyAdmin(user){
 
     if (!user){
-        throw new Error("No signed-in user.");
+        throw new Error(
+            "No signed-in user."
+        );
     }
 
-    /*
-      Keep the existing admin email check.
-      The admins/{uid} document is also checked so the account
-      must exist in the Numora admin collection.
-    */
 
-    const adminRef = doc(db, "admins", user.uid);
-    const adminSnap = await getDoc(adminRef);
+    const adminRef =
+        doc(
+            db,
+            "admins",
+            user.uid
+        );
+
+
+    const adminSnap =
+        await getDoc(
+            adminRef
+        );
+
 
     const emailAllowed =
-        String(user.email || "").toLowerCase() === ADMIN_EMAIL.toLowerCase();
+        String(
+            user.email || ""
+        ).toLowerCase() ===
+        ADMIN_EMAIL.toLowerCase();
 
-    if (!emailAllowed && !adminSnap.exists()){
-        throw new Error("This Google account is not authorized as a Numora admin.");
+
+    if (
+        !emailAllowed &&
+        !adminSnap.exists()
+    ){
+
+        throw new Error(
+            "This Google account is not authorized as a Numora admin."
+        );
     }
 
-    if (!adminSnap.exists() && emailAllowed){
-        /*
-          Existing projects may already rely only on the authorized email.
-          We do not create an admin document from the browser.
-        */
-        return true;
-    }
 
     return true;
 }
 
-googleLoginBtn.addEventListener("click", async () => {
 
-    googleLoginBtn.disabled = true;
-    googleLoginBtn.textContent = "Signing in...";
+googleLoginBtn.addEventListener(
+    "click",
+    async () => {
 
-    try{
-        await signInWithPopup(auth, provider);
-    }catch(error){
+        googleLoginBtn.disabled =
+            true;
 
-        console.error(error);
+        googleLoginBtn.textContent =
+            "Signing in...";
 
-        showToast(error.message || "Google sign-in failed.");
 
-        googleLoginBtn.disabled = false;
-        googleLoginBtn.textContent = "Continue with Google";
-    }
-});
+        try{
 
-onAuthStateChanged(auth, async (user) => {
+            await signInWithPopup(
+                auth,
+                provider
+            );
 
-    if (!user){
+        }catch(error){
 
-        currentUser = null;
+            console.error(error);
 
-        appEl.classList.add("hidden");
-        loginScreen.classList.remove("hidden");
+            showToast(
+                error.message ||
+                "Google sign-in failed."
+            );
 
-        return;
-    }
+            googleLoginBtn.disabled =
+                false;
 
-    try{
-
-        await verifyAdmin(user);
-
-        currentUser = user;
-
-        loginScreen.classList.add("hidden");
-        appEl.classList.remove("hidden");
-
-        document.getElementById("adminName").textContent =
-            user.displayName || user.email || "Admin";
-
-        const avatar = document.getElementById("adminAvatar");
-
-        if (user.photoURL){
-            avatar.innerHTML = `<img src="${user.photoURL}" alt="">`;
-        }else{
-            avatar.textContent =
-                (user.displayName || "N").charAt(0).toUpperCase();
+            googleLoginBtn.textContent =
+                "Continue with Google";
         }
 
-        await loadDashboard();
-
-    }catch(error){
-
-        console.error(error);
-
-        await signOut(auth);
-
-        showToast(error.message || "Admin access denied.");
-
-        googleLoginBtn.disabled = false;
-        googleLoginBtn.textContent = "Continue with Google";
     }
-});
+);
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+logoutBtn.addEventListener(
+    "click",
+    async () => {
+
+        logoutBtn.disabled =
+            true;
+
+        logoutBtn.textContent =
+            "Logging out...";
+
+
+        try{
+
+            await signOut(
+                auth
+            );
+
+            currentUser =
+                null;
+
+            appEl.classList.add(
+                "hidden"
+            );
+
+            loginScreen.classList.remove(
+                "hidden"
+            );
+
+            googleLoginBtn.disabled =
+                false;
+
+            googleLoginBtn.textContent =
+                "Continue with Google";
+
+            showToast(
+                "You have been logged out."
+            );
+
+        }catch(error){
+
+            console.error(error);
+
+            showToast(
+                error.message ||
+                "Could not log out."
+            );
+
+        }finally{
+
+            logoutBtn.disabled =
+                false;
+
+            logoutBtn.textContent =
+                "Log Out";
+        }
+
+    }
+);
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+onAuthStateChanged(
+    auth,
+    async (user) => {
+
+        if (!user){
+
+            currentUser =
+                null;
+
+            appEl.classList.add(
+                "hidden"
+            );
+
+            loginScreen.classList.remove(
+                "hidden"
+            );
+
+            googleLoginBtn.disabled =
+                false;
+
+            googleLoginBtn.textContent =
+                "Continue with Google";
+
+            return;
+        }
+
+
+        try{
+
+            await verifyAdmin(
+                user
+            );
+
+
+            currentUser =
+                user;
+
+
+            loginScreen.classList.add(
+                "hidden"
+            );
+
+            appEl.classList.remove(
+                "hidden"
+            );
+
+
+            document.getElementById(
+                "adminName"
+            ).textContent =
+                user.displayName ||
+                user.email ||
+                "Admin";
+
+
+            const avatar =
+                document.getElementById(
+                    "adminAvatar"
+                );
+
+
+            if (user.photoURL){
+
+                avatar.innerHTML =
+                    `<img src="${escapeAttr(user.photoURL)}" alt="">`;
+
+            }else{
+
+                avatar.textContent =
+                    (
+                        user.displayName ||
+                        "N"
+                    )
+                    .charAt(0)
+                    .toUpperCase();
+            }
+
+
+            await loadDashboard();
+
+
+        }catch(error){
+
+            console.error(error);
+
+
+            await signOut(
+                auth
+            );
+
+
+            currentUser =
+                null;
+
+
+            appEl.classList.add(
+                "hidden"
+            );
+
+            loginScreen.classList.remove(
+                "hidden"
+            );
+
+
+            showToast(
+                error.message ||
+                "Admin access denied."
+            );
+
+
+            googleLoginBtn.disabled =
+                false;
+
+            googleLoginBtn.textContent =
+                "Continue with Google";
+        }
+
+    }
+);
 
 
 /* =========================================================
@@ -1241,97 +1863,281 @@ onAuthStateChanged(auth, async (user) => {
 async function loadDashboard(){
 
     pendingChanges.clear();
+
     markSaveState();
+
 
     await Promise.all([
         loadStats(),
-        loadPricing()
+        loadPricing(),
+        loadExchangeRate()
     ]);
 }
+
+
+/* =========================================================
+   STATS
+========================================================= */
 
 async function loadStats(){
 
     try{
 
-        const usersSnap = await getDocs(collection(db, "users"));
+        const usersSnap =
+            await getDocs(
+                collection(
+                    db,
+                    "users"
+                )
+            );
 
-        document.getElementById("totalUsers").textContent =
-            formatNumber(usersSnap.size);
+
+        document.getElementById(
+            "totalUsers"
+        ).textContent =
+            formatNumber(
+                usersSnap.size
+            );
 
     }catch(error){
 
-        console.warn("Users count unavailable:", error);
+        console.warn(
+            "Users count unavailable:",
+            error
+        );
 
-        document.getElementById("totalUsers").textContent = "—";
+        document.getElementById(
+            "totalUsers"
+        ).textContent =
+            "—";
     }
 
-    /*
-      Active numbers and total sales depend on the collections already
-      used by the rest of the Numora backend. We query common collection
-      names without making the dashboard dependent on them.
-    */
 
     try{
 
-        const numbersSnap = await getDocs(collection(db, "numbers"));
+        const numbersSnap =
+            await getDocs(
+                collection(
+                    db,
+                    "numbers"
+                )
+            );
 
-        let active = 0;
 
-        numbersSnap.forEach(item => {
+        let active =
+            0;
 
-            const data = item.data();
 
-            if (
-                data.active === true ||
-                data.status === "active" ||
-                data.status === "Active"
-            ){
-                active++;
+        numbersSnap.forEach(
+            item => {
+
+                const data =
+                    item.data();
+
+                const status =
+                    String(
+                        data.status ||
+                        ""
+                    ).toLowerCase();
+
+
+                if (
+                    data.active === true ||
+                    status === "active"
+                ){
+
+                    active++;
+                }
+
             }
-        });
+        );
 
-        document.getElementById("activeNumbers").textContent =
-            formatNumber(active);
+
+        document.getElementById(
+            "activeNumbers"
+        ).textContent =
+            formatNumber(
+                active
+            );
 
     }catch(error){
 
-        document.getElementById("activeNumbers").textContent = "—";
+        document.getElementById(
+            "activeNumbers"
+        ).textContent =
+            "—";
     }
+
 
     try{
 
-        const paymentsSnap = await getDocs(collection(db, "payments"));
+        const paymentsSnap =
+            await getDocs(
+                collection(
+                    db,
+                    "payments"
+                )
+            );
 
-        let total = 0;
 
-        paymentsSnap.forEach(item => {
+        let total =
+            0;
 
-            const data = item.data();
 
-            const status = String(data.status || "").toLowerCase();
+        paymentsSnap.forEach(
+            item => {
 
-            if (
-                status === "success" ||
-                status === "successful" ||
-                status === "paid" ||
-                status === "completed"
-            ){
-                total += Number(
-                    data.amount ??
-                    data.amountNaira ??
-                    data.nairaAmount ??
-                    0
-                );
+                const data =
+                    item.data();
+
+
+                const status =
+                    String(
+                        data.status ||
+                        ""
+                    ).toLowerCase();
+
+
+                if (
+                    status === "success" ||
+                    status === "successful" ||
+                    status === "paid" ||
+                    status === "completed"
+                ){
+
+                    total += Number(
+                        data.amount ??
+                        data.amountNaira ??
+                        data.nairaAmount ??
+                        0
+                    );
+                }
+
             }
-        });
+        );
 
-        document.getElementById("totalSales").textContent =
-            formatNaira(total);
+
+        document.getElementById(
+            "totalSales"
+        ).textContent =
+            formatNaira(
+                total
+            );
 
     }catch(error){
 
-        document.getElementById("totalSales").textContent = "₦0";
+        document.getElementById(
+            "totalSales"
+        ).textContent =
+            "₦0";
     }
+}
+
+
+/* =========================================================
+   EXCHANGE RATE
+========================================================= */
+
+async function loadExchangeRate(){
+
+    try{
+
+        const response =
+            await fetch(
+                FX_URL,
+                {
+                    method:"GET",
+                    cache:"no-store"
+                }
+            );
+
+
+        if (!response.ok){
+
+            throw new Error(
+                `Exchange-rate request failed (${response.status}).`
+            );
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const rate =
+            Number(
+                data?.rates?.NGN
+            );
+
+
+        if (
+            !Number.isFinite(rate) ||
+            rate <= 0
+        ){
+
+            throw new Error(
+                "No valid USD/NGN exchange rate was returned."
+            );
+        }
+
+
+        usdToNgn =
+            rate;
+
+
+        fxUpdatedAt =
+            data?.time_last_update_utc ||
+            new Date().toISOString();
+
+
+        return rate;
+
+    }catch(error){
+
+        console.warn(
+            "Live FX rate unavailable:",
+            error
+        );
+
+
+        /*
+          Do not silently invent an exchange rate.
+
+          If the rate cannot be retrieved, provider NGN cost is shown
+          as unavailable rather than pretending USD is NGN.
+        */
+
+        usdToNgn =
+            null;
+
+        fxUpdatedAt =
+            null;
+
+        return null;
+    }
+}
+
+
+function convertUsdToNgn(
+    usd
+){
+
+    const amount =
+        Number(usd);
+
+
+    if (
+        !Number.isFinite(amount) ||
+        amount <= 0 ||
+        !usdToNgn
+    ){
+
+        return null;
+    }
+
+
+    return amount *
+        usdToNgn;
 }
 
 
@@ -1344,56 +2150,126 @@ async function loadPricing(){
     pricingBody.innerHTML = `
         <tr>
             <td colspan="6">
-                <div class="loading">Loading pricing...</div>
+                <div class="loading">
+                    Loading pricing...
+                </div>
             </td>
         </tr>
     `;
 
+
     try{
 
-        const snapshot = await getDocs(collection(db, "servicePricing"));
-
-        pricingRows = snapshot.docs.map(item => ({
-            id:item.id,
-            ...item.data()
-        }));
-
-        /*
-          Keep the table predictable:
-          country first, then service.
-        */
-        pricingRows.sort((a,b) => {
-
-            const countryCompare =
-                String(a.country || "").localeCompare(String(b.country || ""));
-
-            if (countryCompare !== 0){
-                return countryCompare;
-            }
-
-            return String(a.service || "").localeCompare(
-                String(b.service || "")
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "servicePricing"
+                )
             );
-        });
+
+
+        pricingRows =
+            snapshot.docs.map(
+                item => {
+
+                    const data =
+                        item.data();
+
+
+                    /*
+                      Normalize older records so the Admin can still
+                      display them while new records use the correct
+                      code/name structure.
+                    */
+
+                    return {
+                        id:item.id,
+                        ...data
+                    };
+
+                }
+            );
+
+
+        pricingRows.sort(
+            (a,b) => {
+
+                const countryCompare =
+                    String(
+                        a.countryName ||
+                        a.country ||
+                        a.countryCode ||
+                        ""
+                    ).localeCompare(
+                        String(
+                            b.countryName ||
+                            b.country ||
+                            b.countryCode ||
+                            ""
+                        )
+                    );
+
+
+                if (
+                    countryCompare !== 0
+                ){
+
+                    return countryCompare;
+                }
+
+
+                return String(
+                    a.serviceName ||
+                    a.service ||
+                    a.serviceCode ||
+                    ""
+                ).localeCompare(
+                    String(
+                        b.serviceName ||
+                        b.service ||
+                        b.serviceCode ||
+                        ""
+                    )
+                );
+
+            }
+        );
+
 
         renderPricing();
+
 
     }catch(error){
 
         console.error(error);
 
+
         pricingBody.innerHTML = `
             <tr>
                 <td colspan="6">
                     <div class="empty">
-                        <strong>Could not load pricing</strong>
-                        ${error.message || "Please try again."}
+
+                        <strong>
+                            Could not load pricing
+                        </strong>
+
+                        ${escapeHtml(
+                            error.message ||
+                            "Please try again."
+                        )}
+
                     </div>
                 </td>
             </tr>
         `;
     }
 }
+
+
+/* =========================================================
+   RENDER PRICING
+========================================================= */
 
 function renderPricing(){
 
@@ -1402,10 +2278,19 @@ function renderPricing(){
         pricingBody.innerHTML = `
             <tr>
                 <td colspan="6">
+
                     <div class="empty">
-                        <strong>No services added yet</strong>
-                        Click <b>+ Add Service</b> to load services directly from 5SIM.
+
+                        <strong>
+                            No services added yet
+                        </strong>
+
+                        Click
+                        <b>+ Add Service</b>
+                        to load services directly from 5SIM.
+
                     </div>
+
                 </td>
             </tr>
         `;
@@ -1413,106 +2298,307 @@ function renderPricing(){
         return;
     }
 
-    pricingBody.innerHTML = pricingRows.map(row => {
 
-        const price = getRowPrice(row);
-        const providerCost = Number(row.providerCost || 0);
+    pricingBody.innerHTML =
+        pricingRows.map(
+            row => {
 
-        const profit =
-            price > 0 && providerCost > 0
-                ? price - providerCost
-                : 0;
+                const price =
+                    getRowPrice(
+                        row
+                    );
 
-        const available =
-            row.available !== false;
 
-        let statusClass = "available";
-        let statusText = "Available";
+                const providerCostUsd =
+                    Number(
+                        row.providerCostUsd ??
+                        row.providerCost ??
+                        0
+                    );
 
-        if (price <= 0){
-            statusClass = "unpriced";
-            statusText = "Set price";
-        }else if (!available){
-            statusClass = "unavailable";
-            statusText = "Unavailable";
-        }
 
-        return `
-            <tr data-row-id="${row.id}">
+                const providerCostNgn =
+                    Number(
+                        row.providerCostNgn ??
+                        convertUsdToNgn(
+                            providerCostUsd
+                        ) ??
+                        0
+                    );
 
-                <td class="country-cell">
-                    ${escapeHtml(row.country || "—")}
-                </td>
 
-                <td class="service-cell">
-                    ${escapeHtml(row.service || "—")}
-                </td>
+                const profit =
+                    price > 0 &&
+                    providerCostNgn > 0
+                        ? price - providerCostNgn
+                        : null;
 
-                <td class="cost">
-                    ${providerCost > 0 ? formatNaira(providerCost) : "Live cost unavailable"}
-                </td>
 
-                <td>
-                    <input
-                        class="price-input ${pendingChanges.has(row.id) ? "changed" : ""}"
-                        type="number"
-                        min="1"
-                        step="1"
-                        value="${price > 0 ? price : ""}"
-                        placeholder="Enter price"
-                        data-price-id="${row.id}"
-                    >
-                </td>
+                const available =
+                    row.available !== false;
 
-                <td class="profit">
-                    ${price > 0 && providerCost > 0
-                        ? formatNaira(profit)
-                        : "—"
-                    }
-                </td>
 
-                <td>
-                    <span class="status ${statusClass}">
-                        <span class="status-dot"></span>
-                        ${statusText}
-                    </span>
-                </td>
+                let statusClass =
+                    "available";
 
-            </tr>
-        `;
+                let statusText =
+                    "Available";
 
-    }).join("");
 
-    document.querySelectorAll(".price-input").forEach(input => {
+                if (
+                    price <= 0
+                ){
 
-        input.addEventListener("input", () => {
+                    statusClass =
+                        "unpriced";
 
-            const id = input.dataset.priceId;
-            const value = Number(input.value);
+                    statusText =
+                        "Set price";
 
-            if (!Number.isFinite(value) || value <= 0){
+                }else if (
+                    !available
+                ){
 
-                pendingChanges.set(id, 0);
+                    statusClass =
+                        "unavailable";
 
-            }else{
-
-                const original = pricingRows.find(row => row.id === id);
-
-                if (original && Number(original.price || 0) === value){
-
-                    pendingChanges.delete(id);
-
-                }else{
-
-                    pendingChanges.set(id, value);
+                    statusText =
+                        "Unavailable";
                 }
+
+
+                const countryName =
+                    row.countryName ||
+                    row.country ||
+                    "—";
+
+
+                const countryCode =
+                    row.countryCode ||
+                    "";
+
+
+                const serviceName =
+                    row.serviceName ||
+                    (
+                        row.service &&
+                        !row.serviceCode
+                            ? row.service
+                            : row.serviceCode
+                    ) ||
+                    "—";
+
+
+                const serviceCode =
+                    row.serviceCode ||
+                    "";
+
+
+                return `
+                    <tr data-row-id="${escapeAttr(row.id)}">
+
+                        <td class="country-cell">
+
+                            ${escapeHtml(countryName)}
+
+                            ${
+                                countryCode
+                                    ? `
+                                        <div class="country-code">
+                                            ${escapeHtml(countryCode)}
+                                        </div>
+                                      `
+                                    : ""
+                            }
+
+                        </td>
+
+
+                        <td class="service-cell">
+
+                            ${escapeHtml(serviceName)}
+
+                            ${
+                                serviceCode
+                                    ? `
+                                        <div class="service-code">
+                                            ${escapeHtml(serviceCode)}
+                                        </div>
+                                      `
+                                    : ""
+                            }
+
+                        </td>
+
+
+                        <td class="cost">
+
+                            ${
+                                providerCostNgn > 0
+                                    ? formatNaira(providerCostNgn)
+                                    : "Live cost unavailable"
+                            }
+
+                            ${
+                                providerCostUsd > 0
+                                    ? `
+                                        <div class="cost-usd">
+                                            ${formatUsd(providerCostUsd)}
+                                        </div>
+                                      `
+                                    : ""
+                            }
+
+                        </td>
+
+
+                        <td>
+
+                            <input
+                                class="price-input ${
+                                    pendingChanges.has(row.id)
+                                        ? "changed"
+                                        : ""
+                                }"
+                                type="number"
+                                min="0.01"
+                                step="0.01"
+                                value="${
+                                    price > 0
+                                        ? price
+                                        : ""
+                                }"
+                                placeholder="Enter price"
+                                data-price-id="${escapeAttr(row.id)}"
+                            >
+
+                        </td>
+
+
+                        <td class="profit">
+
+                            ${
+                                profit !== null
+                                    ? formatNaira(profit)
+                                    : "—"
+                            }
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status ${statusClass}">
+
+                                <span class="status-dot"></span>
+
+                                ${statusText}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+                `;
+
             }
+        ).join("");
 
-            renderPricing();
-            markSaveState();
-        });
 
-    });
+    document
+        .querySelectorAll(
+            ".price-input"
+        )
+        .forEach(
+            input => {
+
+                input.addEventListener(
+                    "input",
+                    () => {
+
+                        const id =
+                            input.dataset.priceId;
+
+
+                        const raw =
+                            input.value.trim();
+
+
+                        /*
+                          Blank means "not priced yet".
+                          We do not turn blank into ₦1 or ₦0.
+                        */
+
+                        if (
+                            raw === ""
+                        ){
+
+                            pendingChanges.set(
+                                id,
+                                null
+                            );
+
+                        }else{
+
+                            const value =
+                                Number(raw);
+
+
+                            if (
+                                !Number.isFinite(value) ||
+                                value <= 0
+                            ){
+
+                                pendingChanges.set(
+                                    id,
+                                    null
+                                );
+
+                            }else{
+
+                                const original =
+                                    pricingRows.find(
+                                        row =>
+                                            row.id === id
+                                    );
+
+
+                                const originalPrice =
+                                    Number(
+                                        original?.price ??
+                                        0
+                                    );
+
+
+                                if (
+                                    originalPrice ===
+                                    value
+                                ){
+
+                                    pendingChanges.delete(
+                                        id
+                                    );
+
+                                }else{
+
+                                    pendingChanges.set(
+                                        id,
+                                        value
+                                    );
+                                }
+
+                            }
+
+                        }
+
+
+                        markSaveState();
+
+                    }
+                );
+
+            }
+        );
 }
 
 
@@ -1520,24 +2606,43 @@ function renderPricing(){
    LIVE 5SIM DATA
 ========================================================= */
 
-async function apiGet(path){
+async function apiGet(
+    path
+){
 
-    const response = await fetch(`${BACKEND_URL}${path}`, {
-        method:"GET",
-        headers:{
-            "Accept":"application/json"
-        }
-    });
+    const response =
+        await fetch(
+            `${BACKEND_URL}${path}`,
+            {
+                method:"GET",
+                headers:{
+                    "Accept":
+                        "application/json"
+                },
+                cache:"no-store"
+            }
+        );
 
-    let data = null;
+
+    let data =
+        null;
+
 
     try{
-        data = await response.json();
+
+        data =
+            await response.json();
+
     }catch{
-        data = null;
+
+        data =
+            null;
     }
 
-    if (!response.ok){
+
+    if (
+        !response.ok
+    ){
 
         throw new Error(
             data?.error ||
@@ -1546,28 +2651,74 @@ async function apiGet(path){
         );
     }
 
+
     return data;
 }
 
+
+/* =========================================================
+   LOAD 5SIM COUNTRIES
+========================================================= */
+
 async function loadCountries(){
 
-    hideNotice(modalNotice);
+    hideNotice(
+        modalNotice
+    );
+
 
     countrySelect.innerHTML =
-        `<option value="">Loading countries from 5SIM...</option>`;
+        `
+            <option value="">
+                Loading countries from 5SIM...
+            </option>
+        `;
+
 
     try{
 
-        const data = await apiGet("/api/5sim/countries");
+        const data =
+            await apiGet(
+                "/api/5sim/countries"
+            );
 
-        countries = Array.isArray(data?.countries)
-            ? data.countries
-            : [];
 
-        if (!countries.length){
+        countries =
+            Array.isArray(
+                data?.countries
+            )
+                ? data.countries
+                : [];
+
+
+        /*
+          5SIM may call the United Kingdom market "England".
+          We preserve the provider's actual code and name.
+        */
+
+        countries.sort(
+            (a,b) =>
+                String(
+                    a.name || ""
+                ).localeCompare(
+                    String(
+                        b.name || ""
+                    )
+                )
+        );
+
+
+        if (
+            !countries.length
+        ){
 
             countrySelect.innerHTML =
-                `<option value="">No countries returned</option>`;
+                `
+                    <option value="">
+                        No countries returned
+                    </option>
+                `;
+
 
             showNotice(
                 modalNotice,
@@ -1575,23 +2726,41 @@ async function loadCountries(){
                 "error"
             );
 
+
             return;
         }
 
+
         countrySelect.innerHTML =
-            `<option value="">Select country</option>` +
-            countries.map(country => `
-                <option value="${escapeAttr(country.code)}">
-                    ${escapeHtml(country.name)}
+            `
+                <option value="">
+                    Select country
                 </option>
-            `).join("");
+            ` +
+            countries.map(
+                country => `
+                    <option value="${escapeAttr(country.code)}">
+                        ${escapeHtml(
+                            country.name ||
+                            country.code
+                        )}
+                    </option>
+                `
+            ).join("");
+
 
     }catch(error){
 
         console.error(error);
 
+
         countrySelect.innerHTML =
-            `<option value="">Could not load countries</option>`;
+            `
+                <option value="">
+                    Could not load countries
+                </option>
+            `;
+
 
         showNotice(
             modalNotice,
@@ -1601,163 +2770,356 @@ async function loadCountries(){
     }
 }
 
-countrySelect.addEventListener("change", async () => {
 
-    selectedServices.clear();
-    updateSelectedButton();
+/* =========================================================
+   COUNTRY CHANGE
+========================================================= */
 
-    const country = countrySelect.value;
+countrySelect.addEventListener(
+    "change",
+    async () => {
 
-    if (!country){
+        selectedServices.clear();
 
-        countryServices = [];
+        updateSelectedButton();
 
-        serviceListBody.innerHTML =
-            `<div class="loading">Select a country.</div>`;
 
-        serviceCount.textContent = "0";
+        const country =
+            countrySelect.value;
 
-        return;
+
+        if (!country){
+
+            countryServices =
+                [];
+
+
+            serviceListBody.innerHTML =
+                `
+                    <div class="loading">
+                        Select a country.
+                    </div>
+                `;
+
+
+            serviceCount.textContent =
+                "0";
+
+
+            return;
+        }
+
+
+        await loadCountryServices(
+            country
+        );
+
     }
+);
 
-    await loadCountryServices(country);
-});
 
-serviceSearch.addEventListener("input", () => {
-    renderServiceOptions();
-});
+/* =========================================================
+   SERVICE SEARCH
+========================================================= */
 
-async function loadCountryServices(country){
+serviceSearch.addEventListener(
+    "input",
+    () => {
+
+        renderServiceOptions();
+
+    }
+);
+
+
+/* =========================================================
+   LOAD COUNTRY SERVICES
+========================================================= */
+
+async function loadCountryServices(
+    country
+){
 
     serviceListBody.innerHTML =
-        `<div class="loading">Loading services from 5SIM...</div>`;
+        `
+            <div class="loading">
+                Loading services from 5SIM...
+            </div>
+        `;
 
-    serviceCount.textContent = "…";
+
+    serviceCount.textContent =
+        "…";
+
 
     try{
 
-        const data = await apiGet(
-            `/api/5sim/services?country=${encodeURIComponent(country)}`
-        );
+        const data =
+            await apiGet(
+                `/api/5sim/services?country=${encodeURIComponent(country)}`
+            );
 
-        countryServices = Array.isArray(data?.services)
-            ? data.services
-            : [];
 
-        /*
-          A service that is already in servicePricing is still displayed,
-          but disabled so the admin cannot create a duplicate.
-        */
+        countryServices =
+            Array.isArray(
+                data?.services
+            )
+                ? data.services
+                : [];
+
+
         renderServiceOptions();
+
 
     }catch(error){
 
         console.error(error);
 
-        countryServices = [];
 
-        serviceListBody.innerHTML = `
-            <div class="loading">
-                Could not load services.<br>
-                ${escapeHtml(error.message)}
-            </div>
-        `;
+        countryServices =
+            [];
 
-        serviceCount.textContent = "0";
+
+        serviceListBody.innerHTML =
+            `
+                <div class="loading">
+
+                    Could not load services.<br>
+
+                    ${escapeHtml(
+                        error.message
+                    )}
+
+                </div>
+            `;
+
+
+        serviceCount.textContent =
+            "0";
     }
 }
+
+
+/* =========================================================
+   RENDER SERVICES
+========================================================= */
 
 function renderServiceOptions(){
 
     const search =
-        serviceSearch.value.trim().toLowerCase();
+        serviceSearch.value
+            .trim()
+            .toLowerCase();
 
-    const filtered = countryServices.filter(service => {
 
-        if (!search){
-            return true;
-        }
+    const filtered =
+        countryServices.filter(
+            service => {
 
-        return (
-            String(service.name || "").toLowerCase().includes(search) ||
-            String(service.code || "").toLowerCase().includes(search)
+                if (!search){
+                    return true;
+                }
+
+
+                return (
+
+                    String(
+                        service.name || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+                    ||
+
+                    String(
+                        service.code || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+                );
+
+            }
         );
-    });
 
-    serviceCount.textContent = String(filtered.length);
+
+    serviceCount.textContent =
+        String(
+            filtered.length
+        );
+
 
     if (!filtered.length){
 
-        serviceListBody.innerHTML = `
-            <div class="loading">
-                No matching services found.
-            </div>
-        `;
+        serviceListBody.innerHTML =
+            `
+                <div class="loading">
+                    No matching services found.
+                </div>
+            `;
 
         return;
     }
 
-    const countryCode = countrySelect.value;
 
-    serviceListBody.innerHTML = filtered.map(service => {
+    const countryCode =
+        countrySelect.value;
 
-        const id = serviceDocId(countryCode, service.code);
 
-        const exists = pricingRows.some(row => row.id === id);
+    serviceListBody.innerHTML =
+        filtered.map(
+            service => {
 
-        const checked =
-            selectedServices.has(service.code)
-                ? "checked"
-                : "";
+                const id =
+                    serviceDocId(
+                        countryCode,
+                        service.code
+                    );
 
-        return `
-            <label class="service-option">
 
-                <input
-                    type="checkbox"
-                    value="${escapeAttr(service.code)}"
-                    ${checked}
-                    ${exists ? "disabled" : ""}
-                >
+                const exists =
+                    pricingRows.some(
+                        row => {
 
-                <div>
-                    <div class="service-name">
-                        ${escapeHtml(service.name || service.code)}
-                        ${exists ? " · Already added" : ""}
-                    </div>
+                            const rowCountry =
+                                String(
+                                    row.countryCode ||
+                                    row.country ||
+                                    ""
+                                ).toLowerCase();
 
-                    <div class="service-meta">
-                        ${exists
-                            ? "This country/service is already in your pricing table."
-                            : "5SIM availability and cost will be refreshed after adding."
+
+                            const rowService =
+                                String(
+                                    row.serviceCode ||
+                                    (
+                                        row.service &&
+                                        row.serviceCode === undefined
+                                            ? row.service
+                                            : ""
+                                    ) ||
+                                    ""
+                                ).toLowerCase();
+
+
+                            return (
+                                row.id === id ||
+                                (
+                                    rowCountry ===
+                                    String(
+                                        countryCode
+                                    ).toLowerCase()
+                                    &&
+                                    rowService ===
+                                    String(
+                                        service.code
+                                    ).toLowerCase()
+                                )
+                            );
+
                         }
-                    </div>
-                </div>
+                    );
 
-            </label>
-        `;
 
-    }).join("");
+                const checked =
+                    selectedServices.has(
+                        service.code
+                    )
+                        ? "checked"
+                        : "";
+
+
+                return `
+                    <label class="service-option">
+
+                        <input
+                            type="checkbox"
+                            value="${escapeAttr(service.code)}"
+                            ${checked}
+                            ${exists ? "disabled" : ""}
+                        >
+
+
+                        <div>
+
+                            <div class="service-name">
+
+                                ${escapeHtml(
+                                    service.name ||
+                                    service.code
+                                )}
+
+                                ${
+                                    exists
+                                        ? " · Already added"
+                                        : ""
+                                }
+
+                            </div>
+
+
+                            <div class="service-meta">
+
+                                ${
+                                    exists
+                                        ? "This country/service is already in your pricing catalog."
+                                        : "5SIM availability and provider cost will be checked before saving."
+                                }
+
+                            </div>
+
+                        </div>
+
+                    </label>
+                `;
+
+            }
+        ).join("");
+
 
     serviceListBody
-        .querySelectorAll('input[type="checkbox"]:not(:disabled)')
-        .forEach(box => {
+        .querySelectorAll(
+            'input[type="checkbox"]:not(:disabled)'
+        )
+        .forEach(
+            box => {
 
-            box.addEventListener("change", () => {
+                box.addEventListener(
+                    "change",
+                    () => {
 
-                if (box.checked){
-                    selectedServices.add(box.value);
-                }else{
-                    selectedServices.delete(box.value);
-                }
+                        if (
+                            box.checked
+                        ){
 
-                updateSelectedButton();
-            });
+                            selectedServices.add(
+                                box.value
+                            );
 
-        });
+                        }else{
+
+                            selectedServices.delete(
+                                box.value
+                            );
+                        }
+
+
+                        updateSelectedButton();
+
+                    }
+                );
+
+            }
+        );
+
 
     updateSelectedButton();
 }
+
+
+/* =========================================================
+   SELECTED SERVICE BUTTON
+========================================================= */
 
 function updateSelectedButton(){
 
@@ -1770,295 +3132,615 @@ function updateSelectedButton(){
    ADD SELECTED SERVICES
 ========================================================= */
 
-addSelectedBtn.addEventListener("click", async () => {
+addSelectedBtn.addEventListener(
+    "click",
+    async () => {
 
-    const countryCode = countrySelect.value;
+        const countryCode =
+            countrySelect.value;
 
-    if (!countryCode || selectedServices.size === 0){
-        return;
-    }
 
-    addSelectedBtn.disabled = true;
-    addSelectedBtn.textContent = "Adding...";
+        if (
+            !countryCode ||
+            selectedServices.size === 0
+        ){
 
-    try{
-
-        const country =
-            countries.find(item => item.code === countryCode);
-
-        const countryName =
-            country?.name ||
-            countryCode.toUpperCase();
-
-        const selected = countryServices.filter(service =>
-            selectedServices.has(service.code)
-        );
-
-        for (const service of selected){
-
-            const id = serviceDocId(
-                countryCode,
-                service.code
-            );
-
-            /*
-              Fetch the exact current 5SIM price before writing the service.
-              This keeps the first provider-cost value live rather than fake.
-            */
-            let priceData = null;
-
-            try{
-
-                priceData = await apiGet(
-                    `/api/5sim/price?country=${encodeURIComponent(countryCode)}&service=${encodeURIComponent(service.code)}`
-                );
-
-            }catch(error){
-
-                console.warn(
-                    `Could not get exact 5SIM price for ${service.code}:`,
-                    error
-                );
-            }
-
-            const providerCost =
-                Number(
-                    priceData?.providerCost ??
-                    service.providerCost ??
-                    0
-                );
-
-            const available =
-                priceData?.available !== undefined
-                    ? Boolean(priceData.available)
-                    : Boolean(service.available);
-
-            const existing = pricingRows.find(
-                row => row.id === id
-            );
-
-            const payload = {
-
-                country: countryName,
-                countryCode: countryCode,
-
-                service: service.name || service.code,
-                serviceCode: service.code,
-
-                /*
-                  New services intentionally start without a customer price.
-                  The admin enters Numora's price in the table and saves it.
-                */
-                price: existing?.price ?? 0,
-
-                providerCost: providerCost,
-
-                available: available,
-
-                enabled: true,
-
-                updatedAt: serverTimestamp()
-
-            };
-
-            if (!existing){
-                payload.createdAt = serverTimestamp();
-            }
-
-            await setDoc(
-                doc(db, "servicePricing", id),
-                payload,
-                { merge:true }
-            );
+            return;
         }
 
-        closeModal();
 
-        showToast(
-            `${selected.length} service${selected.length === 1 ? "" : "s"} added.`
-        );
+        addSelectedBtn.disabled =
+            true;
 
-        await loadPricing();
+        addSelectedBtn.textContent =
+            "Adding...";
 
-    }catch(error){
 
-        console.error(error);
+        try{
 
-        showNotice(
-            modalNotice,
-            error.message || "Could not add the selected service(s).",
-            "error"
-        );
+            const country =
+                countries.find(
+                    item =>
+                        item.code ===
+                        countryCode
+                );
 
-    }finally{
 
-        addSelectedBtn.disabled = false;
-        addSelectedBtn.textContent = "Add Selected";
+            const countryName =
+                country?.name ||
+                countryCode;
 
-        updateSelectedButton();
+
+            const selected =
+                countryServices.filter(
+                    service =>
+                        selectedServices.has(
+                            service.code
+                        )
+                );
+
+
+            if (!selected.length){
+
+                throw new Error(
+                    "No valid services were selected."
+                );
+            }
+
+
+            /*
+              Make sure the exchange rate is current before
+              storing the provider NGN equivalent.
+            */
+
+            await loadExchangeRate();
+
+
+            for (
+                const service of selected
+            ){
+
+                const id =
+                    serviceDocId(
+                        countryCode,
+                        service.code
+                    );
+
+
+                let priceData =
+                    null;
+
+
+                try{
+
+                    priceData =
+                        await apiGet(
+                            `/api/5sim/price?country=${encodeURIComponent(countryCode)}&service=${encodeURIComponent(service.code)}`
+                        );
+
+                }catch(error){
+
+                    console.warn(
+                        `Could not get exact 5SIM price for ${service.code}:`,
+                        error
+                    );
+                }
+
+
+                const providerCostUsd =
+                    Number(
+                        priceData?.providerCost ??
+                        service.providerCost ??
+                        0
+                    );
+
+
+                const providerCostNgn =
+                    convertUsdToNgn(
+                        providerCostUsd
+                    );
+
+
+                const available =
+                    priceData?.available !== undefined
+                        ? Boolean(
+                            priceData.available
+                        )
+                        : Boolean(
+                            service.available
+                        );
+
+
+                const existing =
+                    pricingRows.find(
+                        row =>
+                            row.id === id
+                    );
+
+
+                /*
+                  IMPORTANT:
+
+                  servicePricing stores the CODE in `service`
+                  because the backend catalog needs the provider
+                  service code.
+
+                  The human-readable name is stored separately
+                  in `serviceName`.
+
+                  Same thing for country.
+                */
+
+                const payload = {
+
+                    country:
+                        countryCode,
+
+                    countryCode:
+                        countryCode,
+
+                    countryName:
+                        countryName,
+
+                    service:
+                        service.code,
+
+                    serviceCode:
+                        service.code,
+
+                    serviceName:
+                        service.name ||
+                        service.code,
+
+                    /*
+                      Existing Numora price is preserved.
+                      New services remain genuinely unpriced.
+                    */
+
+                    price:
+                        existing?.price ??
+                        null,
+
+                    providerCostUsd:
+                        providerCostUsd,
+
+                    /*
+                      Do not pretend USD is NGN.
+                      If live FX was unavailable, keep this null.
+                    */
+
+                    providerCostNgn:
+                        providerCostNgn !== null
+                            ? providerCostNgn
+                            : null,
+
+                    available:
+                        available,
+
+                    enabled:
+                        true,
+
+                    currency:
+                        "NGN",
+
+                    providerCurrency:
+                        "USD",
+
+                    exchangeRateUsdNgn:
+                        usdToNgn,
+
+                    providerCheckedAt:
+                        serverTimestamp(),
+
+                    updatedAt:
+                        serverTimestamp()
+
+                };
+
+
+                if (!existing){
+
+                    payload.createdAt =
+                        serverTimestamp();
+                }
+
+
+                await setDoc(
+                    doc(
+                        db,
+                        "servicePricing",
+                        id
+                    ),
+                    payload,
+                    {
+                        merge:true
+                    }
+                );
+
+            }
+
+
+            closeModal();
+
+
+            showToast(
+                `${selected.length} service${selected.length === 1 ? "" : "s"} added to the customer catalog.`
+            );
+
+
+            await loadPricing();
+
+
+        }catch(error){
+
+            console.error(error);
+
+
+            showNotice(
+                modalNotice,
+                error.message ||
+                "Could not add the selected service(s).",
+                "error"
+            );
+
+
+        }finally{
+
+            addSelectedBtn.disabled =
+                false;
+
+            addSelectedBtn.textContent =
+                "Add Selected";
+
+            updateSelectedButton();
+
+        }
+
     }
-});
+);
 
 
 /* =========================================================
    SAVE NUMORA PRICES
 ========================================================= */
 
-saveAllBtn.addEventListener("click", async () => {
+saveAllBtn.addEventListener(
+    "click",
+    async () => {
 
-    if (!pendingChanges.size){
-        return;
-    }
+        if (
+            !pendingChanges.size
+        ){
 
-    saveAllBtn.disabled = true;
-    saveAllBtn.textContent = "Saving...";
-
-    try{
-
-        for (const [id, value] of pendingChanges.entries()){
-
-            if (!Number.isFinite(Number(value)) || Number(value) <= 0){
-                throw new Error(
-                    "Every Numora price must be greater than ₦0."
-                );
-            }
-
-            await setDoc(
-                doc(db, "servicePricing", id),
-                {
-                    price:Number(value),
-                    enabled:true,
-                    updatedAt:serverTimestamp()
-                },
-                { merge:true }
-            );
+            return;
         }
 
-        pendingChanges.clear();
 
-        showNotice(
-            tableNotice,
-            "Numora prices saved successfully.",
-            "success"
-        );
+        saveAllBtn.disabled =
+            true;
 
-        showToast("Prices saved.");
+        saveAllBtn.textContent =
+            "Saving...";
 
-        await loadPricing();
 
-        setTimeout(() => {
-            hideNotice(tableNotice);
-        }, 2600);
+        try{
 
-    }catch(error){
+            for (
+                const [id, value]
+                of pendingChanges.entries()
+            ){
 
-        console.error(error);
+                const row =
+                    pricingRows.find(
+                        item =>
+                            item.id === id
+                    );
 
-        showNotice(
-            tableNotice,
-            error.message || "Could not save prices.",
-            "error"
-        );
 
-    }finally{
+                if (!row){
+                    continue;
+                }
 
-        saveAllBtn.textContent = "Save Changes";
-        markSaveState();
+
+                /*
+                  Blank is allowed to mean "unpriced".
+                  A real customer selling price must be greater than 0.
+                */
+
+                if (
+                    value === null ||
+                    value === ""
+                ){
+
+                    await setDoc(
+                        doc(
+                            db,
+                            "servicePricing",
+                            id
+                        ),
+                        {
+                            price:null,
+                            enabled:false,
+                            updatedAt:
+                                serverTimestamp()
+                        },
+                        {
+                            merge:true
+                        }
+                    );
+
+
+                    continue;
+                }
+
+
+                const numericValue =
+                    Number(value);
+
+
+                if (
+                    !Number.isFinite(
+                        numericValue
+                    ) ||
+                    numericValue <= 0
+                ){
+
+                    throw new Error(
+                        "Enter a real Numora selling price greater than ₦0."
+                    );
+                }
+
+
+                await setDoc(
+                    doc(
+                        db,
+                        "servicePricing",
+                        id
+                    ),
+                    {
+
+                        /*
+                          This is the authoritative customer price.
+                        */
+
+                        price:
+                            numericValue,
+
+                        enabled:
+                            true,
+
+                        updatedAt:
+                            serverTimestamp()
+
+                    },
+                    {
+                        merge:true
+                    }
+                );
+
+            }
+
+
+            pendingChanges.clear();
+
+
+            showNotice(
+                tableNotice,
+                "Numora prices saved successfully.",
+                "success"
+            );
+
+
+            showToast(
+                "Prices saved."
+            );
+
+
+            await loadPricing();
+
+
+            setTimeout(
+                () => {
+
+                    hideNotice(
+                        tableNotice
+                    );
+
+                },
+                2600
+            );
+
+
+        }catch(error){
+
+            console.error(error);
+
+
+            showNotice(
+                tableNotice,
+                error.message ||
+                "Could not save prices.",
+                "error"
+            );
+
+
+        }finally{
+
+            saveAllBtn.textContent =
+                "Save Changes";
+
+            markSaveState();
+        }
+
     }
-});
+);
 
 
 /* =========================================================
    REFRESH
 ========================================================= */
 
-refreshBtn.addEventListener("click", async () => {
+refreshBtn.addEventListener(
+    "click",
+    async () => {
 
-    refreshBtn.disabled = true;
-    refreshBtn.textContent = "…";
+        refreshBtn.disabled =
+            true;
 
-    try{
+        refreshBtn.textContent =
+            "…";
 
-        /*
-          Refresh pricing from Firestore first, then refresh live
-          5SIM costs/availability for every configured service.
-        */
-        await loadPricing();
-        await refreshLiveProviderData();
-        await loadStats();
 
-        showToast("Dashboard refreshed.");
+        try{
 
-    }catch(error){
+            /*
+              Refresh all important sources:
 
-        console.error(error);
+              1. Live USD/NGN
+              2. Firestore servicePricing
+              3. Live 5SIM provider values
+              4. Dashboard statistics
+            */
 
-        showToast(
-            error.message || "Refresh failed."
-        );
+            await loadExchangeRate();
 
-    }finally{
+            await loadPricing();
 
-        refreshBtn.disabled = false;
-        refreshBtn.textContent = "↻";
+            await refreshLiveProviderData();
+
+            await loadStats();
+
+
+            showToast(
+                "Dashboard and live pricing refreshed."
+            );
+
+
+        }catch(error){
+
+            console.error(error);
+
+
+            showToast(
+                error.message ||
+                "Refresh failed."
+            );
+
+
+        }finally{
+
+            refreshBtn.disabled =
+                false;
+
+            refreshBtn.textContent =
+                "↻";
+        }
+
     }
-});
+);
 
 
 /* =========================================================
-   REFRESH LIVE PROVIDER COSTS
+   REFRESH LIVE PROVIDER DATA
 ========================================================= */
 
 async function refreshLiveProviderData(){
 
-    if (!pricingRows.length){
+    if (
+        !pricingRows.length
+    ){
+
         return;
     }
 
-    let changed = false;
 
-    for (const row of pricingRows){
+    for (
+        const row of pricingRows
+    ){
 
-        if (!row.countryCode || !row.serviceCode){
+        const countryCode =
+            row.countryCode ||
+            row.country;
+
+
+        const serviceCode =
+            row.serviceCode;
+
+
+        if (
+            !countryCode ||
+            !serviceCode
+        ){
+
             continue;
         }
 
+
         try{
 
-            const data = await apiGet(
-                `/api/5sim/price?country=${encodeURIComponent(row.countryCode)}&service=${encodeURIComponent(row.serviceCode)}`
-            );
-
-            const providerCost =
-                Number(data?.providerCost || 0);
-
-            const available =
-                Boolean(data?.available);
-
-            const oldCost =
-                Number(row.providerCost || 0);
-
-            const oldAvailable =
-                row.available !== false;
-
-            if (
-                providerCost !== oldCost ||
-                available !== oldAvailable
-            ){
-
-                await setDoc(
-                    doc(db, "servicePricing", row.id),
-                    {
-                        providerCost,
-                        available,
-                        providerCheckedAt:serverTimestamp(),
-                        updatedAt:serverTimestamp()
-                    },
-                    { merge:true }
+            const data =
+                await apiGet(
+                    `/api/5sim/price?country=${encodeURIComponent(countryCode)}&service=${encodeURIComponent(serviceCode)}`
                 );
 
-                changed = true;
-            }
+
+            const providerCostUsd =
+                Number(
+                    data?.providerCost ||
+                    0
+                );
+
+
+            const providerCostNgn =
+                convertUsdToNgn(
+                    providerCostUsd
+                );
+
+
+            const available =
+                Boolean(
+                    data?.available
+                );
+
+
+            await setDoc(
+                doc(
+                    db,
+                    "servicePricing",
+                    row.id
+                ),
+                {
+
+                    providerCostUsd:
+                        providerCostUsd,
+
+                    providerCostNgn:
+                        providerCostNgn,
+
+                    available:
+                        available,
+
+                    providerCurrency:
+                        "USD",
+
+                    currency:
+                        "NGN",
+
+                    exchangeRateUsdNgn:
+                        usdToNgn,
+
+                    providerCheckedAt:
+                        serverTimestamp(),
+
+                    updatedAt:
+                        serverTimestamp()
+
+                },
+                {
+                    merge:true
+                }
+            );
+
 
         }catch(error){
 
@@ -2066,12 +3748,13 @@ async function refreshLiveProviderData(){
                 `Live 5SIM refresh failed for ${row.id}:`,
                 error
             );
+
         }
+
     }
 
-    if (changed){
-        await loadPricing();
-    }
+
+    await loadPricing();
 }
 
 
@@ -2079,66 +3762,111 @@ async function refreshLiveProviderData(){
    MODAL EVENTS
 ========================================================= */
 
-addServiceBtn.addEventListener("click", openModal);
+addServiceBtn.addEventListener(
+    "click",
+    openModal
+);
 
-closeModalBtn.addEventListener("click", closeModal);
 
-cancelModalBtn.addEventListener("click", closeModal);
+closeModalBtn.addEventListener(
+    "click",
+    closeModal
+);
 
-addServiceModal.addEventListener("click", event => {
 
-    if (event.target === addServiceModal){
-        closeModal();
+cancelModalBtn.addEventListener(
+    "click",
+    closeModal
+);
+
+
+addServiceModal.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target ===
+            addServiceModal
+        ){
+
+            closeModal();
+        }
+
     }
-});
+);
 
 
 /* =========================================================
-   ESCAPE / HTML HELPERS
+   ESCAPE
 ========================================================= */
 
-function escapeHtml(value){
+document.addEventListener(
+    "keydown",
+    event => {
 
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+        if (
+            event.key === "Escape" &&
+            addServiceModal.classList.contains(
+                "show"
+            )
+        ){
+
+            closeModal();
+        }
+
+    }
+);
+
+
+/* =========================================================
+   HTML HELPERS
+========================================================= */
+
+function escapeHtml(
+    value
+){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 }
 
-function escapeAttr(value){
-    return escapeHtml(value);
+
+function escapeAttr(
+    value
+){
+
+    return escapeHtml(
+        value
+    );
 }
 
 
 /* =========================================================
-   INITIAL LIVE COST REFRESH
+   START
 ========================================================= */
 
-async function refreshProviderDataAfterLoad(){
-
-    /*
-      Give Firestore data a moment to render, then refresh the provider
-      values in the background. This avoids blocking the dashboard.
-    */
-    try{
-        await refreshLiveProviderData();
-    }catch(error){
-        console.warn(error);
-    }
-}
-
-
-/*
-  The dashboard has already loaded by the time this function runs.
-  A small delayed background refresh keeps the first screen responsive.
-*/
-setTimeout(() => {
-    if (currentUser){
-        refreshProviderDataAfterLoad();
-    }
-}, 700);
+configureAuth();
 
 </script>
 
