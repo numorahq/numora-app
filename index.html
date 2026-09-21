@@ -317,7 +317,7 @@ button{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:900px;
+    min-width:1040px;
 }
 
 th{
@@ -406,6 +406,8 @@ tbody tr:last-child td{
     border-radius:999px;
     font-size:11px;
     font-weight:800;
+    margin-right:6px;
+    margin-bottom:4px;
 }
 
 .status-dot{
@@ -428,6 +430,54 @@ tbody tr:last-child td{
 .status.unpriced{
     color:#b54708;
     background:#fff6ed;
+}
+
+.status.disabled{
+    color:#667085;
+    background:#f2f4f7;
+}
+
+.status.provider{
+    color:#6941c6;
+    background:#f4f3ff;
+}
+
+.status.provider-ok{
+    color:#087443;
+    background:#eafaf2;
+}
+
+.status.provider-off{
+    color:#b42318;
+    background:#fff0ee;
+}
+
+.delete-button{
+    border:1px solid #f3c3bf;
+    background:#fff;
+    color:#b42318;
+    padding:7px 10px;
+    border-radius:9px;
+    font-size:11px;
+    font-weight:800;
+    transition:.2s;
+}
+
+.delete-button:hover{
+    background:#fff1f0;
+    border-color:#e89c96;
+}
+
+.delete-button:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+.status-wrap{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:3px;
 }
 
 .empty{
@@ -728,6 +778,7 @@ tbody tr:last-child td{
 }
 
 @media(max-width:900px){
+
     .sidebar{
         display:none;
     }
@@ -786,6 +837,7 @@ tbody tr:last-child td{
 }
 
 @media(max-width:600px){
+
     .topbar{
         margin-bottom:20px;
     }
@@ -819,6 +871,13 @@ tbody tr:last-child td{
         max-height:92vh;
         border-radius:19px;
     }
+
+    .toast{
+        left:16px;
+        right:16px;
+        bottom:86px;
+        text-align:center;
+    }
 }
 </style>
 </head>
@@ -826,38 +885,68 @@ tbody tr:last-child td{
 <body>
 
 <div id="loginScreen" class="login-screen">
+
     <div class="login-card">
-        <div class="login-logo">N</div>
-        <h1>Numora Admin</h1>
-        <p>Sign in with the authorized Google account to manage Numora services and pricing.</p>
+
+        <div class="login-logo">
+            N
+        </div>
+
+        <h1>
+            Numora Admin
+        </h1>
+
+        <p>
+            Sign in with the authorized Google account to manage
+            Numora services and pricing.
+        </p>
+
         <button id="googleLoginBtn" class="google-btn">
             Continue with Google
         </button>
+
     </div>
+
 </div>
+
 
 <div id="app" class="app hidden">
 
     <aside class="sidebar">
 
         <div class="brand">
-            <div class="brand-mark">N</div>
-            <div class="brand-text">Nu<span>mora</span></div>
+
+            <div class="brand-mark">
+                N
+            </div>
+
+            <div class="brand-text">
+                Nu<span>mora</span>
+            </div>
+
         </div>
 
+
         <nav class="nav">
-            <button id="navDashboard" class="active" onclick="goTo('index.html')">
+
+            <button id="navDashboard"
+                    class="active"
+                    onclick="goTo('index.html')">
                 Dashboard
             </button>
 
-            <button id="navPayments" onclick="goTo('payments.html')">
+            <button id="navPayments"
+                    onclick="goTo('payments.html')">
                 Payments
             </button>
 
-            <button id="navSettings" onclick="goTo('settings.html')">
+            <button id="navSettings"
+                    onclick="goTo('settings.html')">
                 Settings
             </button>
+
         </nav>
+
 
         <div class="sidebar-footer">
             Admin panel
@@ -865,16 +954,23 @@ tbody tr:last-child td{
 
     </aside>
 
+
     <main class="main">
 
         <header class="topbar">
 
             <div>
-                <div class="page-title">Dashboard</div>
+
+                <div class="page-title">
+                    Dashboard
+                </div>
+
                 <div class="page-subtitle">
                     Manage Numora services and customer pricing.
                 </div>
+
             </div>
+
 
             <div class="top-actions">
 
@@ -884,14 +980,17 @@ tbody tr:last-child td{
                     ↻
                 </button>
 
+
                 <button id="logoutBtn"
                         class="logout-button">
                     Log Out
                 </button>
 
+
                 <div class="admin-chip">
 
-                    <div id="adminAvatar" class="admin-avatar">
+                    <div id="adminAvatar"
+                         class="admin-avatar">
                         N
                     </div>
 
@@ -909,47 +1008,56 @@ tbody tr:last-child td{
         <section class="stats">
 
             <div class="stat-card">
+
                 <div class="stat-label">
                     Total Users
                 </div>
 
-                <div id="totalUsers" class="stat-value">
+                <div id="totalUsers"
+                     class="stat-value">
                     —
                 </div>
 
                 <div class="stat-note">
                     Registered customer accounts
                 </div>
+
             </div>
 
 
             <div class="stat-card">
+
                 <div class="stat-label">
                     Active Numbers
                 </div>
 
-                <div id="activeNumbers" class="stat-value">
+                <div id="activeNumbers"
+                     class="stat-value">
                     —
                 </div>
 
                 <div class="stat-note">
                     Currently active verification numbers
                 </div>
+
             </div>
 
 
             <div class="stat-card">
+
                 <div class="stat-label">
                     Total Sales
                 </div>
 
-                <div id="totalSales" class="stat-value">
+                <div id="totalSales"
+                     class="stat-value">
                     ₦0
                 </div>
 
                 <div class="stat-note">
                     Recorded customer payments
                 </div>
+
             </div>
 
         </section>
@@ -960,6 +1068,7 @@ tbody tr:last-child td{
             <div class="section-head">
 
                 <div>
+
                     <div class="section-title">
                         Service Pricing
                     </div>
@@ -968,7 +1077,9 @@ tbody tr:last-child td{
                         5SIM provider cost is live in USD and converted to NGN.
                         Set the actual Numora customer price here.
                     </div>
+
                 </div>
+
 
                 <div class="head-actions">
 
@@ -1000,15 +1111,35 @@ tbody tr:last-child td{
                     <thead>
 
                         <tr>
-                            <th>Country</th>
-                            <th>Service</th>
-                            <th>5SIM Cost</th>
-                            <th>Numora Price</th>
-                            <th>Profit</th>
-                            <th>Status</th>
+
+                            <th>
+                                Country
+                            </th>
+
+                            <th>
+                                Service
+                            </th>
+
+                            <th>
+                                5SIM Cost
+                            </th>
+
+                            <th>
+                                Numora Price
+                            </th>
+
+                            <th>
+                                Profit
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
                         </tr>
 
                     </thead>
+
 
                     <tbody id="pricingBody">
 
@@ -1076,6 +1207,7 @@ tbody tr:last-child td{
                 </div>
 
             </div>
+
 
             <button id="closeModalBtn"
                     class="close">
@@ -1206,6 +1338,7 @@ import {
     getDocs,
     getDoc,
     setDoc,
+    deleteDoc,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -1262,17 +1395,6 @@ const BACKEND_URL =
 const ADMIN_EMAIL =
     "numora.support@gmail.com";
 
-
-/*
-  Public exchange-rate endpoint.
-
-  The 5SIM provider cost is USD.
-  We convert it to NGN only for Numora's admin display/profit
-  calculation.
-
-  The customer's actual Numora price remains whatever the admin
-  explicitly enters.
-*/
 const FX_URL =
     "https://open.er-api.com/v6/latest/USD";
 
@@ -1496,8 +1618,11 @@ function getRowPrice(row){
         pendingChanges.has(row.id)
     ){
 
+        const pending =
+            pendingChanges.get(row.id);
+
         return Number(
-            pendingChanges.get(row.id)
+            pending || 0
         );
 
     }
@@ -1587,6 +1712,7 @@ async function configureAuth(){
 async function verifyAdmin(user){
 
     if (!user){
+
         throw new Error(
             "No signed-in user."
         );
@@ -1705,10 +1831,6 @@ logoutBtn.addEventListener(
             googleLoginBtn.textContent =
                 "Continue with Google";
 
-            showToast(
-                "You have been logged out."
-            );
-
         }catch(error){
 
             console.error(error);
@@ -1735,125 +1857,132 @@ logoutBtn.addEventListener(
    AUTH STATE
 ========================================================= */
 
-onAuthStateChanged(
-    auth,
-    async (user) => {
+async function startAdmin(){
 
-        if (!user){
-
-            currentUser =
-                null;
-
-            appEl.classList.add(
-                "hidden"
-            );
-
-            loginScreen.classList.remove(
-                "hidden"
-            );
-
-            googleLoginBtn.disabled =
-                false;
-
-            googleLoginBtn.textContent =
-                "Continue with Google";
-
-            return;
-        }
+    await configureAuth();
 
 
-        try{
+    onAuthStateChanged(
+        auth,
+        async (user) => {
 
-            await verifyAdmin(
-                user
-            );
+            if (!user){
 
+                currentUser =
+                    null;
 
-            currentUser =
-                user;
-
-
-            loginScreen.classList.add(
-                "hidden"
-            );
-
-            appEl.classList.remove(
-                "hidden"
-            );
-
-
-            document.getElementById(
-                "adminName"
-            ).textContent =
-                user.displayName ||
-                user.email ||
-                "Admin";
-
-
-            const avatar =
-                document.getElementById(
-                    "adminAvatar"
+                appEl.classList.add(
+                    "hidden"
                 );
 
+                loginScreen.classList.remove(
+                    "hidden"
+                );
 
-            if (user.photoURL){
+                googleLoginBtn.disabled =
+                    false;
 
-                avatar.innerHTML =
-                    `<img src="${escapeAttr(user.photoURL)}" alt="">`;
+                googleLoginBtn.textContent =
+                    "Continue with Google";
 
-            }else{
-
-                avatar.textContent =
-                    (
-                        user.displayName ||
-                        "N"
-                    )
-                    .charAt(0)
-                    .toUpperCase();
+                return;
             }
 
 
-            await loadDashboard();
+            try{
+
+                await verifyAdmin(
+                    user
+                );
 
 
-        }catch(error){
-
-            console.error(error);
-
-
-            await signOut(
-                auth
-            );
+                currentUser =
+                    user;
 
 
-            currentUser =
-                null;
+                loginScreen.classList.add(
+                    "hidden"
+                );
+
+                appEl.classList.remove(
+                    "hidden"
+                );
 
 
-            appEl.classList.add(
-                "hidden"
-            );
-
-            loginScreen.classList.remove(
-                "hidden"
-            );
-
-
-            showToast(
-                error.message ||
-                "Admin access denied."
-            );
+                document.getElementById(
+                    "adminName"
+                ).textContent =
+                    user.displayName ||
+                    user.email ||
+                    "Admin";
 
 
-            googleLoginBtn.disabled =
-                false;
+                const avatar =
+                    document.getElementById(
+                        "adminAvatar"
+                    );
 
-            googleLoginBtn.textContent =
-                "Continue with Google";
+
+                if (user.photoURL){
+
+                    avatar.innerHTML =
+                        `<img src="${escapeAttr(user.photoURL)}" alt="">`;
+
+                }else{
+
+                    avatar.textContent =
+                        (
+                            user.displayName ||
+                            "N"
+                        )
+                        .charAt(0)
+                        .toUpperCase();
+
+                }
+
+
+                await loadDashboard();
+
+
+            }catch(error){
+
+                console.error(error);
+
+
+                await signOut(
+                    auth
+                );
+
+
+                currentUser =
+                    null;
+
+
+                appEl.classList.add(
+                    "hidden"
+                );
+
+                loginScreen.classList.remove(
+                    "hidden"
+                );
+
+
+                showToast(
+                    error.message ||
+                    "Admin access denied."
+                );
+
+
+                googleLoginBtn.disabled =
+                    false;
+
+                googleLoginBtn.textContent =
+                    "Continue with Google";
+            }
+
         }
-
-    }
-);
+    );
+}
 
 
 /* =========================================================
@@ -2100,13 +2229,6 @@ async function loadExchangeRate(){
         );
 
 
-        /*
-          Do not silently invent an exchange rate.
-
-          If the rate cannot be retrieved, provider NGN cost is shown
-          as unavailable rather than pretending USD is NGN.
-        */
-
         usdToNgn =
             null;
 
@@ -2173,19 +2295,9 @@ async function loadPricing(){
             snapshot.docs.map(
                 item => {
 
-                    const data =
-                        item.data();
-
-
-                    /*
-                      Normalize older records so the Admin can still
-                      display them while new records use the correct
-                      code/name structure.
-                    */
-
                     return {
                         id:item.id,
-                        ...data
+                        ...item.data()
                     };
 
                 }
@@ -2248,6 +2360,7 @@ async function loadPricing(){
         pricingBody.innerHTML = `
             <tr>
                 <td colspan="6">
+
                     <div class="empty">
 
                         <strong>
@@ -2260,6 +2373,7 @@ async function loadPricing(){
                         )}
 
                     </div>
+
                 </td>
             </tr>
         `;
@@ -2317,14 +2431,23 @@ function renderPricing(){
                     );
 
 
-                const providerCostNgn =
-                    Number(
-                        row.providerCostNgn ??
-                        convertUsdToNgn(
-                            providerCostUsd
-                        ) ??
-                        0
+                const convertedNgn =
+                    convertUsdToNgn(
+                        providerCostUsd
                     );
+
+
+                const providerCostNgn =
+                    Number.isFinite(
+                        Number(row.providerCostNgn)
+                    )
+                    && Number(row.providerCostNgn) > 0
+                        ? Number(row.providerCostNgn)
+                        : (
+                            convertedNgn !== null
+                                ? convertedNgn
+                                : 0
+                        );
 
 
                 const profit =
@@ -2334,36 +2457,75 @@ function renderPricing(){
                         : null;
 
 
-                const available =
+                /*
+                  `enabled` controls whether the Admin has enabled
+                  the service in Numora.
+
+                  `available` is supplier/provider availability only.
+
+                  They are intentionally NOT treated as the same thing.
+                */
+
+                const enabled =
+                    row.enabled !== false;
+
+
+                const providerAvailable =
                     row.available !== false;
 
 
-                let statusClass =
-                    "available";
-
-                let statusText =
-                    "Available";
+                let statusHtml =
+                    "";
 
 
-                if (
-                    price <= 0
-                ){
+                if (!enabled){
 
-                    statusClass =
-                        "unpriced";
+                    statusHtml += `
+                        <span class="status disabled">
+                            <span class="status-dot"></span>
+                            Disabled
+                        </span>
+                    `;
 
-                    statusText =
-                        "Set price";
+                }else if (price <= 0){
 
-                }else if (
-                    !available
-                ){
+                    statusHtml += `
+                        <span class="status unpriced">
+                            <span class="status-dot"></span>
+                            Set price
+                        </span>
+                    `;
 
-                    statusClass =
-                        "unavailable";
+                }else{
 
-                    statusText =
-                        "Unavailable";
+                    statusHtml += `
+                        <span class="status available">
+                            <span class="status-dot"></span>
+                            Enabled
+                        </span>
+                    `;
+
+                }
+
+
+                if (providerAvailable){
+
+                    statusHtml += `
+                        <span class="status provider-ok">
+                            <span class="status-dot"></span>
+                            5SIM Available
+                        </span>
+                    `;
+
+                }else{
+
+                    statusHtml += `
+                        <span class="status provider-off">
+                            <span class="status-dot"></span>
+                            5SIM Unavailable
+                        </span>
+                    `;
+
                 }
 
 
@@ -2375,22 +2537,20 @@ function renderPricing(){
 
                 const countryCode =
                     row.countryCode ||
+                    row.country ||
                     "";
 
 
                 const serviceName =
                     row.serviceName ||
-                    (
-                        row.service &&
-                        !row.serviceCode
-                            ? row.service
-                            : row.serviceCode
-                    ) ||
+                    row.service ||
+                    row.serviceCode ||
                     "—";
 
 
                 const serviceCode =
                     row.serviceCode ||
+                    row.service ||
                     "";
 
 
@@ -2488,13 +2648,18 @@ function renderPricing(){
 
                         <td>
 
-                            <span class="status ${statusClass}">
+                            <div class="status-wrap">
 
-                                <span class="status-dot"></span>
+                                ${statusHtml}
 
-                                ${statusText}
+                                <button
+                                    class="delete-button"
+                                    type="button"
+                                    data-delete-id="${escapeAttr(row.id)}">
+                                    Delete
+                                </button>
 
-                            </span>
+                            </div>
 
                         </td>
 
@@ -2523,11 +2688,6 @@ function renderPricing(){
                         const raw =
                             input.value.trim();
 
-
-                        /*
-                          Blank means "not priced yet".
-                          We do not turn blank into ₦1 or ₦0.
-                        */
 
                         if (
                             raw === ""
@@ -2599,6 +2759,170 @@ function renderPricing(){
 
             }
         );
+
+
+    document
+        .querySelectorAll(
+            ".delete-button"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        deleteService(
+                            button.dataset.deleteId
+                        );
+
+                    }
+                );
+
+            }
+        );
+}
+
+
+/* =========================================================
+   DELETE SERVICE
+========================================================= */
+
+async function deleteService(
+    id
+){
+
+    const row =
+        pricingRows.find(
+            item =>
+                item.id === id
+        );
+
+
+    if (!row){
+
+        showToast(
+            "Service could not be found."
+        );
+
+        return;
+    }
+
+
+    const country =
+        row.countryName ||
+        row.countryCode ||
+        row.country ||
+        "this country";
+
+
+    const service =
+        row.serviceName ||
+        row.serviceCode ||
+        row.service ||
+        "this service";
+
+
+    const confirmed =
+        window.confirm(
+            `Delete ${service} for ${country}?\n\nThis removes it from the Numora service catalog.`
+        );
+
+
+    if (!confirmed){
+        return;
+    }
+
+
+    const button =
+        document.querySelector(
+            `[data-delete-id="${CSS.escape(id)}"]`
+        );
+
+
+    if (button){
+
+        button.disabled =
+            true;
+
+        button.textContent =
+            "Deleting...";
+    }
+
+
+    try{
+
+        await deleteDoc(
+            doc(
+                db,
+                "servicePricing",
+                id
+            )
+        );
+
+
+        pendingChanges.delete(
+            id
+        );
+
+
+        pricingRows =
+            pricingRows.filter(
+                item =>
+                    item.id !== id
+            );
+
+
+        renderPricing();
+
+        markSaveState();
+
+
+        showNotice(
+            tableNotice,
+            `${service} for ${country} was deleted from the Numora catalog.`,
+            "success"
+        );
+
+
+        showToast(
+            "Service deleted."
+        );
+
+
+        setTimeout(
+            () => {
+
+                hideNotice(
+                    tableNotice
+                );
+
+            },
+            2600
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "Delete service error:",
+            error
+        );
+
+
+        showNotice(
+            tableNotice,
+            error.message ||
+            "Could not delete the service.",
+            "error"
+        );
+
+
+        showToast(
+            "Could not delete service."
+        );
+
+    }
 }
 
 
@@ -2690,11 +3014,6 @@ async function loadCountries(){
                 ? data.countries
                 : [];
 
-
-        /*
-          5SIM may call the United Kingdom market "England".
-          We preserve the provider's actual code and name.
-        */
 
         countries.sort(
             (a,b) =>
@@ -2992,12 +3311,7 @@ function renderServiceOptions(){
                             const rowService =
                                 String(
                                     row.serviceCode ||
-                                    (
-                                        row.service &&
-                                        row.serviceCode === undefined
-                                            ? row.service
-                                            : ""
-                                    ) ||
+                                    row.service ||
                                     ""
                                 ).toLowerCase();
 
@@ -3188,11 +3502,6 @@ addSelectedBtn.addEventListener(
             }
 
 
-            /*
-              Make sure the exchange rate is current before
-              storing the provider NGN equivalent.
-            */
-
             await loadExchangeRate();
 
 
@@ -3258,19 +3567,6 @@ addSelectedBtn.addEventListener(
                     );
 
 
-                /*
-                  IMPORTANT:
-
-                  servicePricing stores the CODE in `service`
-                  because the backend catalog needs the provider
-                  service code.
-
-                  The human-readable name is stored separately
-                  in `serviceName`.
-
-                  Same thing for country.
-                */
-
                 const payload = {
 
                     country:
@@ -3293,8 +3589,8 @@ addSelectedBtn.addEventListener(
                         service.code,
 
                     /*
-                      Existing Numora price is preserved.
-                      New services remain genuinely unpriced.
+                      Preserve existing Numora selling price.
+                      New service remains unpriced.
                     */
 
                     price:
@@ -3304,21 +3600,25 @@ addSelectedBtn.addEventListener(
                     providerCostUsd:
                         providerCostUsd,
 
-                    /*
-                      Do not pretend USD is NGN.
-                      If live FX was unavailable, keep this null.
-                    */
-
                     providerCostNgn:
                         providerCostNgn !== null
                             ? providerCostNgn
                             : null,
 
+                    /*
+                      This field is ONLY supplier availability.
+                      It does not control customer catalog visibility.
+                    */
+
                     available:
                         available,
 
+                    /*
+                      Admin enablement is separate.
+                    */
+
                     enabled:
-                        true,
+                        existing?.enabled !== false,
 
                     currency:
                         "NGN",
@@ -3342,6 +3642,9 @@ addSelectedBtn.addEventListener(
 
                     payload.createdAt =
                         serverTimestamp();
+
+                    payload.enabled =
+                        true;
                 }
 
 
@@ -3443,8 +3746,7 @@ saveAllBtn.addEventListener(
 
 
                 /*
-                  Blank is allowed to mean "unpriced".
-                  A real customer selling price must be greater than 0.
+                  Blank means unpriced and disabled.
                 */
 
                 if (
@@ -3498,10 +3800,6 @@ saveAllBtn.addEventListener(
                         id
                     ),
                     {
-
-                        /*
-                          This is the authoritative customer price.
-                        */
 
                         price:
                             numericValue,
@@ -3593,15 +3891,6 @@ refreshBtn.addEventListener(
 
         try{
 
-            /*
-              Refresh all important sources:
-
-              1. Live USD/NGN
-              2. Firestore servicePricing
-              3. Live 5SIM provider values
-              4. Dashboard statistics
-            */
-
             await loadExchangeRate();
 
             await loadPricing();
@@ -3664,7 +3953,8 @@ async function refreshLiveProviderData(){
 
 
         const serviceCode =
-            row.serviceCode;
+            row.serviceCode ||
+            row.service;
 
 
         if (
@@ -3697,7 +3987,18 @@ async function refreshLiveProviderData(){
                 );
 
 
-            const available =
+            /*
+              IMPORTANT:
+
+              We update ONLY supplier information here.
+
+              We do NOT modify `enabled`.
+
+              Therefore a temporary 5SIM inventory problem cannot
+              accidentally disable the Admin's service.
+            */
+
+            const providerAvailable =
                 Boolean(
                     data?.available
                 );
@@ -3718,7 +4019,7 @@ async function refreshLiveProviderData(){
                         providerCostNgn,
 
                     available:
-                        available,
+                        providerAvailable,
 
                     providerCurrency:
                         "USD",
@@ -3866,7 +4167,7 @@ function escapeAttr(
    START
 ========================================================= */
 
-configureAuth();
+startAdmin();
 
 </script>
 
