@@ -707,6 +707,59 @@
 
 
         /* =====================================================
+           CUSTOMER PREVIEW
+        ====================================================== */
+
+        .customer-preview {
+            display: none;
+
+            margin-top: 14px;
+
+            padding: 13px;
+
+            border:
+                1px solid
+                #e5e7eb;
+
+            border-radius: 12px;
+
+            background: #f9fafb;
+        }
+
+        .customer-preview.show {
+            display: block;
+        }
+
+        .customer-preview-row {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            font-size: 12px;
+
+            margin-bottom: 7px;
+        }
+
+        .customer-preview-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .customer-preview-label {
+            color: var(--muted);
+        }
+
+        .customer-preview-value {
+            font-weight: 700;
+
+            text-align: right;
+        }
+
+
+        /* =====================================================
            LOGOUT
         ====================================================== */
 
@@ -1247,7 +1300,7 @@
 
                     <div class="settings-description">
                         Manually add Naira to a customer's Numora balance.
-                        Use the customer's Firebase user ID.
+                        Use the customer's Profile ID.
                     </div>
 
 
@@ -1260,16 +1313,72 @@
                                 class="field-label"
                                 for="customerId"
                             >
-                                Customer / User ID
+                                Customer Profile ID
                             </label>
 
                             <input
                                 id="customerId"
                                 class="field-input"
                                 type="text"
-                                placeholder="Enter customer user ID"
+                                placeholder="Enter 6-character Profile ID"
                                 autocomplete="off"
+                                maxlength="6"
                             >
+
+                        </div>
+
+
+                        <div
+                            id="customerPreview"
+                            class="customer-preview"
+                        >
+
+                            <div class="customer-preview-row">
+
+                                <span class="customer-preview-label">
+                                    Profile ID
+                                </span>
+
+                                <span
+                                    id="previewProfileId"
+                                    class="customer-preview-value"
+                                >
+                                    —
+                                </span>
+
+                            </div>
+
+
+                            <div class="customer-preview-row">
+
+                                <span class="customer-preview-label">
+                                    Customer
+                                </span>
+
+                                <span
+                                    id="previewCustomerName"
+                                    class="customer-preview-value"
+                                >
+                                    —
+                                </span>
+
+                            </div>
+
+
+                            <div class="customer-preview-row">
+
+                                <span class="customer-preview-label">
+                                    Current Balance
+                                </span>
+
+                                <span
+                                    id="previewBalance"
+                                    class="customer-preview-value"
+                                >
+                                    ₦0
+                                </span>
+
+                            </div>
 
                         </div>
 
@@ -1312,8 +1421,7 @@
 
                         <div class="transfer-note">
                             This action adds the specified amount to the customer's Naira balance.
-                            The final customer balance structure and transaction ledger will be connected
-                            when the Firestore backend is finalized.
+                            The customer's balance is protected from customer-side balance changes.
                         </div>
 
                     </div>
@@ -1391,7 +1499,9 @@
         GoogleAuthProvider,
         signInWithPopup,
         signOut,
-        onAuthStateChanged
+        onAuthStateChanged,
+        setPersistence,
+        browserLocalPersistence
     }
     from
     "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -1399,6 +1509,10 @@
 
     import {
         getFirestore,
+        collection,
+        query,
+        where,
+        getDocs,
         doc,
         getDoc,
         runTransaction,
@@ -1459,6 +1573,10 @@
         "numora.support@gmail.com";
 
 
+    /* =====================================================
+       DOM
+    ====================================================== */
+
     const loginScreen =
         document.getElementById(
             "loginScreen"
@@ -1501,6 +1619,75 @@
         );
 
 
+    const customerIdInput =
+        document.getElementById(
+            "customerId"
+        );
+
+
+    const transferAmountInput =
+        document.getElementById(
+            "transferAmount"
+        );
+
+
+    const customerPreview =
+        document.getElementById(
+            "customerPreview"
+        );
+
+
+    const previewProfileId =
+        document.getElementById(
+            "previewProfileId"
+        );
+
+
+    const previewCustomerName =
+        document.getElementById(
+            "previewCustomerName"
+        );
+
+
+    const previewBalance =
+        document.getElementById(
+            "previewBalance"
+        );
+
+
+    let currentUser = null;
+
+
+    let currentCustomer = null;
+
+
+    /* =====================================================
+       AUTH PERSISTENCE
+    ====================================================== */
+
+    async function configureAuth() {
+
+        try {
+
+            await setPersistence(
+                auth,
+                browserLocalPersistence
+            );
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Could not configure Firebase persistence:",
+                error
+            );
+
+        }
+
+    }
+
+
     /* =====================================================
        STATUS
     ====================================================== */
@@ -1536,8 +1723,24 @@
     }
 
 
+    function clearTransferMessage() {
+
+        transferMessage.textContent =
+            "";
+
+        transferMessage.className =
+            "transfer-message";
+
+    }
+
+
     /* =====================================================
-       VERIFY ADMIN
+       ADMIN VERIFICATION
+       
+       Authorized admin can be verified by:
+       
+       1. Exact authorized email
+       2. admins/{uid} document
     ====================================================== */
 
     async function verifyAdmin(user) {
@@ -1547,21 +1750,52 @@
         }
 
 
-        const adminRef =
-            doc(
-                db,
-                "admins",
-                user.uid
+        const email =
+            (
+                user.email || ""
+            ).toLowerCase();
+
+
+        if (
+            email ===
+            ADMIN_EMAIL.toLowerCase()
+        ) {
+
+            return true;
+
+        }
+
+
+        try {
+
+            const adminRef =
+                doc(
+                    db,
+                    "admins",
+                    user.uid
+                );
+
+
+            const snapshot =
+                await getDoc(
+                    adminRef
+                );
+
+
+            return snapshot.exists();
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Admin document verification failed:",
+                error
             );
 
+            return false;
 
-        const snapshot =
-            await getDoc(
-                adminRef
-            );
-
-
-        return snapshot.exists();
+        }
 
     }
 
@@ -1571,6 +1805,10 @@
     ====================================================== */
 
     async function showAdmin(user) {
+
+        currentUser =
+            user;
+
 
         loginScreen.style.display =
             "none";
@@ -1632,6 +1870,12 @@
                 "Signing in...";
 
 
+            showStatus(
+                "",
+                ""
+            );
+
+
             try {
 
                 const result =
@@ -1656,13 +1900,23 @@
                     ADMIN_EMAIL.toLowerCase()
                 ) {
 
-                    await signOut(
-                        auth
-                    );
+                    const adminDocument =
+                        await verifyAdmin(
+                            user
+                        );
 
-                    throw new Error(
-                        "unauthorized"
-                    );
+
+                    if (!adminDocument) {
+
+                        await signOut(
+                            auth
+                        );
+
+                        throw new Error(
+                            "unauthorized"
+                        );
+
+                    }
 
                 }
 
@@ -1694,7 +1948,10 @@
 
             catch (error) {
 
-                console.error(error);
+                console.error(
+                    "Admin login failed:",
+                    error
+                );
 
 
                 if (
@@ -1759,65 +2016,285 @@
 
 
     /* =====================================================
-       EXISTING LOGIN
+       FIND CUSTOMER BY PROFILE ID
     ====================================================== */
 
-    onAuthStateChanged(
-        auth,
-        async user => {
+    async function findCustomerByProfileId(
+        profileId
+    ) {
 
-            if (!user) {
+        const normalizedId =
+            String(
+                profileId || ""
+            )
+            .trim()
+            .toUpperCase();
+
+
+        if (!normalizedId) {
+            return null;
+        }
+
+
+        const usersRef =
+            collection(
+                db,
+                "users"
+            );
+
+
+        const customerQuery =
+            query(
+                usersRef,
+                where(
+                    "profileId",
+                    "==",
+                    normalizedId
+                )
+            );
+
+
+        const snapshot =
+            await getDocs(
+                customerQuery
+            );
+
+
+        if (
+            snapshot.empty
+        ) {
+
+            return null;
+
+        }
+
+
+        const customerDoc =
+            snapshot.docs[0];
+
+
+        return {
+
+            uid:
+                customerDoc.id,
+
+            ...customerDoc.data()
+
+        };
+
+    }
+
+
+    /* =====================================================
+       LOAD CUSTOMER PREVIEW
+    ====================================================== */
+
+    async function loadCustomerPreview() {
+
+        const profileId =
+            customerIdInput
+                .value
+                .trim()
+                .toUpperCase();
+
+
+        if (!profileId) {
+
+            currentCustomer =
+                null;
+
+            customerPreview.classList.remove(
+                "show"
+            );
+
+            return;
+
+        }
+
+
+        if (
+            profileId.length < 6
+        ) {
+
+            customerPreview.classList.remove(
+                "show"
+            );
+
+            return;
+
+        }
+
+
+        clearTransferMessage();
+
+
+        customerIdInput.value =
+            profileId;
+
+
+        try {
+
+            customerIdInput.disabled =
+                true;
+
+
+            const customer =
+                await findCustomerByProfileId(
+                    profileId
+                );
+
+
+            if (!customer) {
+
+                currentCustomer =
+                    null;
+
+                customerPreview.classList.remove(
+                    "show"
+                );
+
+                showTransferMessage(
+                    "Customer Profile ID was not found.",
+                    "error"
+                );
+
                 return;
+
             }
 
 
-            const email =
-                (
-                    user.email || ""
-                ).toLowerCase();
+            currentCustomer =
+                customer;
 
 
-            if (
-                email !==
-                ADMIN_EMAIL.toLowerCase()
-            ) {
-
-                await signOut(auth);
-
-                return;
-
-            }
+            const name =
+                customer.displayName ||
+                customer.name ||
+                customer.fullName ||
+                customer.email ||
+                "Customer";
 
 
-            try {
+            const balance =
+                Number(
+                    customer.balance ??
+                    customer.nairaBalance ??
+                    customer.walletBalance ??
+                    0
+                );
 
-                const isAdmin =
-                    await verifyAdmin(
-                        user
+
+            previewProfileId.textContent =
+                customer.profileId ||
+                profileId;
+
+
+            previewCustomerName.textContent =
+                name;
+
+
+            previewBalance.textContent =
+                "₦" +
+                balance.toLocaleString(
+                    "en-NG"
+                );
+
+
+            customerPreview.classList.add(
+                "show"
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Customer lookup failed:",
+                error
+            );
+
+
+            currentCustomer =
+                null;
+
+
+            customerPreview.classList.remove(
+                "show"
+            );
+
+
+            showTransferMessage(
+                "Unable to find customer. Please check the Profile ID.",
+                "error"
+            );
+
+        }
+
+        finally {
+
+            customerIdInput.disabled =
+                false;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       PROFILE ID INPUT
+    ====================================================== */
+
+    customerIdInput.addEventListener(
+        "input",
+        () => {
+
+            customerIdInput.value =
+                customerIdInput
+                    .value
+                    .toUpperCase()
+                    .replace(
+                        /[^A-Z0-9]/g,
+                        ""
                     );
 
 
-                if (!isAdmin) {
-
-                    await signOut(auth);
-
-                    return;
-
-                }
+            currentCustomer =
+                null;
 
 
-                await showAdmin(user);
+            customerPreview.classList.remove(
+                "show"
+            );
 
-            }
 
-            catch (error) {
+            clearTransferMessage();
 
-                console.error(
-                    "Admin verification failed:",
-                    error
-                );
+        }
+    );
 
-                await signOut(auth);
+
+    customerIdInput.addEventListener(
+        "blur",
+        async () => {
+
+            await loadCustomerPreview();
+
+        }
+    );
+
+
+    customerIdInput.addEventListener(
+        "keydown",
+        async event => {
+
+            if (
+                event.key ===
+                "Enter"
+            ) {
+
+                event.preventDefault();
+
+                await loadCustomerPreview();
 
             }
 
@@ -1828,47 +2305,91 @@
     /* =====================================================
        TRANSFER NAIRA
        
-       IMPORTANT:
-       This currently assumes the customer's
-       balance is stored at:
-
-       users/{customerId}
-
+       Uses:
+       
+       users/{firebaseUid}
+       
        field:
-
+       
        balance
-
-       We will finalize this structure before
-       writing the production Firestore rules.
+       
+       Customer is located by:
+       
+       profileId
+       
+       Admin performs a Firestore
+       transaction against the actual
+       user document.
     ====================================================== */
 
     transferButton.addEventListener(
         "click",
         async () => {
 
-            const customerId =
-                document
-                    .getElementById(
-                        "customerId"
-                    )
+            clearTransferMessage();
+
+
+            if (!currentUser) {
+
+                showTransferMessage(
+                    "Admin session is not active. Please sign in again.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const isAdmin =
+                await verifyAdmin(
+                    currentUser
+                );
+
+
+            if (!isAdmin) {
+
+                showTransferMessage(
+                    "Your account is not authorized to transfer customer balances.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const profileId =
+                customerIdInput
                     .value
-                    .trim();
+                    .trim()
+                    .toUpperCase();
 
 
             const amount =
                 Number(
-                    document
-                        .getElementById(
-                            "transferAmount"
-                        )
-                        .value
+                    transferAmountInput.value
                 );
 
 
-            if (!customerId) {
+            if (!profileId) {
 
                 showTransferMessage(
-                    "Enter the customer's user ID.",
+                    "Enter the customer's Profile ID.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                profileId.length !== 6
+            ) {
+
+                showTransferMessage(
+                    "Profile ID must be 6 characters.",
                     "error"
                 );
 
@@ -1892,33 +2413,100 @@
             }
 
 
-            const confirmed =
-                confirm(
-                    "Transfer ₦" +
-                    amount.toLocaleString("en-NG") +
-                    " to this customer's balance?"
-                );
-
-
-            if (!confirmed) {
-                return;
-            }
-
-
-            transferButton.disabled =
-                true;
-
-            transferButton.textContent =
-                "Transferring...";
+            let customer =
+                currentCustomer;
 
 
             try {
+
+                if (
+                    !customer ||
+                    String(
+                        customer.profileId || ""
+                    ).toUpperCase() !==
+                    profileId
+                ) {
+
+                    customer =
+                        await findCustomerByProfileId(
+                            profileId
+                        );
+
+                }
+
+
+                if (!customer) {
+
+                    showTransferMessage(
+                        "Customer Profile ID was not found.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                const customerName =
+                    customer.displayName ||
+                    customer.name ||
+                    customer.fullName ||
+                    customer.email ||
+                    "Customer";
+
+
+                const existingBalance =
+                    Number(
+                        customer.balance ??
+                        customer.nairaBalance ??
+                        customer.walletBalance ??
+                        0
+                    );
+
+
+                const confirmed =
+                    confirm(
+                        "Transfer ₦" +
+                        amount.toLocaleString(
+                            "en-NG"
+                        ) +
+                        " to " +
+                        customerName +
+                        " (" +
+                        profileId +
+                        ")?\n\n" +
+                        "Current balance: ₦" +
+                        existingBalance.toLocaleString(
+                            "en-NG"
+                        ) +
+                        "\n" +
+                        "New balance: ₦" +
+                        (
+                            existingBalance +
+                            amount
+                        ).toLocaleString(
+                            "en-NG"
+                        )
+                    );
+
+
+                if (!confirmed) {
+                    return;
+                }
+
+
+                transferButton.disabled =
+                    true;
+
+                transferButton.textContent =
+                    "Transferring...";
+
 
                 const customerRef =
                     doc(
                         db,
                         "users",
-                        customerId
+                        customer.uid
                     );
 
 
@@ -1949,8 +2537,24 @@
 
                         const currentBalance =
                             Number(
-                                data.balance || 0
+                                data.balance ??
+                                data.nairaBalance ??
+                                data.walletBalance ??
+                                0
                             );
+
+
+                        if (
+                            !Number.isFinite(
+                                currentBalance
+                            )
+                        ) {
+
+                            throw new Error(
+                                "invalid-balance"
+                            );
+
+                        }
 
 
                         const newBalance =
@@ -1961,11 +2565,13 @@
                         transaction.update(
                             customerRef,
                             {
+
                                 balance:
                                     newBalance,
 
                                 updatedAt:
                                     serverTimestamp()
+
                             }
                         );
 
@@ -1973,26 +2579,47 @@
                 );
 
 
+                const updatedBalance =
+                    existingBalance +
+                    amount;
+
+
                 showTransferMessage(
                     "₦" +
-                    amount.toLocaleString("en-NG") +
-                    " has been added to the customer's balance.",
+                    amount.toLocaleString(
+                        "en-NG"
+                    ) +
+                    " has been added to " +
+                    customerName +
+                    "'s balance. New balance: ₦" +
+                    updatedBalance.toLocaleString(
+                        "en-NG"
+                    ) +
+                    ".",
                     "success"
                 );
 
 
-                document
-                    .getElementById(
-                        "customerId"
-                    )
-                    .value = "";
+                previewBalance.textContent =
+                    "₦" +
+                    updatedBalance.toLocaleString(
+                        "en-NG"
+                    );
 
 
-                document
-                    .getElementById(
-                        "transferAmount"
-                    )
-                    .value = "";
+                currentCustomer = {
+
+                    ...customer,
+
+                    balance:
+                        updatedBalance
+
+                };
+
+
+                transferAmountInput.value =
+                    "";
+
 
             }
 
@@ -2011,6 +2638,30 @@
 
                     showTransferMessage(
                         "Customer account was not found.",
+                        "error"
+                    );
+
+                }
+
+                else if (
+                    error.message ===
+                    "invalid-balance"
+                ) {
+
+                    showTransferMessage(
+                        "The customer's current balance is invalid.",
+                        "error"
+                    );
+
+                }
+
+                else if (
+                    error.code ===
+                    "permission-denied"
+                ) {
+
+                    showTransferMessage(
+                        "Firebase denied this balance transfer. Make sure the Firestore rules allow the authorized Numora admin to update customer balances.",
                         "error"
                     );
 
@@ -2039,6 +2690,79 @@
 
         }
     );
+
+
+    /* =====================================================
+       EXISTING ADMIN SESSION
+    ====================================================== */
+
+    async function startAdmin() {
+
+        await configureAuth();
+
+
+        onAuthStateChanged(
+            auth,
+            async user => {
+
+                if (!user) {
+
+                    currentUser =
+                        null;
+
+                    adminApp.style.display =
+                        "none";
+
+                    loginScreen.style.display =
+                        "flex";
+
+                    return;
+
+                }
+
+
+                try {
+
+                    const isAdmin =
+                        await verifyAdmin(
+                            user
+                        );
+
+
+                    if (!isAdmin) {
+
+                        await signOut(
+                            auth
+                        );
+
+                        return;
+
+                    }
+
+
+                    await showAdmin(
+                        user
+                    );
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "Admin verification failed:",
+                        error
+                    );
+
+                    await signOut(
+                        auth
+                    );
+
+                }
+
+            }
+        );
+
+    }
 
 
     /* =====================================================
@@ -2071,12 +2795,36 @@
                 }
 
 
+                currentUser =
+                    null;
+
+
+                currentCustomer =
+                    null;
+
+
                 adminApp.style.display =
                     "none";
 
 
                 loginScreen.style.display =
                     "flex";
+
+
+                customerIdInput.value =
+                    "";
+
+
+                transferAmountInput.value =
+                    "";
+
+
+                customerPreview.classList.remove(
+                    "show"
+                );
+
+
+                clearTransferMessage();
 
 
                 showStatus(
@@ -2086,6 +2834,13 @@
 
             }
         );
+
+
+    /* =====================================================
+       START
+    ====================================================== */
+
+    startAdmin();
 
 </script>
 
